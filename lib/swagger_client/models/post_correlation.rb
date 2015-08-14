@@ -24,10 +24,10 @@ module SwaggerClient
     # attribute type
     def self.swagger_types
       {
-        :'cause' => :'string',
-        :'effect' => :'string',
-        :'correlation' => :'double',
-        :'vote' => :'int'
+        :'cause' => :'String',
+        :'effect' => :'String',
+        :'correlation' => :'Float',
+        :'vote' => :'Integer'
         
       }
     end
@@ -40,21 +40,22 @@ module SwaggerClient
 
       
       if attributes[:'cause']
-        @cause = attributes[:'cause']
+        self.cause = attributes[:'cause']
       end
       
       if attributes[:'effect']
-        @effect = attributes[:'effect']
+        self.effect = attributes[:'effect']
       end
       
       if attributes[:'correlation']
-        @correlation = attributes[:'correlation']
+        self.correlation = attributes[:'correlation']
       end
       
       if attributes[:'vote']
-        @vote = attributes[:'vote']
+        self.vote = attributes[:'vote']
       end
       
     end
+
   end
 end

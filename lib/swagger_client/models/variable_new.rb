@@ -27,11 +27,11 @@ module SwaggerClient
     # attribute type
     def self.swagger_types
       {
-        :'name' => :'string',
-        :'category' => :'string',
-        :'unit' => :'string',
-        :'combination_operation' => :'string',
-        :'parent' => :'string'
+        :'name' => :'String',
+        :'category' => :'String',
+        :'unit' => :'String',
+        :'combination_operation' => :'String',
+        :'parent' => :'String'
         
       }
     end
@@ -44,25 +44,34 @@ module SwaggerClient
 
       
       if attributes[:'name']
-        @name = attributes[:'name']
+        self.name = attributes[:'name']
       end
       
       if attributes[:'category']
-        @category = attributes[:'category']
+        self.category = attributes[:'category']
       end
       
       if attributes[:'unit']
-        @unit = attributes[:'unit']
+        self.unit = attributes[:'unit']
       end
       
       if attributes[:'combinationOperation']
-        @combination_operation = attributes[:'combinationOperation']
+        self.combination_operation = attributes[:'combinationOperation']
       end
       
       if attributes[:'parent']
-        @parent = attributes[:'parent']
+        self.parent = attributes[:'parent']
       end
       
     end
+
+    def combination_operation=(combination_operation)
+      allowed_values = ["MEAN", "SUM"]
+      if combination_operation && !allowed_values.include?(combination_operation)
+        fail "invalid value for 'combination_operation', must be one of #{allowed_values}"
+      end
+      @combination_operation = combination_operation
+    end
+
   end
 end

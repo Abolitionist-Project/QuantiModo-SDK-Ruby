@@ -21,8 +21,8 @@ module SwaggerClient
     # attribute type
     def self.swagger_types
       {
-        :'code' => :'int',
-        :'message' => :'string',
+        :'code' => :'Integer',
+        :'message' => :'String',
         :'user' => :'UserTokenSuccessfulResponseInnerUserField'
         
       }
@@ -36,17 +36,18 @@ module SwaggerClient
 
       
       if attributes[:'code']
-        @code = attributes[:'code']
+        self.code = attributes[:'code']
       end
       
       if attributes[:'message']
-        @message = attributes[:'message']
+        self.message = attributes[:'message']
       end
       
       if attributes[:'user']
-        @user = attributes[:'user']
+        self.user = attributes[:'user']
       end
       
     end
+
   end
 end

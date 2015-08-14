@@ -33,13 +33,13 @@ module SwaggerClient
     # attribute type
     def self.swagger_types
       {
-        :'target' => :'int',
-        :'variable_name' => :'string',
-        :'min_timestamp' => :'int',
-        :'max_timestamp' => :'int',
-        :'min_time_of_day' => :'int',
-        :'max_time_of_day' => :'int',
-        :'week' => :'string'
+        :'target' => :'Integer',
+        :'variable_name' => :'String',
+        :'min_timestamp' => :'Integer',
+        :'max_timestamp' => :'Integer',
+        :'min_time_of_day' => :'Integer',
+        :'max_time_of_day' => :'Integer',
+        :'week' => :'String'
         
       }
     end
@@ -52,33 +52,34 @@ module SwaggerClient
 
       
       if attributes[:'target']
-        @target = attributes[:'target']
+        self.target = attributes[:'target']
       end
       
       if attributes[:'variableName']
-        @variable_name = attributes[:'variableName']
+        self.variable_name = attributes[:'variableName']
       end
       
       if attributes[:'min_timestamp']
-        @min_timestamp = attributes[:'min_timestamp']
+        self.min_timestamp = attributes[:'min_timestamp']
       end
       
       if attributes[:'max_timestamp']
-        @max_timestamp = attributes[:'max_timestamp']
+        self.max_timestamp = attributes[:'max_timestamp']
       end
       
       if attributes[:'min_time_of_day']
-        @min_time_of_day = attributes[:'min_time_of_day']
+        self.min_time_of_day = attributes[:'min_time_of_day']
       end
       
       if attributes[:'max_time_of_day']
-        @max_time_of_day = attributes[:'max_time_of_day']
+        self.max_time_of_day = attributes[:'max_time_of_day']
       end
       
       if attributes[:'week']
-        @week = attributes[:'week']
+        self.week = attributes[:'week']
       end
       
     end
+
   end
 end

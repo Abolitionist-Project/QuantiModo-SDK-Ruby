@@ -2,8 +2,6 @@ require "uri"
 
 module SwaggerClient
   class OrganizationsApi
-    basePath = "https://localhost/api"
-    # apiInvoker = APIInvoker
 
     # Get user tokens for existing users, create new users
     # Get user tokens for existing users, create new users
@@ -12,14 +10,16 @@ module SwaggerClient
     # @param [Hash] opts the optional parameters
     # @return [UserTokenSuccessfulResponse]
     def self.v1_organizations_organization_id_users_post(organization_id, body, opts = {})
+      if Swagger.configuration.debug
+        Swagger.logger.debug "Calling API: OrganizationsApi#v1_organizations_organization_id_users_post ..."
+      end
       
       # verify the required parameter 'organization_id' is set
-      raise "Missing the required parameter 'organization_id' when calling v1_organizations_organization_id_users_post" if organization_id.nil?
+      fail "Missing the required parameter 'organization_id' when calling v1_organizations_organization_id_users_post" if organization_id.nil?
       
       # verify the required parameter 'body' is set
-      raise "Missing the required parameter 'body' when calling v1_organizations_organization_id_users_post" if body.nil?
+      fail "Missing the required parameter 'body' when calling v1_organizations_organization_id_users_post" if body.nil?
       
-
       # resource path
       path = "/v1/organizations/{organizationId}/users".sub('{format}','json').sub('{' + 'organizationId' + '}', organization_id.to_s)
 
@@ -45,8 +45,12 @@ module SwaggerClient
       
 
       auth_names = []
-      response = Swagger::Request.new(:POST, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make.body
-      obj = UserTokenSuccessfulResponse.new() and obj.build_from_hash(response)
+      response = Swagger::Request.new(:POST, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
+      result = response.deserialize('UserTokenSuccessfulResponse')
+      if Swagger.configuration.debug
+        Swagger.logger.debug "API called: OrganizationsApi#v1_organizations_organization_id_users_post. Result: #{result.inspect}"
+      end
+      result
     end
   end
 end

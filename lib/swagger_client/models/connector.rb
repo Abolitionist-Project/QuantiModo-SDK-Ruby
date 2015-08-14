@@ -42,16 +42,16 @@ module SwaggerClient
     # attribute type
     def self.swagger_types
       {
-        :'id' => :'int',
-        :'name' => :'string',
-        :'display_name' => :'string',
-        :'image' => :'string',
-        :'get_it_url' => :'string',
-        :'connected' => :'string',
-        :'connect_instructions' => :'string',
-        :'last_update' => :'int',
-        :'latest_data' => :'int',
-        :'no_data_yet' => :'boolean'
+        :'id' => :'Integer',
+        :'name' => :'String',
+        :'display_name' => :'String',
+        :'image' => :'String',
+        :'get_it_url' => :'String',
+        :'connected' => :'String',
+        :'connect_instructions' => :'String',
+        :'last_update' => :'Integer',
+        :'latest_data' => :'Integer',
+        :'no_data_yet' => :'BOOLEAN'
         
       }
     end
@@ -64,45 +64,46 @@ module SwaggerClient
 
       
       if attributes[:'id']
-        @id = attributes[:'id']
+        self.id = attributes[:'id']
       end
       
       if attributes[:'name']
-        @name = attributes[:'name']
+        self.name = attributes[:'name']
       end
       
       if attributes[:'displayName']
-        @display_name = attributes[:'displayName']
+        self.display_name = attributes[:'displayName']
       end
       
       if attributes[:'image']
-        @image = attributes[:'image']
+        self.image = attributes[:'image']
       end
       
       if attributes[:'getItUrl']
-        @get_it_url = attributes[:'getItUrl']
+        self.get_it_url = attributes[:'getItUrl']
       end
       
       if attributes[:'connected']
-        @connected = attributes[:'connected']
+        self.connected = attributes[:'connected']
       end
       
       if attributes[:'connectInstructions']
-        @connect_instructions = attributes[:'connectInstructions']
+        self.connect_instructions = attributes[:'connectInstructions']
       end
       
       if attributes[:'lastUpdate']
-        @last_update = attributes[:'lastUpdate']
+        self.last_update = attributes[:'lastUpdate']
       end
       
       if attributes[:'latestData']
-        @latest_data = attributes[:'latestData']
+        self.latest_data = attributes[:'latestData']
       end
       
       if attributes[:'noDataYet']
-        @no_data_yet = attributes[:'noDataYet']
+        self.no_data_yet = attributes[:'noDataYet']
       end
       
     end
+
   end
 end

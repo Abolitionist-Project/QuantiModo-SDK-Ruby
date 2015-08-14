@@ -1,13 +1,13 @@
 module SwaggerClient
   # 
-  class UserTokenFailedResponse < BaseObject
-    attr_accessor :code, :message, :success
+  class CommonResponse < BaseObject
+    attr_accessor :status, :message, :success
     # attribute mapping from ruby-style variable name to JSON key
     def self.attribute_map
       {
         
         # Status code
-        :'code' => :'code',
+        :'status' => :'status',
         
         # Message
         :'message' => :'message',
@@ -21,7 +21,7 @@ module SwaggerClient
     # attribute type
     def self.swagger_types
       {
-        :'code' => :'Integer',
+        :'status' => :'Integer',
         :'message' => :'String',
         :'success' => :'BOOLEAN'
         
@@ -35,8 +35,8 @@ module SwaggerClient
       attributes = attributes.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
 
       
-      if attributes[:'code']
-        self.code = attributes[:'code']
+      if attributes[:'status']
+        self.status = attributes[:'status']
       end
       
       if attributes[:'message']

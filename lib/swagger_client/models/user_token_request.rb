@@ -19,7 +19,7 @@ module SwaggerClient
     def self.swagger_types
       {
         :'user' => :'UserTokenRequestInnerUserField',
-        :'organization_access_token' => :'string'
+        :'organization_access_token' => :'String'
         
       }
     end
@@ -32,13 +32,14 @@ module SwaggerClient
 
       
       if attributes[:'user']
-        @user = attributes[:'user']
+        self.user = attributes[:'user']
       end
       
       if attributes[:'organization_access_token']
-        @organization_access_token = attributes[:'organization_access_token']
+        self.organization_access_token = attributes[:'organization_access_token']
       end
       
     end
+
   end
 end

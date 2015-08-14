@@ -24,5 +24,6 @@ module SwaggerClient
 
       
     end
+
   end
 end

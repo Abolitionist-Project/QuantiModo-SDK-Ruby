@@ -1,13 +1,14 @@
 # Swagger common files
-require 'swagger_client/monkey'
 require 'swagger_client/swagger'
 require 'swagger_client/swagger/configuration'
+require 'swagger_client/swagger/api_error'
 require 'swagger_client/swagger/request'
 require 'swagger_client/swagger/response'
 require 'swagger_client/swagger/version'
 
 # Models
 require 'swagger_client/models/base_object'
+require 'swagger_client/models/common_response'
 require 'swagger_client/models/connector'
 require 'swagger_client/models/conversion_step'
 require 'swagger_client/models/correlation'
@@ -43,10 +44,12 @@ require 'swagger_client/api/measurements_api'
 require 'swagger_client/api/correlations_api'
 require 'swagger_client/api/connect_api'
 require 'swagger_client/api/organizations_api'
+require 'swagger_client/api/votes_api'
 require 'swagger_client/api/pairs_api'
 require 'swagger_client/api/units_api'
 
 module SwaggerClient
   # Initialize the default configuration
-  Swagger.configuration ||= Swagger::Configuration.new
+  Swagger.configuration = Swagger::Configuration.new
+  Swagger.configure { |config| }
 end

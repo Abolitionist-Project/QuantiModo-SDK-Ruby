@@ -21,9 +21,9 @@ module SwaggerClient
     # attribute type
     def self.swagger_types
       {
-        :'timestamp' => :'int',
-        :'value' => :'double',
-        :'note' => :'string'
+        :'timestamp' => :'Integer',
+        :'value' => :'Float',
+        :'note' => :'String'
         
       }
     end
@@ -36,17 +36,18 @@ module SwaggerClient
 
       
       if attributes[:'timestamp']
-        @timestamp = attributes[:'timestamp']
+        self.timestamp = attributes[:'timestamp']
       end
       
       if attributes[:'value']
-        @value = attributes[:'value']
+        self.value = attributes[:'value']
       end
       
       if attributes[:'note']
-        @note = attributes[:'note']
+        self.note = attributes[:'note']
       end
       
     end
+
   end
 end

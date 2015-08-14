@@ -2,32 +2,35 @@ require "uri"
 
 module SwaggerClient
   class PairsApi
-    basePath = "https://localhost/api"
-    # apiInvoker = APIInvoker
 
     # Get pairs
     # Pairs cause measurements with effect measurements grouped over the duration of action after the onset delay.
     # @param cause Original variable name for the explanatory or independent variable
     # @param effect Original variable name for the outcome or dependent variable
     # @param [Hash] opts the optional parameters
-    # @option opts [string] :cause_source Name of data source that the cause measurements should come from
-    # @option opts [string] :cause_unit Abbreviated name for the unit cause measurements to be returned in
-    # @option opts [string] :delay Delay before onset of action (in seconds) from the cause variable settings.
-    # @option opts [string] :duration Duration of action (in seconds) from the cause variable settings.
-    # @option opts [string] :effect_source Name of data source that the effectmeasurements should come from
-    # @option opts [string] :effect_unit Abbreviated name for the unit effect measurements to be returned in
-    # @option opts [string] :end_time The most recent date (in epoch time) for which we should return measurements
-    # @option opts [string] :start_time The earliest date (in epoch time) for which we should return measurements
-    # @return [array[Pairs]]
+    # @option opts [String] :cause_source Name of data source that the cause measurements should come from
+    # @option opts [String] :cause_unit Abbreviated name for the unit cause measurements to be returned in
+    # @option opts [String] :delay Delay before onset of action (in seconds) from the cause variable settings.
+    # @option opts [String] :duration Duration of action (in seconds) from the cause variable settings.
+    # @option opts [String] :effect_source Name of data source that the effectmeasurements should come from
+    # @option opts [String] :effect_unit Abbreviated name for the unit effect measurements to be returned in
+    # @option opts [String] :end_time The most recent date (in epoch time) for which we should return measurements
+    # @option opts [String] :start_time The earliest date (in epoch time) for which we should return measurements
+    # @option opts [Integer] :limit The LIMIT is used to limit the number of results returned. So if you have 1000 results, but only want to the first 10, you would set this to 10 and offset to 0.
+    # @option opts [Integer] :offset Now suppose you wanted to show results 11-20. You&#39;d set the offset to 10 and the limit to 10.
+    # @option opts [Integer] :sort Sort by given field. If the field is prefixed with `-, it will sort in descending order.
+    # @return [Array<Pairs>]
     def self.pairs_get(cause, effect, opts = {})
+      if Swagger.configuration.debug
+        Swagger.logger.debug "Calling API: PairsApi#pairs_get ..."
+      end
       
       # verify the required parameter 'cause' is set
-      raise "Missing the required parameter 'cause' when calling pairs_get" if cause.nil?
+      fail "Missing the required parameter 'cause' when calling pairs_get" if cause.nil?
       
       # verify the required parameter 'effect' is set
-      raise "Missing the required parameter 'effect' when calling pairs_get" if effect.nil?
+      fail "Missing the required parameter 'effect' when calling pairs_get" if effect.nil?
       
-
       # resource path
       path = "/pairs".sub('{format}','json')
 
@@ -43,6 +46,9 @@ module SwaggerClient
       query_params[:'effectUnit'] = opts[:'effect_unit'] if opts[:'effect_unit']
       query_params[:'endTime'] = opts[:'end_time'] if opts[:'end_time']
       query_params[:'startTime'] = opts[:'start_time'] if opts[:'start_time']
+      query_params[:'limit'] = opts[:'limit'] if opts[:'limit']
+      query_params[:'offset'] = opts[:'offset'] if opts[:'offset']
+      query_params[:'sort'] = opts[:'sort'] if opts[:'sort']
 
       # header parameters
       header_params = {}
@@ -63,8 +69,12 @@ module SwaggerClient
       
 
       auth_names = ['oauth2']
-      response = Swagger::Request.new(:GET, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make.body
-      response.map {|response| obj = Pairs.new() and obj.build_from_hash(response) }
+      response = Swagger::Request.new(:GET, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
+      result = response.deserialize('Array<Pairs>')
+      if Swagger.configuration.debug
+        Swagger.logger.debug "API called: PairsApi#pairs_get. Result: #{result.inspect}"
+      end
+      result
     end
   end
 end

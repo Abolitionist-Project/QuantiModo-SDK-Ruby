@@ -33,13 +33,13 @@ module SwaggerClient
     # attribute type
     def self.swagger_types
       {
-        :'variable' => :'string',
-        :'source' => :'string',
-        :'timestamp' => :'int',
-        :'value' => :'double',
-        :'unit' => :'string',
-        :'stored_value' => :'double',
-        :'stored_unit' => :'string'
+        :'variable' => :'String',
+        :'source' => :'String',
+        :'timestamp' => :'Integer',
+        :'value' => :'Float',
+        :'unit' => :'String',
+        :'stored_value' => :'Float',
+        :'stored_unit' => :'String'
         
       }
     end
@@ -52,33 +52,34 @@ module SwaggerClient
 
       
       if attributes[:'variable']
-        @variable = attributes[:'variable']
+        self.variable = attributes[:'variable']
       end
       
       if attributes[:'source']
-        @source = attributes[:'source']
+        self.source = attributes[:'source']
       end
       
       if attributes[:'timestamp']
-        @timestamp = attributes[:'timestamp']
+        self.timestamp = attributes[:'timestamp']
       end
       
       if attributes[:'value']
-        @value = attributes[:'value']
+        self.value = attributes[:'value']
       end
       
       if attributes[:'unit']
-        @unit = attributes[:'unit']
+        self.unit = attributes[:'unit']
       end
       
       if attributes[:'storedValue']
-        @stored_value = attributes[:'storedValue']
+        self.stored_value = attributes[:'storedValue']
       end
       
       if attributes[:'storedUnit']
-        @stored_unit = attributes[:'storedUnit']
+        self.stored_unit = attributes[:'storedUnit']
       end
       
     end
+
   end
 end

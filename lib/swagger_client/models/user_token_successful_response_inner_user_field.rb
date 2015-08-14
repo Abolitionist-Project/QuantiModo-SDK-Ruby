@@ -18,8 +18,8 @@ module SwaggerClient
     # attribute type
     def self.swagger_types
       {
-        :'_id' => :'int',
-        :'access_token' => :'string'
+        :'_id' => :'Integer',
+        :'access_token' => :'String'
         
       }
     end
@@ -32,13 +32,14 @@ module SwaggerClient
 
       
       if attributes[:'_id']
-        @_id = attributes[:'_id']
+        self._id = attributes[:'_id']
       end
       
       if attributes[:'access_token']
-        @access_token = attributes[:'access_token']
+        self.access_token = attributes[:'access_token']
       end
       
     end
+
   end
 end

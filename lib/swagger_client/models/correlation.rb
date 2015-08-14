@@ -51,19 +51,19 @@ module SwaggerClient
     # attribute type
     def self.swagger_types
       {
-        :'correlation_coefficient' => :'number',
-        :'cause' => :'string',
-        :'effect' => :'string',
-        :'onset_delay' => :'double',
-        :'duration_of_action' => :'number',
-        :'number_of_pairs' => :'number',
-        :'effect_size' => :'string',
-        :'statistical_significance' => :'string',
-        :'timestamp' => :'number',
-        :'reverse_correlation' => :'number',
-        :'causality_factor' => :'number',
-        :'cause_category' => :'string',
-        :'effect_category' => :'string'
+        :'correlation_coefficient' => :'Float',
+        :'cause' => :'String',
+        :'effect' => :'String',
+        :'onset_delay' => :'Float',
+        :'duration_of_action' => :'Float',
+        :'number_of_pairs' => :'Float',
+        :'effect_size' => :'String',
+        :'statistical_significance' => :'String',
+        :'timestamp' => :'Float',
+        :'reverse_correlation' => :'Float',
+        :'causality_factor' => :'Float',
+        :'cause_category' => :'String',
+        :'effect_category' => :'String'
         
       }
     end
@@ -76,57 +76,58 @@ module SwaggerClient
 
       
       if attributes[:'correlationCoefficient']
-        @correlation_coefficient = attributes[:'correlationCoefficient']
+        self.correlation_coefficient = attributes[:'correlationCoefficient']
       end
       
       if attributes[:'cause']
-        @cause = attributes[:'cause']
+        self.cause = attributes[:'cause']
       end
       
       if attributes[:'effect']
-        @effect = attributes[:'effect']
+        self.effect = attributes[:'effect']
       end
       
       if attributes[:'onsetDelay']
-        @onset_delay = attributes[:'onsetDelay']
+        self.onset_delay = attributes[:'onsetDelay']
       end
       
       if attributes[:'durationOfAction']
-        @duration_of_action = attributes[:'durationOfAction']
+        self.duration_of_action = attributes[:'durationOfAction']
       end
       
       if attributes[:'numberOfPairs']
-        @number_of_pairs = attributes[:'numberOfPairs']
+        self.number_of_pairs = attributes[:'numberOfPairs']
       end
       
       if attributes[:'effectSize']
-        @effect_size = attributes[:'effectSize']
+        self.effect_size = attributes[:'effectSize']
       end
       
       if attributes[:'statisticalSignificance']
-        @statistical_significance = attributes[:'statisticalSignificance']
+        self.statistical_significance = attributes[:'statisticalSignificance']
       end
       
       if attributes[:'timestamp']
-        @timestamp = attributes[:'timestamp']
+        self.timestamp = attributes[:'timestamp']
       end
       
       if attributes[:'reverseCorrelation']
-        @reverse_correlation = attributes[:'reverseCorrelation']
+        self.reverse_correlation = attributes[:'reverseCorrelation']
       end
       
       if attributes[:'causalityFactor']
-        @causality_factor = attributes[:'causalityFactor']
+        self.causality_factor = attributes[:'causalityFactor']
       end
       
       if attributes[:'causeCategory']
-        @cause_category = attributes[:'causeCategory']
+        self.cause_category = attributes[:'causeCategory']
       end
       
       if attributes[:'effectCategory']
-        @effect_category = attributes[:'effectCategory']
+        self.effect_category = attributes[:'effectCategory']
       end
       
     end
+
   end
 end

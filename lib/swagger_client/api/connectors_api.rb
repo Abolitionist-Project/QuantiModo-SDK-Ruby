@@ -2,16 +2,16 @@ require "uri"
 
 module SwaggerClient
   class ConnectorsApi
-    basePath = "https://localhost/api"
-    # apiInvoker = APIInvoker
 
     # List of Connectors
     # Returns a list of all available connectors. A connector pulls data from other data providers using their API or a screenscraper.
     # @param [Hash] opts the optional parameters
-    # @return [array[Connector]]
+    # @return [Array<Connector>]
     def self.connectors_list_get(opts = {})
+      if Swagger.configuration.debug
+        Swagger.logger.debug "Calling API: ConnectorsApi#connectors_list_get ..."
+      end
       
-
       # resource path
       path = "/connectors/list".sub('{format}','json')
 
@@ -37,8 +37,12 @@ module SwaggerClient
       
 
       auth_names = ['oauth2']
-      response = Swagger::Request.new(:GET, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make.body
-      response.map {|response| obj = Connector.new() and obj.build_from_hash(response) }
+      response = Swagger::Request.new(:GET, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
+      result = response.deserialize('Array<Connector>')
+      if Swagger.configuration.debug
+        Swagger.logger.debug "API called: ConnectorsApi#connectors_list_get. Result: #{result.inspect}"
+      end
+      result
     end
 
     # Obtain a token from 3rd party data source
@@ -47,11 +51,13 @@ module SwaggerClient
     # @param [Hash] opts the optional parameters
     # @return [nil]
     def self.connectors_connector_connect_get(connector, opts = {})
+      if Swagger.configuration.debug
+        Swagger.logger.debug "Calling API: ConnectorsApi#connectors_connector_connect_get ..."
+      end
       
       # verify the required parameter 'connector' is set
-      raise "Missing the required parameter 'connector' when calling connectors_connector_connect_get" if connector.nil?
+      fail "Missing the required parameter 'connector' when calling connectors_connector_connect_get" if connector.nil?
       
-
       # resource path
       path = "/connectors/{connector}/connect".sub('{format}','json').sub('{' + 'connector' + '}', connector.to_s)
 
@@ -77,7 +83,10 @@ module SwaggerClient
       
 
       auth_names = ['oauth2']
-      Swagger::Request.new(:GET, path, {:params => query_params,:headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
+      Swagger::Request.new(:GET, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
+      if Swagger.configuration.debug
+        Swagger.logger.debug "API called: ConnectorsApi#connectors_connector_connect_get"
+      end
       nil
     end
 
@@ -90,20 +99,22 @@ module SwaggerClient
     # @param [Hash] opts the optional parameters
     # @return [nil]
     def self.connectors_connector_connect_instructions_get(connector, url, parameters, use_popup, opts = {})
+      if Swagger.configuration.debug
+        Swagger.logger.debug "Calling API: ConnectorsApi#connectors_connector_connect_instructions_get ..."
+      end
       
       # verify the required parameter 'connector' is set
-      raise "Missing the required parameter 'connector' when calling connectors_connector_connect_instructions_get" if connector.nil?
+      fail "Missing the required parameter 'connector' when calling connectors_connector_connect_instructions_get" if connector.nil?
       
       # verify the required parameter 'url' is set
-      raise "Missing the required parameter 'url' when calling connectors_connector_connect_instructions_get" if url.nil?
+      fail "Missing the required parameter 'url' when calling connectors_connector_connect_instructions_get" if url.nil?
       
       # verify the required parameter 'parameters' is set
-      raise "Missing the required parameter 'parameters' when calling connectors_connector_connect_instructions_get" if parameters.nil?
+      fail "Missing the required parameter 'parameters' when calling connectors_connector_connect_instructions_get" if parameters.nil?
       
       # verify the required parameter 'use_popup' is set
-      raise "Missing the required parameter 'use_popup' when calling connectors_connector_connect_instructions_get" if use_popup.nil?
+      fail "Missing the required parameter 'use_popup' when calling connectors_connector_connect_instructions_get" if use_popup.nil?
       
-
       # resource path
       path = "/connectors/{connector}/connectInstructions".sub('{format}','json').sub('{' + 'connector' + '}', connector.to_s)
 
@@ -132,7 +143,10 @@ module SwaggerClient
       
 
       auth_names = ['oauth2']
-      Swagger::Request.new(:GET, path, {:params => query_params,:headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
+      Swagger::Request.new(:GET, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
+      if Swagger.configuration.debug
+        Swagger.logger.debug "API called: ConnectorsApi#connectors_connector_connect_instructions_get"
+      end
       nil
     end
 
@@ -148,29 +162,31 @@ module SwaggerClient
     # @param [Hash] opts the optional parameters
     # @return [nil]
     def self.connectors_connector_connect_parameter_get(connector, display_name, key, use_popup, type, placeholder, default_value, opts = {})
+      if Swagger.configuration.debug
+        Swagger.logger.debug "Calling API: ConnectorsApi#connectors_connector_connect_parameter_get ..."
+      end
       
       # verify the required parameter 'connector' is set
-      raise "Missing the required parameter 'connector' when calling connectors_connector_connect_parameter_get" if connector.nil?
+      fail "Missing the required parameter 'connector' when calling connectors_connector_connect_parameter_get" if connector.nil?
       
       # verify the required parameter 'display_name' is set
-      raise "Missing the required parameter 'display_name' when calling connectors_connector_connect_parameter_get" if display_name.nil?
+      fail "Missing the required parameter 'display_name' when calling connectors_connector_connect_parameter_get" if display_name.nil?
       
       # verify the required parameter 'key' is set
-      raise "Missing the required parameter 'key' when calling connectors_connector_connect_parameter_get" if key.nil?
+      fail "Missing the required parameter 'key' when calling connectors_connector_connect_parameter_get" if key.nil?
       
       # verify the required parameter 'use_popup' is set
-      raise "Missing the required parameter 'use_popup' when calling connectors_connector_connect_parameter_get" if use_popup.nil?
+      fail "Missing the required parameter 'use_popup' when calling connectors_connector_connect_parameter_get" if use_popup.nil?
       
       # verify the required parameter 'type' is set
-      raise "Missing the required parameter 'type' when calling connectors_connector_connect_parameter_get" if type.nil?
+      fail "Missing the required parameter 'type' when calling connectors_connector_connect_parameter_get" if type.nil?
       
       # verify the required parameter 'placeholder' is set
-      raise "Missing the required parameter 'placeholder' when calling connectors_connector_connect_parameter_get" if placeholder.nil?
+      fail "Missing the required parameter 'placeholder' when calling connectors_connector_connect_parameter_get" if placeholder.nil?
       
       # verify the required parameter 'default_value' is set
-      raise "Missing the required parameter 'default_value' when calling connectors_connector_connect_parameter_get" if default_value.nil?
+      fail "Missing the required parameter 'default_value' when calling connectors_connector_connect_parameter_get" if default_value.nil?
       
-
       # resource path
       path = "/connectors/{connector}/connectParameter".sub('{format}','json').sub('{' + 'connector' + '}', connector.to_s)
 
@@ -202,7 +218,10 @@ module SwaggerClient
       
 
       auth_names = ['oauth2']
-      Swagger::Request.new(:GET, path, {:params => query_params,:headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
+      Swagger::Request.new(:GET, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
+      if Swagger.configuration.debug
+        Swagger.logger.debug "API called: ConnectorsApi#connectors_connector_connect_parameter_get"
+      end
       nil
     end
 
@@ -212,11 +231,13 @@ module SwaggerClient
     # @param [Hash] opts the optional parameters
     # @return [nil]
     def self.connectors_connector_disconnect_get(connector, opts = {})
+      if Swagger.configuration.debug
+        Swagger.logger.debug "Calling API: ConnectorsApi#connectors_connector_disconnect_get ..."
+      end
       
       # verify the required parameter 'connector' is set
-      raise "Missing the required parameter 'connector' when calling connectors_connector_disconnect_get" if connector.nil?
+      fail "Missing the required parameter 'connector' when calling connectors_connector_disconnect_get" if connector.nil?
       
-
       # resource path
       path = "/connectors/{connector}/disconnect".sub('{format}','json').sub('{' + 'connector' + '}', connector.to_s)
 
@@ -242,7 +263,10 @@ module SwaggerClient
       
 
       auth_names = ['oauth2']
-      Swagger::Request.new(:GET, path, {:params => query_params,:headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
+      Swagger::Request.new(:GET, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
+      if Swagger.configuration.debug
+        Swagger.logger.debug "API called: ConnectorsApi#connectors_connector_disconnect_get"
+      end
       nil
     end
 
@@ -252,11 +276,13 @@ module SwaggerClient
     # @param [Hash] opts the optional parameters
     # @return [nil]
     def self.connectors_connector_info_get(connector, opts = {})
+      if Swagger.configuration.debug
+        Swagger.logger.debug "Calling API: ConnectorsApi#connectors_connector_info_get ..."
+      end
       
       # verify the required parameter 'connector' is set
-      raise "Missing the required parameter 'connector' when calling connectors_connector_info_get" if connector.nil?
+      fail "Missing the required parameter 'connector' when calling connectors_connector_info_get" if connector.nil?
       
-
       # resource path
       path = "/connectors/{connector}/info".sub('{format}','json').sub('{' + 'connector' + '}', connector.to_s)
 
@@ -282,7 +308,10 @@ module SwaggerClient
       
 
       auth_names = ['oauth2']
-      Swagger::Request.new(:GET, path, {:params => query_params,:headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
+      Swagger::Request.new(:GET, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
+      if Swagger.configuration.debug
+        Swagger.logger.debug "API called: ConnectorsApi#connectors_connector_info_get"
+      end
       nil
     end
 
@@ -292,11 +321,13 @@ module SwaggerClient
     # @param [Hash] opts the optional parameters
     # @return [nil]
     def self.connectors_connector_update_get(connector, opts = {})
+      if Swagger.configuration.debug
+        Swagger.logger.debug "Calling API: ConnectorsApi#connectors_connector_update_get ..."
+      end
       
       # verify the required parameter 'connector' is set
-      raise "Missing the required parameter 'connector' when calling connectors_connector_update_get" if connector.nil?
+      fail "Missing the required parameter 'connector' when calling connectors_connector_update_get" if connector.nil?
       
-
       # resource path
       path = "/connectors/{connector}/update".sub('{format}','json').sub('{' + 'connector' + '}', connector.to_s)
 
@@ -322,7 +353,10 @@ module SwaggerClient
       
 
       auth_names = ['oauth2']
-      Swagger::Request.new(:GET, path, {:params => query_params,:headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
+      Swagger::Request.new(:GET, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
+      if Swagger.configuration.debug
+        Swagger.logger.debug "API called: ConnectorsApi#connectors_connector_update_get"
+      end
       nil
     end
   end

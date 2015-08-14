@@ -18,8 +18,8 @@ module SwaggerClient
     # attribute type
     def self.swagger_types
       {
-        :'operation' => :'string',
-        :'value' => :'double'
+        :'operation' => :'String',
+        :'value' => :'Float'
         
       }
     end
@@ -32,13 +32,22 @@ module SwaggerClient
 
       
       if attributes[:'operation']
-        @operation = attributes[:'operation']
+        self.operation = attributes[:'operation']
       end
       
       if attributes[:'value']
-        @value = attributes[:'value']
+        self.value = attributes[:'value']
       end
       
     end
+
+    def operation=(operation)
+      allowed_values = ["MULTIPLY", "ADD"]
+      if operation && !allowed_values.include?(operation)
+        fail "invalid value for 'operation', must be one of #{allowed_values}"
+      end
+      @operation = operation
+    end
+
   end
 end

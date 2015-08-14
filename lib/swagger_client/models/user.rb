@@ -33,13 +33,13 @@ module SwaggerClient
     # attribute type
     def self.swagger_types
       {
-        :'id' => :'int',
-        :'wp_id' => :'int',
-        :'display_name' => :'string',
-        :'login_name' => :'string',
-        :'email' => :'string',
-        :'token' => :'string',
-        :'administrator' => :'boolean'
+        :'id' => :'Integer',
+        :'wp_id' => :'Integer',
+        :'display_name' => :'String',
+        :'login_name' => :'String',
+        :'email' => :'String',
+        :'token' => :'String',
+        :'administrator' => :'BOOLEAN'
         
       }
     end
@@ -52,33 +52,34 @@ module SwaggerClient
 
       
       if attributes[:'id']
-        @id = attributes[:'id']
+        self.id = attributes[:'id']
       end
       
       if attributes[:'wpId']
-        @wp_id = attributes[:'wpId']
+        self.wp_id = attributes[:'wpId']
       end
       
       if attributes[:'displayName']
-        @display_name = attributes[:'displayName']
+        self.display_name = attributes[:'displayName']
       end
       
       if attributes[:'loginName']
-        @login_name = attributes[:'loginName']
+        self.login_name = attributes[:'loginName']
       end
       
       if attributes[:'email']
-        @email = attributes[:'email']
+        self.email = attributes[:'email']
       end
       
       if attributes[:'token']
-        @token = attributes[:'token']
+        self.token = attributes[:'token']
       end
       
       if attributes[:'administrator']
-        @administrator = attributes[:'administrator']
+        self.administrator = attributes[:'administrator']
       end
       
     end
+
   end
 end

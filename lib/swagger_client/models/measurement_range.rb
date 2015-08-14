@@ -18,8 +18,8 @@ module SwaggerClient
     # attribute type
     def self.swagger_types
       {
-        :'lower_limit' => :'int',
-        :'upper_limit' => :'int'
+        :'lower_limit' => :'Integer',
+        :'upper_limit' => :'Integer'
         
       }
     end
@@ -32,13 +32,14 @@ module SwaggerClient
 
       
       if attributes[:'lowerLimit']
-        @lower_limit = attributes[:'lowerLimit']
+        self.lower_limit = attributes[:'lowerLimit']
       end
       
       if attributes[:'upperLimit']
-        @upper_limit = attributes[:'upperLimit']
+        self.upper_limit = attributes[:'upperLimit']
       end
       
     end
+
   end
 end

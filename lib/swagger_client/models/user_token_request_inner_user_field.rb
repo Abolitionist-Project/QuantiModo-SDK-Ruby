@@ -15,7 +15,7 @@ module SwaggerClient
     # attribute type
     def self.swagger_types
       {
-        :'_id' => :'int'
+        :'_id' => :'Integer'
         
       }
     end
@@ -28,9 +28,10 @@ module SwaggerClient
 
       
       if attributes[:'_id']
-        @_id = attributes[:'_id']
+        self._id = attributes[:'_id']
       end
       
     end
+
   end
 end

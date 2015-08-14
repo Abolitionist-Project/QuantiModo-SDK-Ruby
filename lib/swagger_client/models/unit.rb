@@ -30,12 +30,12 @@ module SwaggerClient
     # attribute type
     def self.swagger_types
       {
-        :'name' => :'string',
-        :'abbreviated_name' => :'string',
-        :'category' => :'string',
-        :'minimum' => :'double',
-        :'maximum' => :'double',
-        :'conversion_steps' => :'array[ConversionStep]'
+        :'name' => :'String',
+        :'abbreviated_name' => :'String',
+        :'category' => :'String',
+        :'minimum' => :'Float',
+        :'maximum' => :'Float',
+        :'conversion_steps' => :'Array<ConversionStep>'
         
       }
     end
@@ -48,31 +48,40 @@ module SwaggerClient
 
       
       if attributes[:'name']
-        @name = attributes[:'name']
+        self.name = attributes[:'name']
       end
       
       if attributes[:'abbreviatedName']
-        @abbreviated_name = attributes[:'abbreviatedName']
+        self.abbreviated_name = attributes[:'abbreviatedName']
       end
       
       if attributes[:'category']
-        @category = attributes[:'category']
+        self.category = attributes[:'category']
       end
       
       if attributes[:'minimum']
-        @minimum = attributes[:'minimum']
+        self.minimum = attributes[:'minimum']
       end
       
       if attributes[:'maximum']
-        @maximum = attributes[:'maximum']
+        self.maximum = attributes[:'maximum']
       end
       
       if attributes[:'conversionSteps']
         if (value = attributes[:'conversionSteps']).is_a?(Array)
-          @conversion_steps = value
+          self.conversion_steps = value
         end
       end
       
     end
+
+    def category=(category)
+      allowed_values = ["Distance", "Duration", "Energy", "Frequency", "Miscellany", "Pressure", "Proportion", "Rating", "Temperature", "Volume", "Weight"]
+      if category && !allowed_values.include?(category)
+        fail "invalid value for 'category', must be one of #{allowed_values}"
+      end
+      @category = category
+    end
+
   end
 end

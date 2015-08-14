@@ -2,26 +2,23 @@ require "uri"
 
 module SwaggerClient
   class ConnectApi
-    basePath = "https://localhost/api"
-    # apiInvoker = APIInvoker
 
     # Get embeddable connect javascript
     # Get embeddable connect javascript
-    # @param t User token
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :t User token
     # @return [nil]
-    def self.v1_connect/js_get(t, opts = {})
+    def self.v1_connect/js_get(opts = {})
+      if Swagger.configuration.debug
+        Swagger.logger.debug "Calling API: ConnectApi#v1_connect/js_get ..."
+      end
       
-      # verify the required parameter 't' is set
-      raise "Missing the required parameter 't' when calling v1_connect/js_get" if t.nil?
-      
-
       # resource path
       path = "/v1/connect.js".sub('{format}','json')
 
       # query parameters
       query_params = {}
-      query_params[:'t'] = t
+      query_params[:'t'] = opts[:'t'] if opts[:'t']
 
       # header parameters
       header_params = {}
@@ -42,7 +39,10 @@ module SwaggerClient
       
 
       auth_names = []
-      Swagger::Request.new(:GET, path, {:params => query_params,:headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
+      Swagger::Request.new(:GET, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
+      if Swagger.configuration.debug
+        Swagger.logger.debug "API called: ConnectApi#v1_connect/js_get"
+      end
       nil
     end
 
@@ -52,11 +52,13 @@ module SwaggerClient
     # @param [Hash] opts the optional parameters
     # @return [nil]
     def self.v1_connect_mobile_get(t, opts = {})
+      if Swagger.configuration.debug
+        Swagger.logger.debug "Calling API: ConnectApi#v1_connect_mobile_get ..."
+      end
       
       # verify the required parameter 't' is set
-      raise "Missing the required parameter 't' when calling v1_connect_mobile_get" if t.nil?
+      fail "Missing the required parameter 't' when calling v1_connect_mobile_get" if t.nil?
       
-
       # resource path
       path = "/v1/connect/mobile".sub('{format}','json')
 
@@ -83,7 +85,10 @@ module SwaggerClient
       
 
       auth_names = []
-      Swagger::Request.new(:GET, path, {:params => query_params,:headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
+      Swagger::Request.new(:GET, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
+      if Swagger.configuration.debug
+        Swagger.logger.debug "API called: ConnectApi#v1_connect_mobile_get"
+      end
       nil
     end
   end

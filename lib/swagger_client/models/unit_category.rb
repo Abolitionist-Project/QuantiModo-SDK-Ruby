@@ -15,7 +15,7 @@ module SwaggerClient
     # attribute type
     def self.swagger_types
       {
-        :'name' => :'string'
+        :'name' => :'String'
         
       }
     end
@@ -28,9 +28,10 @@ module SwaggerClient
 
       
       if attributes[:'name']
-        @name = attributes[:'name']
+        self.name = attributes[:'name']
       end
       
     end
+
   end
 end

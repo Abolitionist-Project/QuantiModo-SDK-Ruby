@@ -18,8 +18,8 @@ module SwaggerClient
     # attribute type
     def self.swagger_types
       {
-        :'status' => :'string',
-        :'message' => :'string'
+        :'status' => :'String',
+        :'message' => :'String'
         
       }
     end
@@ -32,13 +32,14 @@ module SwaggerClient
 
       
       if attributes[:'status']
-        @status = attributes[:'status']
+        self.status = attributes[:'status']
       end
       
       if attributes[:'message']
-        @message = attributes[:'message']
+        self.message = attributes[:'message']
       end
       
     end
+
   end
 end

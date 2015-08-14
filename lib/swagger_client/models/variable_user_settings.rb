@@ -42,16 +42,16 @@ module SwaggerClient
     # attribute type
     def self.swagger_types
       {
-        :'user' => :'int',
-        :'variable' => :'string',
-        :'duration_of_action' => :'int',
-        :'filling_value' => :'int',
-        :'join_with' => :'string',
-        :'maximum_value' => :'float',
-        :'minimum_value' => :'float',
-        :'name' => :'string',
-        :'onset_delay' => :'int',
-        :'unit' => :'string'
+        :'user' => :'Integer',
+        :'variable' => :'String',
+        :'duration_of_action' => :'Integer',
+        :'filling_value' => :'Integer',
+        :'join_with' => :'String',
+        :'maximum_value' => :'Float',
+        :'minimum_value' => :'Float',
+        :'name' => :'String',
+        :'onset_delay' => :'Integer',
+        :'unit' => :'String'
         
       }
     end
@@ -64,45 +64,46 @@ module SwaggerClient
 
       
       if attributes[:'user']
-        @user = attributes[:'user']
+        self.user = attributes[:'user']
       end
       
       if attributes[:'variable']
-        @variable = attributes[:'variable']
+        self.variable = attributes[:'variable']
       end
       
       if attributes[:'durationOfAction']
-        @duration_of_action = attributes[:'durationOfAction']
+        self.duration_of_action = attributes[:'durationOfAction']
       end
       
       if attributes[:'fillingValue']
-        @filling_value = attributes[:'fillingValue']
+        self.filling_value = attributes[:'fillingValue']
       end
       
       if attributes[:'joinWith']
-        @join_with = attributes[:'joinWith']
+        self.join_with = attributes[:'joinWith']
       end
       
       if attributes[:'maximumValue']
-        @maximum_value = attributes[:'maximumValue']
+        self.maximum_value = attributes[:'maximumValue']
       end
       
       if attributes[:'minimumValue']
-        @minimum_value = attributes[:'minimumValue']
+        self.minimum_value = attributes[:'minimumValue']
       end
       
       if attributes[:'name']
-        @name = attributes[:'name']
+        self.name = attributes[:'name']
       end
       
       if attributes[:'onsetDelay']
-        @onset_delay = attributes[:'onsetDelay']
+        self.onset_delay = attributes[:'onsetDelay']
       end
       
       if attributes[:'unit']
-        @unit = attributes[:'unit']
+        self.unit = attributes[:'unit']
       end
       
     end
+
   end
 end

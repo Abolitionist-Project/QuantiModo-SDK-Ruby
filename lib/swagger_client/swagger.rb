@@ -1,6 +1,3 @@
-require 'logger'
-require 'json'
-
 module SwaggerClient
   module Swagger
     class << self
@@ -25,8 +22,7 @@ module SwaggerClient
       def configure
         yield(configuration) if block_given?
 
-        # Configure logger.  Default to use Rails
-        self.logger ||= configuration.logger || (defined?(Rails) ? Rails.logger : Logger.new(STDOUT))
+        self.logger = configuration.logger
 
         # remove :// from scheme
         configuration.scheme.sub!(/:\/\//, '')
@@ -41,7 +37,7 @@ module SwaggerClient
       end
 
       def authenticated?
-        Swagger.configuration.auth_token.present?
+        !Swagger.configuration.auth_token.nil?
       end
 
       def de_authenticate
@@ -51,8 +47,8 @@ module SwaggerClient
       def authenticate
         return if Swagger.authenticated?
 
-        if Swagger.configuration.username.blank? || Swagger.configuration.password.blank?
-          raise ClientError, "Username and password are required to authenticate."
+        if Swagger.configuration.username.nil? || Swagger.configuration.password.nil?
+          raise ApiError, "Username and password are required to authenticate."
         end
 
         request = Swagger::Request.new(
@@ -67,12 +63,14 @@ module SwaggerClient
         response_body = request.response.body
         Swagger.configuration.auth_token = response_body['token']
       end
+
+      def last_response
+        Thread.current[:swagger_last_response]
+      end
+
+      def last_response=(response)
+        Thread.current[:swagger_last_response] = response
+      end
     end
-  end
-
-  class ServerError < StandardError
-  end
-
-  class ClientError < StandardError
   end
 end

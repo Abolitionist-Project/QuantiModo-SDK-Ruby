@@ -30,12 +30,12 @@ module SwaggerClient
     # attribute type
     def self.swagger_types
       {
-        :'measurements' => :'array[ValueObject]',
-        :'name' => :'string',
-        :'source' => :'string',
-        :'category' => :'string',
-        :'combination_operation' => :'string',
-        :'unit' => :'string'
+        :'measurements' => :'Array<ValueObject>',
+        :'name' => :'String',
+        :'source' => :'String',
+        :'category' => :'String',
+        :'combination_operation' => :'String',
+        :'unit' => :'String'
         
       }
     end
@@ -49,30 +49,39 @@ module SwaggerClient
       
       if attributes[:'measurements']
         if (value = attributes[:'measurements']).is_a?(Array)
-          @measurements = value
+          self.measurements = value
         end
       end
       
       if attributes[:'name']
-        @name = attributes[:'name']
+        self.name = attributes[:'name']
       end
       
       if attributes[:'source']
-        @source = attributes[:'source']
+        self.source = attributes[:'source']
       end
       
       if attributes[:'category']
-        @category = attributes[:'category']
+        self.category = attributes[:'category']
       end
       
       if attributes[:'combinationOperation']
-        @combination_operation = attributes[:'combinationOperation']
+        self.combination_operation = attributes[:'combinationOperation']
       end
       
       if attributes[:'unit']
-        @unit = attributes[:'unit']
+        self.unit = attributes[:'unit']
       end
       
     end
+
+    def combination_operation=(combination_operation)
+      allowed_values = ["MEAN", "SUM"]
+      if combination_operation && !allowed_values.include?(combination_operation)
+        fail "invalid value for 'combination_operation', must be one of #{allowed_values}"
+      end
+      @combination_operation = combination_operation
+    end
+
   end
 end
