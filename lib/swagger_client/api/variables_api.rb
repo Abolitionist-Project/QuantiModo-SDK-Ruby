@@ -107,7 +107,7 @@ module SwaggerClient
     end
 
     # Get top 5 PUBLIC variables with the most correlations
-    # Get top 5 PUBLIC variables with the most correlations containing the entered search characters. For example, search for &#39;mood&#39; as an effect. Since &#39;Overall Mood&#39; has a lot of correlations with other variables, it should be in the autocomplete list.
+    # Get top 5 PUBLIC variables with the most correlations containing the entered search characters. For example, search for &#39;mood&#39; as an effect. Since &#39;Overall Mood&#39; has a lot of correlations with other variables, it should be in the autocomplete list.&lt;br&gt;Supported filter parameters:&lt;br&gt;&lt;ul&gt;&lt;li&gt;&lt;b&gt;category&lt;/b&gt; - Category of Variable&lt;/li&gt;&lt;/ul&gt;&lt;br&gt;
     # @param search Search query can be some fraction of a variable name.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :effect_or_cause Allows us to specify which column in the `correlations` table will be searched. Choices are effect or cause.
@@ -160,6 +160,51 @@ module SwaggerClient
       result
     end
 
+    # Update User Settings for a Variable
+    # Users can change things like the display name for a variable. They can also change the parameters used in analysis of that variable such as the expected duration of action for a variable to have an effect, the estimated delay before the onset of action. In order to filter out erroneous data, they are able to set the maximum and minimum reasonable daily values for a variable.
+    # @param sharing_data Variable user settings data
+    # @param [Hash] opts the optional parameters
+    # @return [nil]
+    def self.v1_user_variables_post(sharing_data, opts = {})
+      if Swagger.configuration.debug
+        Swagger.logger.debug "Calling API: VariablesApi#v1_user_variables_post ..."
+      end
+      
+      # verify the required parameter 'sharing_data' is set
+      fail "Missing the required parameter 'sharing_data' when calling v1_user_variables_post" if sharing_data.nil?
+      
+      # resource path
+      path = "/v1/userVariables".sub('{format}','json')
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+
+      # HTTP header 'Accept' (if needed)
+      _header_accept = ['application/json']
+      _header_accept_result = Swagger::Request.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
+
+      # HTTP header 'Content-Type'
+      _header_content_type = []
+      header_params['Content-Type'] = Swagger::Request.select_header_content_type(_header_content_type)
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = Swagger::Request.object_to_http_body(sharing_data)
+      
+
+      auth_names = ['oauth2']
+      Swagger::Request.new(:POST, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
+      if Swagger.configuration.debug
+        Swagger.logger.debug "API called: VariablesApi#v1_user_variables_post"
+      end
+      nil
+    end
+
     # Variable categories
     # The variable categories include Activity, Causes of Illness, Cognitive Performance, Conditions, Environment, Foods, Location, Miscellaneous, Mood, Nutrition, Physical Activity, Physique, Sleep, Social Interactions, Symptoms, Treatments, Vital Signs, and Work.
     # @param [Hash] opts the optional parameters
@@ -200,51 +245,6 @@ module SwaggerClient
         Swagger.logger.debug "API called: VariablesApi#variable_categories_get. Result: #{result.inspect}"
       end
       result
-    end
-
-    # Update User Settings for a Variable
-    # Users can change things like the display name for a variable. They can also change the parameters used in analysis of that variable such as the expected duration of action for a variable to have an effect, the estimated delay before the onset of action. In order to filter out erroneous data, they are able to set the maximum and minimum reasonable daily values for a variable.
-    # @param sharing_data Variable user settings data
-    # @param [Hash] opts the optional parameters
-    # @return [nil]
-    def self.variable_user_settings_post(sharing_data, opts = {})
-      if Swagger.configuration.debug
-        Swagger.logger.debug "Calling API: VariablesApi#variable_user_settings_post ..."
-      end
-      
-      # verify the required parameter 'sharing_data' is set
-      fail "Missing the required parameter 'sharing_data' when calling variable_user_settings_post" if sharing_data.nil?
-      
-      # resource path
-      path = "/variableUserSettings".sub('{format}','json')
-
-      # query parameters
-      query_params = {}
-
-      # header parameters
-      header_params = {}
-
-      # HTTP header 'Accept' (if needed)
-      _header_accept = ['application/json']
-      _header_accept_result = Swagger::Request.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
-
-      # HTTP header 'Content-Type'
-      _header_content_type = []
-      header_params['Content-Type'] = Swagger::Request.select_header_content_type(_header_content_type)
-
-      # form parameters
-      form_params = {}
-
-      # http body (model)
-      post_body = Swagger::Request.object_to_http_body(sharing_data)
-      
-
-      auth_names = ['oauth2']
-      Swagger::Request.new(:POST, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
-      if Swagger.configuration.debug
-        Swagger.logger.debug "API called: VariablesApi#variable_user_settings_post"
-      end
-      nil
     end
 
     # Get variables by the category name

@@ -1,7 +1,7 @@
 module SwaggerClient
   # 
   class Measurement < BaseObject
-    attr_accessor :variable, :source, :timestamp, :value, :unit, :stored_value, :stored_unit
+    attr_accessor :variable, :source, :timestamp, :value, :unit, :stored_value, :stored_abbreviated_unit_name
     # attribute mapping from ruby-style variable name to JSON key
     def self.attribute_map
       {
@@ -25,7 +25,7 @@ module SwaggerClient
         :'stored_value' => :'storedValue',
         
         # Unit of measurement as originally submitted
-        :'stored_unit' => :'storedUnit'
+        :'stored_abbreviated_unit_name' => :'storedAbbreviatedUnitName'
         
       }
     end
@@ -39,7 +39,7 @@ module SwaggerClient
         :'value' => :'Float',
         :'unit' => :'String',
         :'stored_value' => :'Float',
-        :'stored_unit' => :'String'
+        :'stored_abbreviated_unit_name' => :'String'
         
       }
     end
@@ -75,8 +75,8 @@ module SwaggerClient
         self.stored_value = attributes[:'storedValue']
       end
       
-      if attributes[:'storedUnit']
-        self.stored_unit = attributes[:'storedUnit']
+      if attributes[:'storedAbbreviatedUnitName']
+        self.stored_abbreviated_unit_name = attributes[:'storedAbbreviatedUnitName']
       end
       
     end

@@ -1,7 +1,7 @@
 module SwaggerClient
   # 
   class Connector < BaseObject
-    attr_accessor :id, :name, :display_name, :image, :get_it_url, :connected, :connect_instructions, :last_update, :latest_data, :no_data_yet
+    attr_accessor :id, :name, :display_name, :image, :get_it_url, :connected, :connect_instructions, :last_update, :total_measurements_in_last_update, :no_data_yet
     # attribute mapping from ruby-style variable name to JSON key
     def self.attribute_map
       {
@@ -31,7 +31,7 @@ module SwaggerClient
         :'last_update' => :'lastUpdate',
         
         # Number of measurements obtained during latest update
-        :'latest_data' => :'latestData',
+        :'total_measurements_in_last_update' => :'totalMeasurementsInLastUpdate',
         
         # True if user has no measurements for this connector
         :'no_data_yet' => :'noDataYet'
@@ -50,7 +50,7 @@ module SwaggerClient
         :'connected' => :'String',
         :'connect_instructions' => :'String',
         :'last_update' => :'Integer',
-        :'latest_data' => :'Integer',
+        :'total_measurements_in_last_update' => :'Integer',
         :'no_data_yet' => :'BOOLEAN'
         
       }
@@ -95,8 +95,8 @@ module SwaggerClient
         self.last_update = attributes[:'lastUpdate']
       end
       
-      if attributes[:'latestData']
-        self.latest_data = attributes[:'latestData']
+      if attributes[:'totalMeasurementsInLastUpdate']
+        self.total_measurements_in_last_update = attributes[:'totalMeasurementsInLastUpdate']
       end
       
       if attributes[:'noDataYet']
