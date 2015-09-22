@@ -2,47 +2,10 @@ require "uri"
 
 module SwaggerClient
   class UserApi
+    attr_accessor :api_client
 
-    # Get all available units for variableGet authenticated user
-    # Returns user info for the currently authenticated user.
-    # @param [Hash] opts the optional parameters
-    # @return [User]
-    def self.user_me_get(opts = {})
-      if Swagger.configuration.debug
-        Swagger.logger.debug "Calling API: UserApi#user_me_get ..."
-      end
-      
-      # resource path
-      path = "/user/me".sub('{format}','json')
-
-      # query parameters
-      query_params = {}
-
-      # header parameters
-      header_params = {}
-
-      # HTTP header 'Accept' (if needed)
-      _header_accept = ['application/json']
-      _header_accept_result = Swagger::Request.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
-
-      # HTTP header 'Content-Type'
-      _header_content_type = []
-      header_params['Content-Type'] = Swagger::Request.select_header_content_type(_header_content_type)
-
-      # form parameters
-      form_params = {}
-
-      # http body (model)
-      post_body = nil
-      
-
-      auth_names = ['oauth2']
-      response = Swagger::Request.new(:GET, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
-      result = response.deserialize('User')
-      if Swagger.configuration.debug
-        Swagger.logger.debug "API called: UserApi#user_me_get. Result: #{result.inspect}"
-      end
-      result
+    def initialize(api_client = nil)
+      @api_client = api_client || Configuration.api_client
     end
 
     # Get user tokens for existing users, create new users
@@ -51,9 +14,9 @@ module SwaggerClient
     # @param body Provides organization token and user ID
     # @param [Hash] opts the optional parameters
     # @return [UserTokenSuccessfulResponse]
-    def self.v1_organizations_organization_id_users_post(organization_id, body, opts = {})
-      if Swagger.configuration.debug
-        Swagger.logger.debug "Calling API: UserApi#v1_organizations_organization_id_users_post ..."
+    def v1_organizations_organization_id_users_post(organization_id, body, opts = {})
+      if Configuration.debugging
+        Configuration.logger.debug "Calling API: UserApi#v1_organizations_organization_id_users_post ..."
       end
       
       # verify the required parameter 'organization_id' is set
@@ -73,26 +36,82 @@ module SwaggerClient
 
       # HTTP header 'Accept' (if needed)
       _header_accept = ['application/json']
-      _header_accept_result = Swagger::Request.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
+      _header_accept_result = @api_client.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
 
       # HTTP header 'Content-Type'
       _header_content_type = []
-      header_params['Content-Type'] = Swagger::Request.select_header_content_type(_header_content_type)
+      header_params['Content-Type'] = @api_client.select_header_content_type(_header_content_type)
 
       # form parameters
       form_params = {}
 
       # http body (model)
-      post_body = Swagger::Request.object_to_http_body(body)
+      post_body = @api_client.object_to_http_body(body)
       
 
       auth_names = []
-      response = Swagger::Request.new(:POST, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
-      result = response.deserialize('UserTokenSuccessfulResponse')
-      if Swagger.configuration.debug
-        Swagger.logger.debug "API called: UserApi#v1_organizations_organization_id_users_post. Result: #{result.inspect}"
+      result = @api_client.call_api(:POST, path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'UserTokenSuccessfulResponse')
+      if Configuration.debugging
+        Configuration.logger.debug "API called: UserApi#v1_organizations_organization_id_users_post. Result: #{result.inspect}"
       end
-      result
+      return result
+    end
+
+    # Get all available units for variableGet authenticated user
+    # Returns user info for the currently authenticated user.
+    # @param [Hash] opts the optional parameters
+    # @return [User]
+    def v1_user_me_get(opts = {})
+      if Configuration.debugging
+        Configuration.logger.debug "Calling API: UserApi#v1_user_me_get ..."
+      end
+      
+      # resource path
+      path = "/v1/user/me".sub('{format}','json')
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+
+      # HTTP header 'Accept' (if needed)
+      _header_accept = ['application/json']
+      _header_accept_result = @api_client.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
+
+      # HTTP header 'Content-Type'
+      _header_content_type = []
+      header_params['Content-Type'] = @api_client.select_header_content_type(_header_content_type)
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = nil
+      
+
+      auth_names = ['oauth2']
+      result = @api_client.call_api(:GET, path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'User')
+      if Configuration.debugging
+        Configuration.logger.debug "API called: UserApi#v1_user_me_get. Result: #{result.inspect}"
+      end
+      return result
     end
   end
 end
+
+
+
+

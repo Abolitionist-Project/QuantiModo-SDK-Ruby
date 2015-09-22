@@ -2,6 +2,11 @@ require "uri"
 
 module SwaggerClient
   class PairsApi
+    attr_accessor :api_client
+
+    def initialize(api_client = nil)
+      @api_client = api_client || Configuration.api_client
+    end
 
     # Get pairs
     # Pairs cause measurements with effect measurements grouped over the duration of action after the onset delay.
@@ -20,19 +25,19 @@ module SwaggerClient
     # @option opts [Integer] :offset Now suppose you wanted to show results 11-20. You&#39;d set the offset to 10 and the limit to 10.
     # @option opts [Integer] :sort Sort by given field. If the field is prefixed with `-, it will sort in descending order.
     # @return [Array<Pairs>]
-    def self.pairs_get(cause, effect, opts = {})
-      if Swagger.configuration.debug
-        Swagger.logger.debug "Calling API: PairsApi#pairs_get ..."
+    def v1_pairs_get(cause, effect, opts = {})
+      if Configuration.debugging
+        Configuration.logger.debug "Calling API: PairsApi#v1_pairs_get ..."
       end
       
       # verify the required parameter 'cause' is set
-      fail "Missing the required parameter 'cause' when calling pairs_get" if cause.nil?
+      fail "Missing the required parameter 'cause' when calling v1_pairs_get" if cause.nil?
       
       # verify the required parameter 'effect' is set
-      fail "Missing the required parameter 'effect' when calling pairs_get" if effect.nil?
+      fail "Missing the required parameter 'effect' when calling v1_pairs_get" if effect.nil?
       
       # resource path
-      path = "/pairs".sub('{format}','json')
+      path = "/v1/pairs".sub('{format}','json')
 
       # query parameters
       query_params = {}
@@ -55,11 +60,11 @@ module SwaggerClient
 
       # HTTP header 'Accept' (if needed)
       _header_accept = ['application/json']
-      _header_accept_result = Swagger::Request.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
+      _header_accept_result = @api_client.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
 
       # HTTP header 'Content-Type'
       _header_content_type = []
-      header_params['Content-Type'] = Swagger::Request.select_header_content_type(_header_content_type)
+      header_params['Content-Type'] = @api_client.select_header_content_type(_header_content_type)
 
       # form parameters
       form_params = {}
@@ -69,12 +74,21 @@ module SwaggerClient
       
 
       auth_names = ['oauth2']
-      response = Swagger::Request.new(:GET, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
-      result = response.deserialize('Array<Pairs>')
-      if Swagger.configuration.debug
-        Swagger.logger.debug "API called: PairsApi#pairs_get. Result: #{result.inspect}"
+      result = @api_client.call_api(:GET, path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'Array<Pairs>')
+      if Configuration.debugging
+        Configuration.logger.debug "API called: PairsApi#v1_pairs_get. Result: #{result.inspect}"
       end
-      result
+      return result
     end
   end
 end
+
+
+
+

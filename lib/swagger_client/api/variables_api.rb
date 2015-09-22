@@ -2,79 +2,23 @@ require "uri"
 
 module SwaggerClient
   class VariablesApi
+    attr_accessor :api_client
 
-    # Store or Update a Correlation
-    # Store or Update a Correlation
-    # @param cause 
-    # @param effect 
-    # @param correlationcoefficient 
-    # @param vote 
-    # @param [Hash] opts the optional parameters
-    # @return [nil]
-    def self.correlations_post(cause, effect, correlationcoefficient, vote, opts = {})
-      if Swagger.configuration.debug
-        Swagger.logger.debug "Calling API: VariablesApi#correlations_post ..."
-      end
-      
-      # verify the required parameter 'cause' is set
-      fail "Missing the required parameter 'cause' when calling correlations_post" if cause.nil?
-      
-      # verify the required parameter 'effect' is set
-      fail "Missing the required parameter 'effect' when calling correlations_post" if effect.nil?
-      
-      # verify the required parameter 'correlationcoefficient' is set
-      fail "Missing the required parameter 'correlationcoefficient' when calling correlations_post" if correlationcoefficient.nil?
-      
-      # verify the required parameter 'vote' is set
-      fail "Missing the required parameter 'vote' when calling correlations_post" if vote.nil?
-      
-      # resource path
-      path = "/correlations".sub('{format}','json')
-
-      # query parameters
-      query_params = {}
-      query_params[:'cause'] = cause
-      query_params[:'effect'] = effect
-      query_params[:'correlationcoefficient'] = correlationcoefficient
-      query_params[:'vote'] = vote
-
-      # header parameters
-      header_params = {}
-
-      # HTTP header 'Accept' (if needed)
-      _header_accept = ['application/json']
-      _header_accept_result = Swagger::Request.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
-
-      # HTTP header 'Content-Type'
-      _header_content_type = []
-      header_params['Content-Type'] = Swagger::Request.select_header_content_type(_header_content_type)
-
-      # form parameters
-      form_params = {}
-
-      # http body (model)
-      post_body = nil
-      
-
-      auth_names = ['oauth2']
-      Swagger::Request.new(:POST, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
-      if Swagger.configuration.debug
-        Swagger.logger.debug "API called: VariablesApi#correlations_post"
-      end
-      nil
+    def initialize(api_client = nil)
+      @api_client = api_client || Configuration.api_client
     end
 
     # Get public variables
     # This endpoint retrieves an array of all public variables. Public variables are things like foods, medications, symptoms, conditions, and anything not unique to a particular user. For instance, a telephone number or name would not be a public variable.
     # @param [Hash] opts the optional parameters
     # @return [Variable]
-    def self.public_variables_get(opts = {})
-      if Swagger.configuration.debug
-        Swagger.logger.debug "Calling API: VariablesApi#public_variables_get ..."
+    def v1_public_variables_get(opts = {})
+      if Configuration.debugging
+        Configuration.logger.debug "Calling API: VariablesApi#v1_public_variables_get ..."
       end
       
       # resource path
-      path = "/public/variables".sub('{format}','json')
+      path = "/v1/public/variables".sub('{format}','json')
 
       # query parameters
       query_params = {}
@@ -84,11 +28,11 @@ module SwaggerClient
 
       # HTTP header 'Accept' (if needed)
       _header_accept = ['application/json']
-      _header_accept_result = Swagger::Request.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
+      _header_accept_result = @api_client.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
 
       # HTTP header 'Content-Type'
       _header_content_type = []
-      header_params['Content-Type'] = Swagger::Request.select_header_content_type(_header_content_type)
+      header_params['Content-Type'] = @api_client.select_header_content_type(_header_content_type)
 
       # form parameters
       form_params = {}
@@ -98,12 +42,17 @@ module SwaggerClient
       
 
       auth_names = ['oauth2']
-      response = Swagger::Request.new(:GET, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
-      result = response.deserialize('Variable')
-      if Swagger.configuration.debug
-        Swagger.logger.debug "API called: VariablesApi#public_variables_get. Result: #{result.inspect}"
+      result = @api_client.call_api(:GET, path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'Variable')
+      if Configuration.debugging
+        Configuration.logger.debug "API called: VariablesApi#v1_public_variables_get. Result: #{result.inspect}"
       end
-      result
+      return result
     end
 
     # Get top 5 PUBLIC variables with the most correlations
@@ -115,16 +64,16 @@ module SwaggerClient
     # @option opts [Integer] :offset Now suppose you wanted to show results 11-20. You&#39;d set the offset to 10 and the limit to 10.
     # @option opts [Integer] :sort Sort by given field. If the field is prefixed with `-, it will sort in descending order.
     # @return [Variable]
-    def self.public_variables_search_search_get(search, opts = {})
-      if Swagger.configuration.debug
-        Swagger.logger.debug "Calling API: VariablesApi#public_variables_search_search_get ..."
+    def v1_public_variables_search_search_get(search, opts = {})
+      if Configuration.debugging
+        Configuration.logger.debug "Calling API: VariablesApi#v1_public_variables_search_search_get ..."
       end
       
       # verify the required parameter 'search' is set
-      fail "Missing the required parameter 'search' when calling public_variables_search_search_get" if search.nil?
+      fail "Missing the required parameter 'search' when calling v1_public_variables_search_search_get" if search.nil?
       
       # resource path
-      path = "/public/variables/search/{search}".sub('{format}','json').sub('{' + 'search' + '}', search.to_s)
+      path = "/v1/public/variables/search/{search}".sub('{format}','json').sub('{' + 'search' + '}', search.to_s)
 
       # query parameters
       query_params = {}
@@ -138,11 +87,11 @@ module SwaggerClient
 
       # HTTP header 'Accept' (if needed)
       _header_accept = ['application/json']
-      _header_accept_result = Swagger::Request.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
+      _header_accept_result = @api_client.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
 
       # HTTP header 'Content-Type'
       _header_content_type = []
-      header_params['Content-Type'] = Swagger::Request.select_header_content_type(_header_content_type)
+      header_params['Content-Type'] = @api_client.select_header_content_type(_header_content_type)
 
       # form parameters
       form_params = {}
@@ -152,12 +101,17 @@ module SwaggerClient
       
 
       auth_names = ['oauth2']
-      response = Swagger::Request.new(:GET, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
-      result = response.deserialize('Variable')
-      if Swagger.configuration.debug
-        Swagger.logger.debug "API called: VariablesApi#public_variables_search_search_get. Result: #{result.inspect}"
+      result = @api_client.call_api(:GET, path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'Variable')
+      if Configuration.debugging
+        Configuration.logger.debug "API called: VariablesApi#v1_public_variables_search_search_get. Result: #{result.inspect}"
       end
-      result
+      return result
     end
 
     # Update User Settings for a Variable
@@ -165,9 +119,9 @@ module SwaggerClient
     # @param sharing_data Variable user settings data
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def self.v1_user_variables_post(sharing_data, opts = {})
-      if Swagger.configuration.debug
-        Swagger.logger.debug "Calling API: VariablesApi#v1_user_variables_post ..."
+    def v1_user_variables_post(sharing_data, opts = {})
+      if Configuration.debugging
+        Configuration.logger.debug "Calling API: VariablesApi#v1_user_variables_post ..."
       end
       
       # verify the required parameter 'sharing_data' is set
@@ -184,38 +138,43 @@ module SwaggerClient
 
       # HTTP header 'Accept' (if needed)
       _header_accept = ['application/json']
-      _header_accept_result = Swagger::Request.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
+      _header_accept_result = @api_client.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
 
       # HTTP header 'Content-Type'
       _header_content_type = []
-      header_params['Content-Type'] = Swagger::Request.select_header_content_type(_header_content_type)
+      header_params['Content-Type'] = @api_client.select_header_content_type(_header_content_type)
 
       # form parameters
       form_params = {}
 
       # http body (model)
-      post_body = Swagger::Request.object_to_http_body(sharing_data)
+      post_body = @api_client.object_to_http_body(sharing_data)
       
 
       auth_names = ['oauth2']
-      Swagger::Request.new(:POST, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
-      if Swagger.configuration.debug
-        Swagger.logger.debug "API called: VariablesApi#v1_user_variables_post"
+      @api_client.call_api(:POST, path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names)
+      if Configuration.debugging
+        Configuration.logger.debug "API called: VariablesApi#v1_user_variables_post"
       end
-      nil
+      return nil
     end
 
     # Variable categories
     # The variable categories include Activity, Causes of Illness, Cognitive Performance, Conditions, Environment, Foods, Location, Miscellaneous, Mood, Nutrition, Physical Activity, Physique, Sleep, Social Interactions, Symptoms, Treatments, Vital Signs, and Work.
     # @param [Hash] opts the optional parameters
     # @return [Array<VariableCategory>]
-    def self.variable_categories_get(opts = {})
-      if Swagger.configuration.debug
-        Swagger.logger.debug "Calling API: VariablesApi#variable_categories_get ..."
+    def v1_variable_categories_get(opts = {})
+      if Configuration.debugging
+        Configuration.logger.debug "Calling API: VariablesApi#v1_variable_categories_get ..."
       end
       
       # resource path
-      path = "/variableCategories".sub('{format}','json')
+      path = "/v1/variableCategories".sub('{format}','json')
 
       # query parameters
       query_params = {}
@@ -225,11 +184,11 @@ module SwaggerClient
 
       # HTTP header 'Accept' (if needed)
       _header_accept = ['application/json']
-      _header_accept_result = Swagger::Request.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
+      _header_accept_result = @api_client.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
 
       # HTTP header 'Content-Type'
       _header_content_type = []
-      header_params['Content-Type'] = Swagger::Request.select_header_content_type(_header_content_type)
+      header_params['Content-Type'] = @api_client.select_header_content_type(_header_content_type)
 
       # form parameters
       form_params = {}
@@ -239,12 +198,17 @@ module SwaggerClient
       
 
       auth_names = ['oauth2']
-      response = Swagger::Request.new(:GET, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
-      result = response.deserialize('Array<VariableCategory>')
-      if Swagger.configuration.debug
-        Swagger.logger.debug "API called: VariablesApi#variable_categories_get. Result: #{result.inspect}"
+      result = @api_client.call_api(:GET, path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'Array<VariableCategory>')
+      if Configuration.debugging
+        Configuration.logger.debug "API called: VariablesApi#v1_variable_categories_get. Result: #{result.inspect}"
       end
-      result
+      return result
     end
 
     # Get variables by the category name
@@ -256,13 +220,13 @@ module SwaggerClient
     # @option opts [Integer] :offset Now suppose you wanted to show results 11-20. You&#39;d set the offset to 10 and the limit to 10.
     # @option opts [Integer] :sort Sort by given field. If the field is prefixed with `-, it will sort in descending order.
     # @return [Variable]
-    def self.variables_get(opts = {})
-      if Swagger.configuration.debug
-        Swagger.logger.debug "Calling API: VariablesApi#variables_get ..."
+    def v1_variables_get(opts = {})
+      if Configuration.debugging
+        Configuration.logger.debug "Calling API: VariablesApi#v1_variables_get ..."
       end
       
       # resource path
-      path = "/variables".sub('{format}','json')
+      path = "/v1/variables".sub('{format}','json')
 
       # query parameters
       query_params = {}
@@ -277,11 +241,11 @@ module SwaggerClient
 
       # HTTP header 'Accept' (if needed)
       _header_accept = ['application/json']
-      _header_accept_result = Swagger::Request.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
+      _header_accept_result = @api_client.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
 
       # HTTP header 'Content-Type'
       _header_content_type = []
-      header_params['Content-Type'] = Swagger::Request.select_header_content_type(_header_content_type)
+      header_params['Content-Type'] = @api_client.select_header_content_type(_header_content_type)
 
       # form parameters
       form_params = {}
@@ -291,12 +255,17 @@ module SwaggerClient
       
 
       auth_names = ['basicAuth', 'oauth2']
-      response = Swagger::Request.new(:GET, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
-      result = response.deserialize('Variable')
-      if Swagger.configuration.debug
-        Swagger.logger.debug "API called: VariablesApi#variables_get. Result: #{result.inspect}"
+      result = @api_client.call_api(:GET, path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'Variable')
+      if Configuration.debugging
+        Configuration.logger.debug "API called: VariablesApi#v1_variables_get. Result: #{result.inspect}"
       end
-      result
+      return result
     end
 
     # Create Variables
@@ -304,16 +273,16 @@ module SwaggerClient
     # @param variable_name Original name for the variable.
     # @param [Hash] opts the optional parameters
     # @return [nil]
-    def self.variables_post(variable_name, opts = {})
-      if Swagger.configuration.debug
-        Swagger.logger.debug "Calling API: VariablesApi#variables_post ..."
+    def v1_variables_post(variable_name, opts = {})
+      if Configuration.debugging
+        Configuration.logger.debug "Calling API: VariablesApi#v1_variables_post ..."
       end
       
       # verify the required parameter 'variable_name' is set
-      fail "Missing the required parameter 'variable_name' when calling variables_post" if variable_name.nil?
+      fail "Missing the required parameter 'variable_name' when calling v1_variables_post" if variable_name.nil?
       
       # resource path
-      path = "/variables".sub('{format}','json')
+      path = "/v1/variables".sub('{format}','json')
 
       # query parameters
       query_params = {}
@@ -323,25 +292,30 @@ module SwaggerClient
 
       # HTTP header 'Accept' (if needed)
       _header_accept = ['application/json']
-      _header_accept_result = Swagger::Request.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
+      _header_accept_result = @api_client.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
 
       # HTTP header 'Content-Type'
       _header_content_type = []
-      header_params['Content-Type'] = Swagger::Request.select_header_content_type(_header_content_type)
+      header_params['Content-Type'] = @api_client.select_header_content_type(_header_content_type)
 
       # form parameters
       form_params = {}
 
       # http body (model)
-      post_body = Swagger::Request.object_to_http_body(variable_name)
+      post_body = @api_client.object_to_http_body(variable_name)
       
 
       auth_names = ['oauth2']
-      Swagger::Request.new(:POST, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
-      if Swagger.configuration.debug
-        Swagger.logger.debug "API called: VariablesApi#variables_post"
+      @api_client.call_api(:POST, path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names)
+      if Configuration.debugging
+        Configuration.logger.debug "API called: VariablesApi#v1_variables_post"
       end
-      nil
+      return nil
     end
 
     # Get variables by search query
@@ -353,16 +327,16 @@ module SwaggerClient
     # @option opts [Integer] :limit The LIMIT is used to limit the number of results returned. So if you have 1000 results, but only want to the first 10, you would set this to 10 and offset to 0.
     # @option opts [Integer] :offset Now suppose you wanted to show results 11-20. You&#39;d set the offset to 10 and the limit to 10.
     # @return [Array<Variable>]
-    def self.variables_search_search_get(search, opts = {})
-      if Swagger.configuration.debug
-        Swagger.logger.debug "Calling API: VariablesApi#variables_search_search_get ..."
+    def v1_variables_search_search_get(search, opts = {})
+      if Configuration.debugging
+        Configuration.logger.debug "Calling API: VariablesApi#v1_variables_search_search_get ..."
       end
       
       # verify the required parameter 'search' is set
-      fail "Missing the required parameter 'search' when calling variables_search_search_get" if search.nil?
+      fail "Missing the required parameter 'search' when calling v1_variables_search_search_get" if search.nil?
       
       # resource path
-      path = "/variables/search/{search}".sub('{format}','json').sub('{' + 'search' + '}', search.to_s)
+      path = "/v1/variables/search/{search}".sub('{format}','json').sub('{' + 'search' + '}', search.to_s)
 
       # query parameters
       query_params = {}
@@ -376,11 +350,11 @@ module SwaggerClient
 
       # HTTP header 'Accept' (if needed)
       _header_accept = ['application/json']
-      _header_accept_result = Swagger::Request.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
+      _header_accept_result = @api_client.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
 
       # HTTP header 'Content-Type'
       _header_content_type = []
-      header_params['Content-Type'] = Swagger::Request.select_header_content_type(_header_content_type)
+      header_params['Content-Type'] = @api_client.select_header_content_type(_header_content_type)
 
       # form parameters
       form_params = {}
@@ -390,12 +364,17 @@ module SwaggerClient
       
 
       auth_names = ['oauth2']
-      response = Swagger::Request.new(:GET, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
-      result = response.deserialize('Array<Variable>')
-      if Swagger.configuration.debug
-        Swagger.logger.debug "API called: VariablesApi#variables_search_search_get. Result: #{result.inspect}"
+      result = @api_client.call_api(:GET, path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'Array<Variable>')
+      if Configuration.debugging
+        Configuration.logger.debug "API called: VariablesApi#v1_variables_search_search_get. Result: #{result.inspect}"
       end
-      result
+      return result
     end
 
     # Get info about a variable
@@ -403,16 +382,16 @@ module SwaggerClient
     # @param variable_name Variable name
     # @param [Hash] opts the optional parameters
     # @return [Variable]
-    def self.variables_variable_name_get(variable_name, opts = {})
-      if Swagger.configuration.debug
-        Swagger.logger.debug "Calling API: VariablesApi#variables_variable_name_get ..."
+    def v1_variables_variable_name_get(variable_name, opts = {})
+      if Configuration.debugging
+        Configuration.logger.debug "Calling API: VariablesApi#v1_variables_variable_name_get ..."
       end
       
       # verify the required parameter 'variable_name' is set
-      fail "Missing the required parameter 'variable_name' when calling variables_variable_name_get" if variable_name.nil?
+      fail "Missing the required parameter 'variable_name' when calling v1_variables_variable_name_get" if variable_name.nil?
       
       # resource path
-      path = "/variables/{variableName}".sub('{format}','json').sub('{' + 'variableName' + '}', variable_name.to_s)
+      path = "/v1/variables/{variableName}".sub('{format}','json').sub('{' + 'variableName' + '}', variable_name.to_s)
 
       # query parameters
       query_params = {}
@@ -422,11 +401,11 @@ module SwaggerClient
 
       # HTTP header 'Accept' (if needed)
       _header_accept = ['application/json']
-      _header_accept_result = Swagger::Request.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
+      _header_accept_result = @api_client.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
 
       # HTTP header 'Content-Type'
       _header_content_type = []
-      header_params['Content-Type'] = Swagger::Request.select_header_content_type(_header_content_type)
+      header_params['Content-Type'] = @api_client.select_header_content_type(_header_content_type)
 
       # form parameters
       form_params = {}
@@ -436,12 +415,21 @@ module SwaggerClient
       
 
       auth_names = ['oauth2']
-      response = Swagger::Request.new(:GET, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
-      result = response.deserialize('Variable')
-      if Swagger.configuration.debug
-        Swagger.logger.debug "API called: VariablesApi#variables_variable_name_get. Result: #{result.inspect}"
+      result = @api_client.call_api(:GET, path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'Variable')
+      if Configuration.debugging
+        Configuration.logger.debug "API called: VariablesApi#v1_variables_variable_name_get. Result: #{result.inspect}"
       end
-      result
+      return result
     end
   end
 end
+
+
+
+

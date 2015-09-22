@@ -1,10 +1,10 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "swagger_client/swagger/version"
+require "swagger_client/version"
 
 Gem::Specification.new do |s|
   s.name        = "swagger_client"
-  s.version     = SwaggerClient::Swagger::VERSION
+  s.version     = SwaggerClient::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Zeke Sikelianos", "Tony Tam"]
   s.email       = ["zeke@wordnik.com", "fehguy@gmail.com"]

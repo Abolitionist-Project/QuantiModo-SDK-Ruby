@@ -1,7 +1,7 @@
 module SwaggerClient
   # 
   class Correlation < BaseObject
-    attr_accessor :correlation_coefficient, :cause, :effect, :onset_delay, :duration_of_action, :number_of_pairs, :effect_size, :statistical_significance, :timestamp, :reverse_correlation, :causality_factor, :cause_category, :effect_category
+    attr_accessor :correlation_coefficient, :cause, :original_cause, :effect, :original_effect, :onset_delay, :duration_of_action, :number_of_pairs, :effect_size, :statistical_significance, :timestamp, :reverse_correlation, :causality_factor, :cause_category, :effect_category, :value_predicting_high_outcome, :value_predicting_low_outcome, :optimal_pearson_product, :average_vote, :user_vote, :cause_unit, :cause_unit_id
     # attribute mapping from ruby-style variable name to JSON key
     def self.attribute_map
       {
@@ -12,8 +12,14 @@ module SwaggerClient
         # ORIGINAL variable name of the cause variable for which the user desires correlations.
         :'cause' => :'cause',
         
+        # original name of the cause.
+        :'original_cause' => :'originalCause',
+        
         # ORIGINAL variable name of the effect variable for which the user desires correlations.
         :'effect' => :'effect',
+        
+        # effect variable original name.
+        :'original_effect' => :'originalEffect',
         
         # User estimated or default time after cause measurement before a perceivable effect is observed
         :'onset_delay' => :'onsetDelay',
@@ -43,7 +49,28 @@ module SwaggerClient
         :'cause_category' => :'causeCategory',
         
         # Variable category of the effect variable.
-        :'effect_category' => :'effectCategory'
+        :'effect_category' => :'effectCategory',
+        
+        # cause value that predicts an above average effect value (in default unit for cause variable)
+        :'value_predicting_high_outcome' => :'valuePredictingHighOutcome',
+        
+        # cause value that predicts a below average effect value (in default unit for cause variable)
+        :'value_predicting_low_outcome' => :'valuePredictingLowOutcome',
+        
+        # Optimal Pearson Product
+        :'optimal_pearson_product' => :'optimalPearsonProduct',
+        
+        # Average Vote
+        :'average_vote' => :'averageVote',
+        
+        # User Vote
+        :'user_vote' => :'userVote',
+        
+        # Unit of Cause
+        :'cause_unit' => :'causeUnit',
+        
+        # Unit Id of Cause
+        :'cause_unit_id' => :'causeUnitId'
         
       }
     end
@@ -53,7 +80,9 @@ module SwaggerClient
       {
         :'correlation_coefficient' => :'Float',
         :'cause' => :'String',
+        :'original_cause' => :'String',
         :'effect' => :'String',
+        :'original_effect' => :'String',
         :'onset_delay' => :'Float',
         :'duration_of_action' => :'Float',
         :'number_of_pairs' => :'Float',
@@ -63,7 +92,14 @@ module SwaggerClient
         :'reverse_correlation' => :'Float',
         :'causality_factor' => :'Float',
         :'cause_category' => :'String',
-        :'effect_category' => :'String'
+        :'effect_category' => :'String',
+        :'value_predicting_high_outcome' => :'Float',
+        :'value_predicting_low_outcome' => :'Float',
+        :'optimal_pearson_product' => :'Float',
+        :'average_vote' => :'Float',
+        :'user_vote' => :'Float',
+        :'cause_unit' => :'String',
+        :'cause_unit_id' => :'Integer'
         
       }
     end
@@ -83,8 +119,16 @@ module SwaggerClient
         self.cause = attributes[:'cause']
       end
       
+      if attributes[:'originalCause']
+        self.original_cause = attributes[:'originalCause']
+      end
+      
       if attributes[:'effect']
         self.effect = attributes[:'effect']
+      end
+      
+      if attributes[:'originalEffect']
+        self.original_effect = attributes[:'originalEffect']
       end
       
       if attributes[:'onsetDelay']
@@ -125,6 +169,34 @@ module SwaggerClient
       
       if attributes[:'effectCategory']
         self.effect_category = attributes[:'effectCategory']
+      end
+      
+      if attributes[:'valuePredictingHighOutcome']
+        self.value_predicting_high_outcome = attributes[:'valuePredictingHighOutcome']
+      end
+      
+      if attributes[:'valuePredictingLowOutcome']
+        self.value_predicting_low_outcome = attributes[:'valuePredictingLowOutcome']
+      end
+      
+      if attributes[:'optimalPearsonProduct']
+        self.optimal_pearson_product = attributes[:'optimalPearsonProduct']
+      end
+      
+      if attributes[:'averageVote']
+        self.average_vote = attributes[:'averageVote']
+      end
+      
+      if attributes[:'userVote']
+        self.user_vote = attributes[:'userVote']
+      end
+      
+      if attributes[:'causeUnit']
+        self.cause_unit = attributes[:'causeUnit']
+      end
+      
+      if attributes[:'causeUnitId']
+        self.cause_unit_id = attributes[:'causeUnitId']
       end
       
     end

@@ -1,7 +1,7 @@
 module SwaggerClient
   # 
   class Variable < BaseObject
-    attr_accessor :id, :name, :original_name, :category, :unit, :sources, :minimum_value, :maximum_value, :combination_operation, :filling_value, :join_with, :joined_variables, :parent, :sub_variables, :onset_delay, :duration_of_action, :earliest_measurement_time, :latest_measurement_time, :updated, :cause_only, :number_of_correlations, :outcome, :measurements_at_last_analysis, :number_of_measurements, :last_unit, :last_value, :most_common_value, :most_common_unit, :last_source
+    attr_accessor :id, :name, :original_name, :category, :abbreviated_unit_name, :abbreviated_unit_id, :sources, :minimum_value, :maximum_value, :combination_operation, :filling_value, :join_with, :joined_variables, :parent, :sub_variables, :onset_delay, :duration_of_action, :earliest_measurement_time, :latest_measurement_time, :updated, :cause_only, :number_of_correlations, :outcome, :measurements_at_last_analysis, :number_of_measurements, :last_unit, :last_value, :most_common_value, :most_common_unit, :last_source
     # attribute mapping from ruby-style variable name to JSON key
     def self.attribute_map
       {
@@ -19,7 +19,10 @@ module SwaggerClient
         :'category' => :'category',
         
         # Abbreviated name of the default unit for the variable
-        :'unit' => :'unit',
+        :'abbreviated_unit_name' => :'abbreviatedUnitName',
+        
+        # Id of the default unit for the variable
+        :'abbreviated_unit_id' => :'abbreviatedUnitId',
         
         # Comma-separated list of source names to limit variables to those sources
         :'sources' => :'sources',
@@ -103,7 +106,8 @@ module SwaggerClient
         :'name' => :'String',
         :'original_name' => :'String',
         :'category' => :'String',
-        :'unit' => :'String',
+        :'abbreviated_unit_name' => :'String',
+        :'abbreviated_unit_id' => :'Integer',
         :'sources' => :'String',
         :'minimum_value' => :'Float',
         :'maximum_value' => :'Float',
@@ -123,10 +127,10 @@ module SwaggerClient
         :'outcome' => :'Integer',
         :'measurements_at_last_analysis' => :'Integer',
         :'number_of_measurements' => :'Integer',
-        :'last_unit' => :'Integer',
+        :'last_unit' => :'String',
         :'last_value' => :'Integer',
         :'most_common_value' => :'Integer',
-        :'most_common_unit' => :'Integer',
+        :'most_common_unit' => :'String',
         :'last_source' => :'Integer'
         
       }
@@ -155,8 +159,12 @@ module SwaggerClient
         self.category = attributes[:'category']
       end
       
-      if attributes[:'unit']
-        self.unit = attributes[:'unit']
+      if attributes[:'abbreviatedUnitName']
+        self.abbreviated_unit_name = attributes[:'abbreviatedUnitName']
+      end
+      
+      if attributes[:'abbreviatedUnitId']
+        self.abbreviated_unit_id = attributes[:'abbreviatedUnitId']
       end
       
       if attributes[:'sources']

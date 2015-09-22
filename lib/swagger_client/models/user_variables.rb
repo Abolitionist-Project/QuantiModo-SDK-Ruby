@@ -1,7 +1,7 @@
 module SwaggerClient
   # 
   class UserVariables < BaseObject
-    attr_accessor :user, :variable, :duration_of_action, :filling_value, :join_with, :maximum_value, :minimum_value, :name, :onset_delay, :unit
+    attr_accessor :user, :variable, :duration_of_action, :filling_value, :join_with, :maximum_allowed_value, :minimum_allowed_value, :name, :onset_delay, :unit
     # attribute mapping from ruby-style variable name to JSON key
     def self.attribute_map
       {
@@ -21,11 +21,11 @@ module SwaggerClient
         # joinWith
         :'join_with' => :'joinWith',
         
-        # maximumValue
-        :'maximum_value' => :'maximumValue',
+        # maximumAllowedValue
+        :'maximum_allowed_value' => :'maximumAllowedValue',
         
-        # minimumValue
-        :'minimum_value' => :'minimumValue',
+        # minimumAllowedValue
+        :'minimum_allowed_value' => :'minimumAllowedValue',
         
         # name
         :'name' => :'name',
@@ -47,8 +47,8 @@ module SwaggerClient
         :'duration_of_action' => :'Integer',
         :'filling_value' => :'Integer',
         :'join_with' => :'String',
-        :'maximum_value' => :'Float',
-        :'minimum_value' => :'Float',
+        :'maximum_allowed_value' => :'Float',
+        :'minimum_allowed_value' => :'Float',
         :'name' => :'String',
         :'onset_delay' => :'Integer',
         :'unit' => :'String'
@@ -83,12 +83,12 @@ module SwaggerClient
         self.join_with = attributes[:'joinWith']
       end
       
-      if attributes[:'maximumValue']
-        self.maximum_value = attributes[:'maximumValue']
+      if attributes[:'maximumAllowedValue']
+        self.maximum_allowed_value = attributes[:'maximumAllowedValue']
       end
       
-      if attributes[:'minimumValue']
-        self.minimum_value = attributes[:'minimumValue']
+      if attributes[:'minimumAllowedValue']
+        self.minimum_allowed_value = attributes[:'minimumAllowedValue']
       end
       
       if attributes[:'name']

@@ -83,5 +83,21 @@ module SwaggerClient
       @category = category
     end
 
+    def minimum=(minimum)
+      allowed_values = ["-Infinity"]
+      if minimum && !allowed_values.include?(minimum)
+        fail "invalid value for 'minimum', must be one of #{allowed_values}"
+      end
+      @minimum = minimum
+    end
+
+    def maximum=(maximum)
+      allowed_values = ["Infinity"]
+      if maximum && !allowed_values.include?(maximum)
+        fail "invalid value for 'maximum', must be one of #{allowed_values}"
+      end
+      @maximum = maximum
+    end
+
   end
 end

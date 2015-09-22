@@ -2,18 +2,23 @@ require "uri"
 
 module SwaggerClient
   class UnitsApi
+    attr_accessor :api_client
+
+    def initialize(api_client = nil)
+      @api_client = api_client || Configuration.api_client
+    end
 
     # Get unit categories
     # Get a list of the categories of measurement units such as &#39;Distance&#39;, &#39;Duration&#39;, &#39;Energy&#39;, &#39;Frequency&#39;, &#39;Miscellany&#39;, &#39;Pressure&#39;, &#39;Proportion&#39;, &#39;Rating&#39;, &#39;Temperature&#39;, &#39;Volume&#39;, and &#39;Weight&#39;.
     # @param [Hash] opts the optional parameters
     # @return [UnitCategory]
-    def self.unit_categories_get(opts = {})
-      if Swagger.configuration.debug
-        Swagger.logger.debug "Calling API: UnitsApi#unit_categories_get ..."
+    def v1_unit_categories_get(opts = {})
+      if Configuration.debugging
+        Configuration.logger.debug "Calling API: UnitsApi#v1_unit_categories_get ..."
       end
       
       # resource path
-      path = "/unitCategories".sub('{format}','json')
+      path = "/v1/unitCategories".sub('{format}','json')
 
       # query parameters
       query_params = {}
@@ -23,11 +28,11 @@ module SwaggerClient
 
       # HTTP header 'Accept' (if needed)
       _header_accept = ['application/json']
-      _header_accept_result = Swagger::Request.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
+      _header_accept_result = @api_client.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
 
       # HTTP header 'Content-Type'
       _header_content_type = []
-      header_params['Content-Type'] = Swagger::Request.select_header_content_type(_header_content_type)
+      header_params['Content-Type'] = @api_client.select_header_content_type(_header_content_type)
 
       # form parameters
       form_params = {}
@@ -37,12 +42,17 @@ module SwaggerClient
       
 
       auth_names = ['oauth2']
-      response = Swagger::Request.new(:GET, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
-      result = response.deserialize('UnitCategory')
-      if Swagger.configuration.debug
-        Swagger.logger.debug "API called: UnitsApi#unit_categories_get. Result: #{result.inspect}"
+      result = @api_client.call_api(:GET, path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'UnitCategory')
+      if Configuration.debugging
+        Configuration.logger.debug "API called: UnitsApi#v1_unit_categories_get. Result: #{result.inspect}"
       end
-      result
+      return result
     end
 
     # Get all available units
@@ -52,13 +62,13 @@ module SwaggerClient
     # @option opts [String] :abbreviated_unit_name Restrict the results to a specific unit by providing the unit abbreviation.
     # @option opts [String] :category_name Restrict the results to a specific unit category by providing the unit category name.
     # @return [Array<Unit>]
-    def self.units_get(opts = {})
-      if Swagger.configuration.debug
-        Swagger.logger.debug "Calling API: UnitsApi#units_get ..."
+    def v1_units_get(opts = {})
+      if Configuration.debugging
+        Configuration.logger.debug "Calling API: UnitsApi#v1_units_get ..."
       end
       
       # resource path
-      path = "/units".sub('{format}','json')
+      path = "/v1/units".sub('{format}','json')
 
       # query parameters
       query_params = {}
@@ -71,11 +81,11 @@ module SwaggerClient
 
       # HTTP header 'Accept' (if needed)
       _header_accept = ['application/json']
-      _header_accept_result = Swagger::Request.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
+      _header_accept_result = @api_client.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
 
       # HTTP header 'Content-Type'
       _header_content_type = []
-      header_params['Content-Type'] = Swagger::Request.select_header_content_type(_header_content_type)
+      header_params['Content-Type'] = @api_client.select_header_content_type(_header_content_type)
 
       # form parameters
       form_params = {}
@@ -85,12 +95,17 @@ module SwaggerClient
       
 
       auth_names = ['oauth2']
-      response = Swagger::Request.new(:GET, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
-      result = response.deserialize('Array<Unit>')
-      if Swagger.configuration.debug
-        Swagger.logger.debug "API called: UnitsApi#units_get. Result: #{result.inspect}"
+      result = @api_client.call_api(:GET, path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'Array<Unit>')
+      if Configuration.debugging
+        Configuration.logger.debug "API called: UnitsApi#v1_units_get. Result: #{result.inspect}"
       end
-      result
+      return result
     end
 
     # Units for Variable
@@ -101,13 +116,13 @@ module SwaggerClient
     # @option opts [String] :category_name Name of the category you want units for
     # @option opts [String] :variable Name of the variable you want units for
     # @return [Array<Unit>]
-    def self.units_variable_get(opts = {})
-      if Swagger.configuration.debug
-        Swagger.logger.debug "Calling API: UnitsApi#units_variable_get ..."
+    def v1_units_variable_get(opts = {})
+      if Configuration.debugging
+        Configuration.logger.debug "Calling API: UnitsApi#v1_units_variable_get ..."
       end
       
       # resource path
-      path = "/unitsVariable".sub('{format}','json')
+      path = "/v1/unitsVariable".sub('{format}','json')
 
       # query parameters
       query_params = {}
@@ -121,11 +136,11 @@ module SwaggerClient
 
       # HTTP header 'Accept' (if needed)
       _header_accept = ['application/json']
-      _header_accept_result = Swagger::Request.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
+      _header_accept_result = @api_client.select_header_accept(_header_accept) and header_params['Accept'] = _header_accept_result
 
       # HTTP header 'Content-Type'
       _header_content_type = []
-      header_params['Content-Type'] = Swagger::Request.select_header_content_type(_header_content_type)
+      header_params['Content-Type'] = @api_client.select_header_content_type(_header_content_type)
 
       # form parameters
       form_params = {}
@@ -135,12 +150,21 @@ module SwaggerClient
       
 
       auth_names = ['oauth2']
-      response = Swagger::Request.new(:GET, path, {:params => query_params, :headers => header_params, :form_params => form_params, :body => post_body, :auth_names => auth_names}).make
-      result = response.deserialize('Array<Unit>')
-      if Swagger.configuration.debug
-        Swagger.logger.debug "API called: UnitsApi#units_variable_get. Result: #{result.inspect}"
+      result = @api_client.call_api(:GET, path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'Array<Unit>')
+      if Configuration.debugging
+        Configuration.logger.debug "API called: UnitsApi#v1_units_variable_get. Result: #{result.inspect}"
       end
-      result
+      return result
     end
   end
 end
+
+
+
+
