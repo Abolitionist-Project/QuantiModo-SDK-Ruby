@@ -59,7 +59,6 @@ module SwaggerClient
     # Get top 5 PUBLIC variables with the most correlations containing the entered search characters. For example, search for &#39;mood&#39; as an effect. Since &#39;Overall Mood&#39; has a lot of correlations with other variables, it should be in the autocomplete list.&lt;br&gt;Supported filter parameters:&lt;br&gt;&lt;ul&gt;&lt;li&gt;&lt;b&gt;category&lt;/b&gt; - Category of Variable&lt;/li&gt;&lt;/ul&gt;&lt;br&gt;
     # @param search Search query can be some fraction of a variable name.
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :effect_or_cause Allows us to specify which column in the `correlations` table will be searched. Choices are effect or cause.
     # @option opts [Integer] :limit The LIMIT is used to limit the number of results returned. So if you have 1000 results, but only want to the first 10, you would set this to 10 and offset to 0.
     # @option opts [Integer] :offset Now suppose you wanted to show results 11-20. You&#39;d set the offset to 10 and the limit to 10.
     # @option opts [Integer] :sort Sort by given field. If the field is prefixed with `-, it will sort in descending order.
@@ -77,7 +76,6 @@ module SwaggerClient
 
       # query parameters
       query_params = {}
-      query_params[:'effectOrCause'] = opts[:'effect_or_cause'] if opts[:'effect_or_cause']
       query_params[:'limit'] = opts[:'limit'] if opts[:'limit']
       query_params[:'offset'] = opts[:'offset'] if opts[:'offset']
       query_params[:'sort'] = opts[:'sort'] if opts[:'sort']
@@ -216,6 +214,12 @@ module SwaggerClient
     # @param [Hash] opts the optional parameters
     # @option opts [Integer] :user_id User id
     # @option opts [String] :category Filter data by category
+    # @option opts [String] :name Original name of the variable (supports exact name match only)
+    # @option opts [String] :last_updated Filter by the last time any of the properties of the variable were changed. Uses UTC format \&quot;YYYY-MM-DDThh:mm:ss\&quot;
+    # @option opts [String] :source The name of the data source that created the variable (supports exact name match only). So if you have a client application and you only want variables that were last updated by your app, you can include the name of your app here
+    # @option opts [String] :latest_measurement_time Filter variables based on the last time a measurement for them was created or updated in the UTC format \&quot;YYYY-MM-DDThh:mm:ss\&quot;
+    # @option opts [String] :number_of_measurements Filter variables by the total number of measurements that they have. This could be used of you want to filter or sort by popularity.
+    # @option opts [String] :last_source Limit variables to those which measurements were last submitted by a specific source. So if you have a client application and you only want variables that were last updated by your app, you can include the name of your app here. (supports exact name match only)
     # @option opts [Integer] :limit The LIMIT is used to limit the number of results returned. So if you have 1000 results, but only want to the first 10, you would set this to 10 and offset to 0.
     # @option opts [Integer] :offset Now suppose you wanted to show results 11-20. You&#39;d set the offset to 10 and the limit to 10.
     # @option opts [Integer] :sort Sort by given field. If the field is prefixed with `-, it will sort in descending order.
@@ -232,6 +236,12 @@ module SwaggerClient
       query_params = {}
       query_params[:'userId'] = opts[:'user_id'] if opts[:'user_id']
       query_params[:'category'] = opts[:'category'] if opts[:'category']
+      query_params[:'name'] = opts[:'name'] if opts[:'name']
+      query_params[:'lastUpdated'] = opts[:'last_updated'] if opts[:'last_updated']
+      query_params[:'source'] = opts[:'source'] if opts[:'source']
+      query_params[:'latestMeasurementTime'] = opts[:'latest_measurement_time'] if opts[:'latest_measurement_time']
+      query_params[:'numberOfMeasurements'] = opts[:'number_of_measurements'] if opts[:'number_of_measurements']
+      query_params[:'lastSource'] = opts[:'last_source'] if opts[:'last_source']
       query_params[:'limit'] = opts[:'limit'] if opts[:'limit']
       query_params[:'offset'] = opts[:'offset'] if opts[:'offset']
       query_params[:'sort'] = opts[:'sort'] if opts[:'sort']

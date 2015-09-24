@@ -109,7 +109,10 @@ module SwaggerClient
     # Measurements are any value that can be recorded like daily steps, a mood rating, or apples eaten. &lt;br&gt;Supported filter parameters:&lt;br&gt;&lt;ul&gt;&lt;li&gt;&lt;b&gt;value&lt;/b&gt; - Value of measurement&lt;/li&gt;&lt;li&gt;&lt;b&gt;lastUpdated&lt;/b&gt; - The time that this measurement was created or last updated in the UTC format \&quot;YYYY-MM-DDThh:mm:ss\&quot;&lt;/li&gt;&lt;/ul&gt;&lt;br&gt;
     # @param [Hash] opts the optional parameters
     # @option opts [String] :variable_name Name of the variable you want measurements for
-    # @option opts [String] :unit The unit your want the measurements in
+    # @option opts [String] :source Name of the source you want measurements for (supports exact name match only)
+    # @option opts [String] :value Value of measurement
+    # @option opts [String] :last_updated The time that this measurement was created or last updated in the UTC format \&quot;YYYY-MM-DDThh:mm:ss\&quot;
+    # @option opts [String] :unit The unit you want the measurements in
     # @option opts [String] :start_time The lower limit of measurements returned (Epoch)
     # @option opts [String] :end_time The upper limit of measurements returned (Epoch)
     # @option opts [Integer] :grouping_width The time (in seconds) over which measurements are grouped together
@@ -129,6 +132,9 @@ module SwaggerClient
       # query parameters
       query_params = {}
       query_params[:'variableName'] = opts[:'variable_name'] if opts[:'variable_name']
+      query_params[:'source'] = opts[:'source'] if opts[:'source']
+      query_params[:'value'] = opts[:'value'] if opts[:'value']
+      query_params[:'lastUpdated'] = opts[:'last_updated'] if opts[:'last_updated']
       query_params[:'unit'] = opts[:'unit'] if opts[:'unit']
       query_params[:'startTime'] = opts[:'start_time'] if opts[:'start_time']
       query_params[:'endTime'] = opts[:'end_time'] if opts[:'end_time']
@@ -171,7 +177,7 @@ module SwaggerClient
     end
 
     # Post a new set or update existing measurements to the database
-    # You can submit or update multiple measurements in a \&quot;measurements\&quot; sub-array.  If the variable these measurements correspond to does not already exist in the database, it will be automatically added.  The request body should look something like [{\&quot;measurements\&quot;:[{\&quot;timestamp\&quot;:1406419860,\&quot;value\&quot;:\&quot;1\&quot;,\&quot;note\&quot;:\&quot;I am a note about back pain.\&quot;},{\&quot;timestamp\&quot;:1406519865,\&quot;value\&quot;:\&quot;3\&quot;,\&quot;note\&quot;:\&quot;I am another note about back pain.\&quot;}],\&quot;name\&quot;:\&quot;Back Pain\&quot;,\&quot;source\&quot;:\&quot;QuantiModo\&quot;,\&quot;category\&quot;:\&quot;Symptoms\&quot;,\&quot;combinationOperation\&quot;:\&quot;MEAN\&quot;,\&quot;unit\&quot;:\&quot;/5\&quot;}]
+    # You can submit or update multiple measurements in a \&quot;measurements\&quot; sub-array.  If the variable these measurements correspond to does not already exist in the database, it will be automatically added.  The request body should look something like [{\&quot;measurements\&quot;:[{\&quot;startTime\&quot;:1439389320,\&quot;value\&quot;:\&quot;3\&quot;}],\&quot;name\&quot;:\&quot;Acne (out of 5)\&quot;,\&quot;source\&quot;:\&quot;QuantiModo\&quot;,\&quot;category\&quot;:\&quot;Symptoms\&quot;,\&quot;combinationOperation\&quot;:\&quot;MEAN\&quot;,\&quot;unit\&quot;:\&quot;/5\&quot;}]
     # @param measurements An array of measurements you want to insert.
     # @param [Hash] opts the optional parameters
     # @return [nil]

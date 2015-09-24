@@ -9,21 +9,26 @@ module SwaggerClient
     end
 
     # Get embeddable connect javascript
-    # Get embeddable connect javascript. Usage:\n\n  - Embedding in applications with popups for 3rd-party authentication\nwindows.\n\n    Use `qmSetupInPopup` function after connecting `connect.js`.\n\n  - Embedding in applications with popups for 3rd-party authentication\nwindows.\n\n    Requires a selector to block. It will be embedded in this block.\n\n    Use `qmSetupOnPage` function after connecting `connect.js`.\n\n  - Embedding in mobile applications without popups for 3rd-party\nauthentication.\n\n    Use `qmSetupOnMobile` function after connecting `connect.js`.
+    # Get embeddable connect javascript. Usage:\n\n  - Embedding in applications with popups for 3rd-party authentication\nwindows.\n\n    Use `qmSetupInPopup` function after connecting `connect.js`.\n\n  - Embedding in applications with popups for 3rd-party authentication\nwindows.\n\n    Requires a selector to block. It will be embedded in this block.\n\n    Use `qmSetupOnPage` function after connecting `connect.js`.\n\n  - Embedding in mobile applications without popups for 3rd-party\nauthentication.\n\n    Use `qmSetupOnMobile` function after connecting `connect.js`.\n\n    if using the MoodiModo Clones, Use `qmSetupOnIonic` function after connecting `connect.js`.
+    # @param access_token User&#39;s access token
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :t User token
+    # @option opts [String] :mashape_key Mashape API key
     # @return [nil]
-    def v1_connect_js_get(opts = {})
+    def v1_connect_js_get(access_token, opts = {})
       if Configuration.debugging
         Configuration.logger.debug "Calling API: ConnectorsApi#v1_connect_js_get ..."
       end
+      
+      # verify the required parameter 'access_token' is set
+      fail "Missing the required parameter 'access_token' when calling v1_connect_js_get" if access_token.nil?
       
       # resource path
       path = "/v1/connect.js".sub('{format}','json')
 
       # query parameters
       query_params = {}
-      query_params[:'t'] = opts[:'t'] if opts[:'t']
+      query_params[:'access token'] = access_token
+      query_params[:'mashape key'] = opts[:'mashape_key'] if opts[:'mashape_key']
 
       # header parameters
       header_params = {}

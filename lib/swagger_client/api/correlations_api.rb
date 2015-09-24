@@ -13,6 +13,10 @@ module SwaggerClient
     # @param [Hash] opts the optional parameters
     # @option opts [String] :effect ORIGINAL variable name of the effect variable for which the user desires correlations
     # @option opts [String] :cause ORIGINAL variable name of the cause variable for which the user desires correlations
+    # @option opts [String] :correlation_coefficient Pearson correlation coefficient between cause and effect after lagging by onset delay and grouping by duration of action
+    # @option opts [String] :onset_delay The number of seconds which pass following a cause measurement before an effect would likely be observed.
+    # @option opts [String] :duration_of_action The time in seconds over which the cause would be expected to exert a measurable effect. We have selected a default value for each variable. This default value may be replaced by a user specified by adjusting their variable user settings.
+    # @option opts [String] :last_updated The time that this measurement was last updated in the UTC format \&quot;YYYY-MM-DDThh:mm:ss\&quot;
     # @option opts [Integer] :limit The LIMIT is used to limit the number of results returned. So if you have 1000 results, but only want to the first 10, you would set this to 10 and offset to 0.
     # @option opts [Integer] :offset Now suppose you wanted to show results 11-20. You&#39;d set the offset to 10 and the limit to 10.
     # @option opts [Integer] :sort Sort by given field. If the field is prefixed with `-, it will sort in descending order.
@@ -29,6 +33,10 @@ module SwaggerClient
       query_params = {}
       query_params[:'effect'] = opts[:'effect'] if opts[:'effect']
       query_params[:'cause'] = opts[:'cause'] if opts[:'cause']
+      query_params[:'correlationCoefficient'] = opts[:'correlation_coefficient'] if opts[:'correlation_coefficient']
+      query_params[:'onsetDelay'] = opts[:'onset_delay'] if opts[:'onset_delay']
+      query_params[:'durationOfAction'] = opts[:'duration_of_action'] if opts[:'duration_of_action']
+      query_params[:'lastUpdated'] = opts[:'last_updated'] if opts[:'last_updated']
       query_params[:'limit'] = opts[:'limit'] if opts[:'limit']
       query_params[:'offset'] = opts[:'offset'] if opts[:'offset']
       query_params[:'sort'] = opts[:'sort'] if opts[:'sort']
