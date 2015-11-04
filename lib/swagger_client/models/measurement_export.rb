@@ -1,7 +1,7 @@
 module SwaggerClient
   # 
-  class UnitCategory < BaseObject
-    attr_accessor :id, :name, :created_at, :updated_at
+  class MeasurementExport < BaseObject
+    attr_accessor :id, :user_id, :status, :error_message, :created_at, :updated_at
     # attribute mapping from ruby-style variable name to JSON key
     def self.attribute_map
       {
@@ -9,8 +9,14 @@ module SwaggerClient
         # id
         :'id' => :'id',
         
-        # Unit category name
-        :'name' => :'name',
+        # ID of User
+        :'user_id' => :'user_id',
+        
+        # Status of Measurement Export
+        :'status' => :'status',
+        
+        # Error message
+        :'error_message' => :'error_message',
         
         # created_at
         :'created_at' => :'created_at',
@@ -25,7 +31,9 @@ module SwaggerClient
     def self.swagger_types
       {
         :'id' => :'Integer',
-        :'name' => :'String',
+        :'user_id' => :'Integer',
+        :'status' => :'String',
+        :'error_message' => :'String',
         :'created_at' => :'DateTime',
         :'updated_at' => :'DateTime'
         
@@ -43,8 +51,16 @@ module SwaggerClient
         self.id = attributes[:'id']
       end
       
-      if attributes[:'name']
-        self.name = attributes[:'name']
+      if attributes[:'user_id']
+        self.user_id = attributes[:'user_id']
+      end
+      
+      if attributes[:'status']
+        self.status = attributes[:'status']
+      end
+      
+      if attributes[:'error_message']
+        self.error_message = attributes[:'error_message']
       end
       
       if attributes[:'created_at']

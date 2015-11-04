@@ -1,7 +1,7 @@
 module SwaggerClient
   # 
   class Connector < BaseObject
-    attr_accessor :id, :name, :display_name, :image, :get_it_url, :connected, :connect_instructions, :last_update, :total_measurements_in_last_update, :no_data_yet
+    attr_accessor :id, :name, :display_name, :image, :get_it_url, :short_description, :long_description, :enabled, :oauth
     # attribute mapping from ruby-style variable name to JSON key
     def self.attribute_map
       {
@@ -13,28 +13,25 @@ module SwaggerClient
         :'name' => :'name',
         
         # Connector pretty display name
-        :'display_name' => :'displayName',
+        :'display_name' => :'display_name',
         
         # URL to the image of the connector logo
         :'image' => :'image',
         
         # URL to a site where one can get this device or application
-        :'get_it_url' => :'getItUrl',
+        :'get_it_url' => :'get_it_url',
         
-        # True if the authenticated user has this connector enabled
-        :'connected' => :'connected',
+        # Short description
+        :'short_description' => :'short_description',
         
-        # URL and parameters used when connecting to a service
-        :'connect_instructions' => :'connectInstructions',
+        # Long description
+        :'long_description' => :'long_description',
         
-        # Epoch timestamp of last sync
-        :'last_update' => :'lastUpdate',
+        # enabled
+        :'enabled' => :'enabled',
         
-        # Number of measurements obtained during latest update
-        :'total_measurements_in_last_update' => :'totalMeasurementsInLastUpdate',
-        
-        # True if user has no measurements for this connector
-        :'no_data_yet' => :'noDataYet'
+        # oauth
+        :'oauth' => :'oauth'
         
       }
     end
@@ -47,11 +44,10 @@ module SwaggerClient
         :'display_name' => :'String',
         :'image' => :'String',
         :'get_it_url' => :'String',
-        :'connected' => :'String',
-        :'connect_instructions' => :'String',
-        :'last_update' => :'Integer',
-        :'total_measurements_in_last_update' => :'Integer',
-        :'no_data_yet' => :'BOOLEAN'
+        :'short_description' => :'String',
+        :'long_description' => :'String',
+        :'enabled' => :'BOOLEAN',
+        :'oauth' => :'BOOLEAN'
         
       }
     end
@@ -71,36 +67,32 @@ module SwaggerClient
         self.name = attributes[:'name']
       end
       
-      if attributes[:'displayName']
-        self.display_name = attributes[:'displayName']
+      if attributes[:'display_name']
+        self.display_name = attributes[:'display_name']
       end
       
       if attributes[:'image']
         self.image = attributes[:'image']
       end
       
-      if attributes[:'getItUrl']
-        self.get_it_url = attributes[:'getItUrl']
+      if attributes[:'get_it_url']
+        self.get_it_url = attributes[:'get_it_url']
       end
       
-      if attributes[:'connected']
-        self.connected = attributes[:'connected']
+      if attributes[:'short_description']
+        self.short_description = attributes[:'short_description']
       end
       
-      if attributes[:'connectInstructions']
-        self.connect_instructions = attributes[:'connectInstructions']
+      if attributes[:'long_description']
+        self.long_description = attributes[:'long_description']
       end
       
-      if attributes[:'lastUpdate']
-        self.last_update = attributes[:'lastUpdate']
+      if attributes[:'enabled']
+        self.enabled = attributes[:'enabled']
       end
       
-      if attributes[:'totalMeasurementsInLastUpdate']
-        self.total_measurements_in_last_update = attributes[:'totalMeasurementsInLastUpdate']
-      end
-      
-      if attributes[:'noDataYet']
-        self.no_data_yet = attributes[:'noDataYet']
+      if attributes[:'oauth']
+        self.oauth = attributes[:'oauth']
       end
       
     end

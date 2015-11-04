@@ -44,6 +44,9 @@ module SwaggerClient
     # @return [String]
     attr_accessor :password
 
+    # Defines the access token (Bearer) used with OAuth2.
+    attr_accessor :access_token
+
     # Set this to enable/disable debugging. When enabled (set to true), HTTP request/response
     # details will be logged with `logger.debug` (see the `logger` attribute).
     # Default to false.
@@ -64,6 +67,7 @@ module SwaggerClient
     # @return [String]
     attr_accessor :temp_folder_path
 
+    ### TLS/SSL
     # Set this to false to skip verifying SSL certificate when calling API from https server.
     # Default to true.
     #
@@ -79,6 +83,12 @@ module SwaggerClient
     # @see The `cainfo` option of Typhoeus, `--cert` option of libcurl. Related source code:
     # https://github.com/typhoeus/typhoeus/blob/master/lib/typhoeus/easy_factory.rb#L145
     attr_accessor :ssl_ca_cert
+
+    # Client certificate file (for client certificate)
+    attr_accessor :cert_file
+
+    # Client private key file (for client certificate)
+    attr_accessor :key_file
 
     attr_accessor :inject_format
 
@@ -97,11 +107,13 @@ module SwaggerClient
 
     def initialize
       @scheme = 'https'
-      @host = ''
-      @base_path = '/api'
+      @host = 'app.quantimo.do'
+      @base_path = '/api/v2'
       @api_key = {}
       @api_key_prefix = {}
       @verify_ssl = true
+      @cert_file = nil
+      @key_file = nil
       @debugging = false
       @inject_format = false
       @force_ending_format = false
@@ -129,7 +141,7 @@ module SwaggerClient
     end
 
     def base_url
-      url = "#{scheme}://#{[host, base_path].join('/').gsub(/\/+/, '/')}"
+      url = "#{scheme}://#{[host, base_path].join('/').gsub(/\/+/, '/')}".sub(/\/+\z/, '')
       URI.encode(url)
     end
 
@@ -151,19 +163,12 @@ module SwaggerClient
     # Returns Auth Settings hash for api client.
     def auth_settings
       {
-        'basicAuth' =>
+        'quantimodo_oauth2' =>
           {
-            type: 'basic',
+            type: 'oauth2',
             in: 'header',
             key: 'Authorization',
-            value: basic_auth_token
-          },
-        'internalApiKey' =>
-          {
-            type: 'api_key',
-            in: 'header',
-            key: 'api_key',
-            value: api_key_with_prefix('api_key')
+            value: "Bearer #{access_token}"
           },
       }
     end

@@ -1,16 +1,19 @@
 module SwaggerClient
   # 
-  class UnitCategory < BaseObject
-    attr_accessor :id, :name, :created_at, :updated_at
+  class Credential < BaseObject
+    attr_accessor :connector_id, :attr_key, :attr_value, :created_at, :updated_at
     # attribute mapping from ruby-style variable name to JSON key
     def self.attribute_map
       {
         
-        # id
-        :'id' => :'id',
+        # connector_id
+        :'connector_id' => :'connector_id',
         
-        # Unit category name
-        :'name' => :'name',
+        # attr_key
+        :'attr_key' => :'attr_key',
+        
+        # attr_value
+        :'attr_value' => :'attr_value',
         
         # created_at
         :'created_at' => :'created_at',
@@ -24,8 +27,9 @@ module SwaggerClient
     # attribute type
     def self.swagger_types
       {
-        :'id' => :'Integer',
-        :'name' => :'String',
+        :'connector_id' => :'Integer',
+        :'attr_key' => :'String',
+        :'attr_value' => :'String',
         :'created_at' => :'DateTime',
         :'updated_at' => :'DateTime'
         
@@ -39,12 +43,16 @@ module SwaggerClient
       attributes = attributes.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
 
       
-      if attributes[:'id']
-        self.id = attributes[:'id']
+      if attributes[:'connector_id']
+        self.connector_id = attributes[:'connector_id']
       end
       
-      if attributes[:'name']
-        self.name = attributes[:'name']
+      if attributes[:'attr_key']
+        self.attr_key = attributes[:'attr_key']
+      end
+      
+      if attributes[:'attr_value']
+        self.attr_value = attributes[:'attr_value']
       end
       
       if attributes[:'created_at']

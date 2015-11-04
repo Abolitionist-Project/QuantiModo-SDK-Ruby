@@ -1,28 +1,49 @@
 module SwaggerClient
   # 
   class Unit < BaseObject
-    attr_accessor :name, :abbreviated_name, :category, :minimum, :maximum, :conversion_steps
+    attr_accessor :id, :client_id, :name, :abbreviated_name, :category_id, :minimum_value, :maximum_value, :updated, :default_unit_id, :multiply, :add, :created_at, :updated_at
     # attribute mapping from ruby-style variable name to JSON key
     def self.attribute_map
       {
+        
+        # id
+        :'id' => :'id',
+        
+        # client_id
+        :'client_id' => :'client_id',
         
         # Unit name
         :'name' => :'name',
         
         # Unit abbreviation
-        :'abbreviated_name' => :'abbreviatedName',
+        :'abbreviated_name' => :'abbreviated_name',
         
-        # Unit category
-        :'category' => :'category',
+        # Unit category ID
+        :'category_id' => :'category_id',
         
         # Unit minimum value
-        :'minimum' => :'minimum',
+        :'minimum_value' => :'minimum_value',
         
         # Unit maximum value
-        :'maximum' => :'maximum',
+        :'maximum_value' => :'maximum_value',
         
-        # Conversion steps list
-        :'conversion_steps' => :'conversionSteps'
+        # updated
+        :'updated' => :'updated',
+        
+        # ID of default unit
+        :'default_unit_id' => :'default_unit_id',
+        
+        # Value multiplied to
+        :'multiply' => :'multiply',
+        
+        # Value which should be added to convert to default unit
+        :'add' => :'add',
+        
+        # created_at
+        :'created_at' => :'created_at',
+        
+        # updated_at
+        :'updated_at' => :'updated_at'
         
       }
     end
@@ -30,12 +51,19 @@ module SwaggerClient
     # attribute type
     def self.swagger_types
       {
+        :'id' => :'Integer',
+        :'client_id' => :'String',
         :'name' => :'String',
         :'abbreviated_name' => :'String',
-        :'category' => :'String',
-        :'minimum' => :'Float',
-        :'maximum' => :'Float',
-        :'conversion_steps' => :'Array<ConversionStep>'
+        :'category_id' => :'Integer',
+        :'minimum_value' => :'Float',
+        :'maximum_value' => :'Float',
+        :'updated' => :'Integer',
+        :'default_unit_id' => :'Integer',
+        :'multiply' => :'Float',
+        :'add' => :'Float',
+        :'created_at' => :'DateTime',
+        :'updated_at' => :'DateTime'
         
       }
     end
@@ -47,56 +75,58 @@ module SwaggerClient
       attributes = attributes.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
 
       
+      if attributes[:'id']
+        self.id = attributes[:'id']
+      end
+      
+      if attributes[:'client_id']
+        self.client_id = attributes[:'client_id']
+      end
+      
       if attributes[:'name']
         self.name = attributes[:'name']
       end
       
-      if attributes[:'abbreviatedName']
-        self.abbreviated_name = attributes[:'abbreviatedName']
+      if attributes[:'abbreviated_name']
+        self.abbreviated_name = attributes[:'abbreviated_name']
       end
       
-      if attributes[:'category']
-        self.category = attributes[:'category']
+      if attributes[:'category_id']
+        self.category_id = attributes[:'category_id']
       end
       
-      if attributes[:'minimum']
-        self.minimum = attributes[:'minimum']
+      if attributes[:'minimum_value']
+        self.minimum_value = attributes[:'minimum_value']
       end
       
-      if attributes[:'maximum']
-        self.maximum = attributes[:'maximum']
+      if attributes[:'maximum_value']
+        self.maximum_value = attributes[:'maximum_value']
       end
       
-      if attributes[:'conversionSteps']
-        if (value = attributes[:'conversionSteps']).is_a?(Array)
-          self.conversion_steps = value
-        end
+      if attributes[:'updated']
+        self.updated = attributes[:'updated']
       end
       
-    end
-
-    def category=(category)
-      allowed_values = ["Distance", "Duration", "Energy", "Frequency", "Miscellany", "Pressure", "Proportion", "Rating", "Temperature", "Volume", "Weight"]
-      if category && !allowed_values.include?(category)
-        fail "invalid value for 'category', must be one of #{allowed_values}"
+      if attributes[:'default_unit_id']
+        self.default_unit_id = attributes[:'default_unit_id']
       end
-      @category = category
-    end
-
-    def minimum=(minimum)
-      allowed_values = ["-Infinity"]
-      if minimum && !allowed_values.include?(minimum)
-        fail "invalid value for 'minimum', must be one of #{allowed_values}"
+      
+      if attributes[:'multiply']
+        self.multiply = attributes[:'multiply']
       end
-      @minimum = minimum
-    end
-
-    def maximum=(maximum)
-      allowed_values = ["Infinity"]
-      if maximum && !allowed_values.include?(maximum)
-        fail "invalid value for 'maximum', must be one of #{allowed_values}"
+      
+      if attributes[:'add']
+        self.add = attributes[:'add']
       end
-      @maximum = maximum
+      
+      if attributes[:'created_at']
+        self.created_at = attributes[:'created_at']
+      end
+      
+      if attributes[:'updated_at']
+        self.updated_at = attributes[:'updated_at']
+      end
+      
     end
 
   end

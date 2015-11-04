@@ -1,7 +1,7 @@
 module SwaggerClient
   # 
-  class UnitCategory < BaseObject
-    attr_accessor :id, :name, :created_at, :updated_at
+  class Source < BaseObject
+    attr_accessor :id, :client_id, :name, :created_at, :updated_at
     # attribute mapping from ruby-style variable name to JSON key
     def self.attribute_map
       {
@@ -9,7 +9,10 @@ module SwaggerClient
         # id
         :'id' => :'id',
         
-        # Unit category name
+        # client_id
+        :'client_id' => :'client_id',
+        
+        # Name of the application or device
         :'name' => :'name',
         
         # created_at
@@ -25,6 +28,7 @@ module SwaggerClient
     def self.swagger_types
       {
         :'id' => :'Integer',
+        :'client_id' => :'String',
         :'name' => :'String',
         :'created_at' => :'DateTime',
         :'updated_at' => :'DateTime'
@@ -41,6 +45,10 @@ module SwaggerClient
       
       if attributes[:'id']
         self.id = attributes[:'id']
+      end
+      
+      if attributes[:'client_id']
+        self.client_id = attributes[:'client_id']
       end
       
       if attributes[:'name']

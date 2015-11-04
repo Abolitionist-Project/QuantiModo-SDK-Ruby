@@ -70,6 +70,8 @@ module SwaggerClient
         :headers => header_params,
         :params => query_params,
         :ssl_verifypeer => Configuration.verify_ssl,
+        :sslcert => Configuration.cert_file,
+        :sslkey => Configuration.key_file,
         :cainfo => Configuration.ssl_ca_cert,
         :verbose => Configuration.debugging
       }

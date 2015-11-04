@@ -1,100 +1,118 @@
 module SwaggerClient
   # 
   class Variable < BaseObject
-    attr_accessor :id, :name, :original_name, :category, :abbreviated_unit_name, :abbreviated_unit_id, :sources, :minimum_value, :maximum_value, :combination_operation, :filling_value, :join_with, :joined_variables, :parent, :sub_variables, :onset_delay, :duration_of_action, :earliest_measurement_time, :latest_measurement_time, :updated, :cause_only, :number_of_correlations, :outcome, :measurements_at_last_analysis, :number_of_measurements, :last_unit, :last_value, :most_common_value, :most_common_unit, :last_source
+    attr_accessor :id, :client_id, :parent_id, :name, :variable_category_id, :default_unit_id, :combination_operation, :filling_value, :maximum_allowed_value, :minimum_allowed_value, :onset_delay, :duration_of_action, :public, :cause_only, :most_common_value, :most_common_unit_id, :standard_deviation, :variance, :mean, :median, :number_of_measurements, :number_of_unique_values, :skewness, :kurtosis, :status, :error_message, :last_successful_update_time, :created_at, :updated_at, :product_url, :image_url, :price, :number_of_user_variables, :outcome, :minimum_recorded_value, :maximum_recorded_value
     # attribute mapping from ruby-style variable name to JSON key
     def self.attribute_map
       {
         
-        # Variable ID
+        # id
         :'id' => :'id',
         
-        # User-defined variable display name.
+        # client_id
+        :'client_id' => :'client_id',
+        
+        # parent_id
+        :'parent_id' => :'parent_id',
+        
+        # Name of the variable
         :'name' => :'name',
         
-        # Name used when the variable was originally created in the `variables` table.
-        :'original_name' => :'originalName',
+        # Category of the variable
+        :'variable_category_id' => :'variable_category_id',
         
-        # Variable category like Mood, Sleep, Physical Activity, Treatment, Symptom, etc.
-        :'category' => :'category',
+        # ID of the default unit of measurement to use for this variable
+        :'default_unit_id' => :'default_unit_id',
         
-        # Abbreviated name of the default unit for the variable
-        :'abbreviated_unit_name' => :'abbreviatedUnitName',
+        # How to combine values of this variable (for instance, to see a summary of the values over a month) 0 for sum OR 1 for mean
+        :'combination_operation' => :'combination_operation',
         
-        # Id of the default unit for the variable
-        :'abbreviated_unit_id' => :'abbreviatedUnitId',
+        # filling_value
+        :'filling_value' => :'filling_value',
         
-        # Comma-separated list of source names to limit variables to those sources
-        :'sources' => :'sources',
+        # maximum_allowed_value
+        :'maximum_allowed_value' => :'maximum_allowed_value',
         
-        # Minimum reasonable value for this variable (uses default unit)
-        :'minimum_value' => :'minimumValue',
+        # minimum_allowed_value
+        :'minimum_allowed_value' => :'minimum_allowed_value',
         
-        # Maximum reasonable value for this variable (uses default unit)
-        :'maximum_value' => :'maximumValue',
+        # onset_delay
+        :'onset_delay' => :'onset_delay',
         
-        # How to aggregate measurements over time.
-        :'combination_operation' => :'combinationOperation',
+        # duration_of_action
+        :'duration_of_action' => :'duration_of_action',
         
-        # Value for replacing null measurements
-        :'filling_value' => :'fillingValue',
+        # public
+        :'public' => :'public',
         
-        # The Variable this Variable should be joined with. If the variable is joined with some other variable then it is not shown to user in the list of variables.
-        :'join_with' => :'joinWith',
+        # cause_only
+        :'cause_only' => :'cause_only',
         
-        # Array of Variables that are joined with this Variable
-        :'joined_variables' => :'joinedVariables',
+        # most_common_value
+        :'most_common_value' => :'most_common_value',
         
-        # Id of the parent variable if this variable has any parent
-        :'parent' => :'parent',
+        # most_common_unit_id
+        :'most_common_unit_id' => :'most_common_unit_id',
         
-        # Array of Variables that are sub variables to this Variable
-        :'sub_variables' => :'subVariables',
+        # standard_deviation
+        :'standard_deviation' => :'standard_deviation',
         
-        # How long it takes for a measurement in this variable to take effect
-        :'onset_delay' => :'onsetDelay',
+        # variance
+        :'variance' => :'variance',
         
-        # How long the effect of a measurement in this variable lasts
-        :'duration_of_action' => :'durationOfAction',
+        # mean
+        :'mean' => :'mean',
         
-        # Earliest measurement time
-        :'earliest_measurement_time' => :'earliestMeasurementTime',
+        # median
+        :'median' => :'median',
         
-        # Latest measurement time
-        :'latest_measurement_time' => :'latestMeasurementTime',
+        # number_of_measurements
+        :'number_of_measurements' => :'number_of_measurements',
         
-        # When this variable or its settings were last updated
-        :'updated' => :'updated',
+        # number_of_unique_values
+        :'number_of_unique_values' => :'number_of_unique_values',
         
-        # A value of 1 indicates that this variable is generally a cause in a causal relationship.  An example of a causeOnly variable would be a variable such as Cloud Cover which would generally not be influenced by the behaviour of the user.
-        :'cause_only' => :'causeOnly',
+        # skewness
+        :'skewness' => :'skewness',
         
-        # Number of correlations
-        :'number_of_correlations' => :'numberOfCorrelations',
+        # kurtosis
+        :'kurtosis' => :'kurtosis',
         
-        # Outcome variables (those with `outcome` == 1) are variables for which a human would generally want to identify the influencing factors.  These include symptoms of illness, physique, mood, cognitive performance, etc.  Generally correlation calculations are only performed on outcome variables.
+        # status
+        :'status' => :'status',
+        
+        # error_message
+        :'error_message' => :'error_message',
+        
+        # last_successful_update_time
+        :'last_successful_update_time' => :'last_successful_update_time',
+        
+        # created_at
+        :'created_at' => :'created_at',
+        
+        # updated_at
+        :'updated_at' => :'updated_at',
+        
+        # product_url
+        :'product_url' => :'product_url',
+        
+        # image_url
+        :'image_url' => :'image_url',
+        
+        # price
+        :'price' => :'price',
+        
+        # number_of_user_variables
+        :'number_of_user_variables' => :'number_of_user_variables',
+        
+        # outcome
         :'outcome' => :'outcome',
         
-        # The number of measurements that a given user had for this variable the last time a correlation calculation was performed. Generally correlation values are only updated once the current number of measurements for a variable is more than 10% greater than the measurementsAtLastAnalysis.  This avoids a computationally-demanding recalculation when there&#39;s not enough new data to make a significant difference in the correlation.
-        :'measurements_at_last_analysis' => :'measurementsAtLastAnalysis',
+        # minimum_recorded_value
+        :'minimum_recorded_value' => :'minimum_recorded_value',
         
-        # Number of measurements
-        :'number_of_measurements' => :'numberOfMeasurements',
-        
-        # Last unit
-        :'last_unit' => :'lastUnit',
-        
-        # Last value
-        :'last_value' => :'lastValue',
-        
-        # Most common value
-        :'most_common_value' => :'mostCommonValue',
-        
-        # Most common unit
-        :'most_common_unit' => :'mostCommonUnit',
-        
-        # Last source
-        :'last_source' => :'lastSource'
+        # maximum_recorded_value
+        :'maximum_recorded_value' => :'maximum_recorded_value'
         
       }
     end
@@ -103,35 +121,41 @@ module SwaggerClient
     def self.swagger_types
       {
         :'id' => :'Integer',
+        :'client_id' => :'String',
+        :'parent_id' => :'Integer',
         :'name' => :'String',
-        :'original_name' => :'String',
-        :'category' => :'String',
-        :'abbreviated_unit_name' => :'String',
-        :'abbreviated_unit_id' => :'Integer',
-        :'sources' => :'String',
-        :'minimum_value' => :'Float',
-        :'maximum_value' => :'Float',
+        :'variable_category_id' => :'Integer',
+        :'default_unit_id' => :'Integer',
         :'combination_operation' => :'String',
         :'filling_value' => :'Float',
-        :'join_with' => :'String',
-        :'joined_variables' => :'Array<Variable>',
-        :'parent' => :'Integer',
-        :'sub_variables' => :'Array<Variable>',
+        :'maximum_allowed_value' => :'Float',
+        :'minimum_allowed_value' => :'Float',
         :'onset_delay' => :'Integer',
         :'duration_of_action' => :'Integer',
-        :'earliest_measurement_time' => :'Integer',
-        :'latest_measurement_time' => :'Integer',
-        :'updated' => :'Integer',
-        :'cause_only' => :'Integer',
-        :'number_of_correlations' => :'Integer',
-        :'outcome' => :'Integer',
-        :'measurements_at_last_analysis' => :'Integer',
-        :'number_of_measurements' => :'Integer',
-        :'last_unit' => :'String',
-        :'last_value' => :'Integer',
-        :'most_common_value' => :'Integer',
-        :'most_common_unit' => :'String',
-        :'last_source' => :'Integer'
+        :'public' => :'Integer',
+        :'cause_only' => :'BOOLEAN',
+        :'most_common_value' => :'Float',
+        :'most_common_unit_id' => :'Integer',
+        :'standard_deviation' => :'Float',
+        :'variance' => :'Float',
+        :'mean' => :'Float',
+        :'median' => :'Float',
+        :'number_of_measurements' => :'Float',
+        :'number_of_unique_values' => :'Float',
+        :'skewness' => :'Float',
+        :'kurtosis' => :'Float',
+        :'status' => :'String',
+        :'error_message' => :'String',
+        :'last_successful_update_time' => :'DateTime',
+        :'created_at' => :'DateTime',
+        :'updated_at' => :'DateTime',
+        :'product_url' => :'String',
+        :'image_url' => :'String',
+        :'price' => :'Float',
+        :'number_of_user_variables' => :'Integer',
+        :'outcome' => :'BOOLEAN',
+        :'minimum_recorded_value' => :'Float',
+        :'maximum_recorded_value' => :'Float'
         
       }
     end
@@ -147,134 +171,146 @@ module SwaggerClient
         self.id = attributes[:'id']
       end
       
+      if attributes[:'client_id']
+        self.client_id = attributes[:'client_id']
+      end
+      
+      if attributes[:'parent_id']
+        self.parent_id = attributes[:'parent_id']
+      end
+      
       if attributes[:'name']
         self.name = attributes[:'name']
       end
       
-      if attributes[:'originalName']
-        self.original_name = attributes[:'originalName']
+      if attributes[:'variable_category_id']
+        self.variable_category_id = attributes[:'variable_category_id']
       end
       
-      if attributes[:'category']
-        self.category = attributes[:'category']
+      if attributes[:'default_unit_id']
+        self.default_unit_id = attributes[:'default_unit_id']
       end
       
-      if attributes[:'abbreviatedUnitName']
-        self.abbreviated_unit_name = attributes[:'abbreviatedUnitName']
+      if attributes[:'combination_operation']
+        self.combination_operation = attributes[:'combination_operation']
       end
       
-      if attributes[:'abbreviatedUnitId']
-        self.abbreviated_unit_id = attributes[:'abbreviatedUnitId']
+      if attributes[:'filling_value']
+        self.filling_value = attributes[:'filling_value']
       end
       
-      if attributes[:'sources']
-        self.sources = attributes[:'sources']
+      if attributes[:'maximum_allowed_value']
+        self.maximum_allowed_value = attributes[:'maximum_allowed_value']
       end
       
-      if attributes[:'minimumValue']
-        self.minimum_value = attributes[:'minimumValue']
+      if attributes[:'minimum_allowed_value']
+        self.minimum_allowed_value = attributes[:'minimum_allowed_value']
       end
       
-      if attributes[:'maximumValue']
-        self.maximum_value = attributes[:'maximumValue']
+      if attributes[:'onset_delay']
+        self.onset_delay = attributes[:'onset_delay']
       end
       
-      if attributes[:'combinationOperation']
-        self.combination_operation = attributes[:'combinationOperation']
+      if attributes[:'duration_of_action']
+        self.duration_of_action = attributes[:'duration_of_action']
       end
       
-      if attributes[:'fillingValue']
-        self.filling_value = attributes[:'fillingValue']
+      if attributes[:'public']
+        self.public = attributes[:'public']
       end
       
-      if attributes[:'joinWith']
-        self.join_with = attributes[:'joinWith']
+      if attributes[:'cause_only']
+        self.cause_only = attributes[:'cause_only']
       end
       
-      if attributes[:'joinedVariables']
-        if (value = attributes[:'joinedVariables']).is_a?(Array)
-          self.joined_variables = value
-        end
+      if attributes[:'most_common_value']
+        self.most_common_value = attributes[:'most_common_value']
       end
       
-      if attributes[:'parent']
-        self.parent = attributes[:'parent']
+      if attributes[:'most_common_unit_id']
+        self.most_common_unit_id = attributes[:'most_common_unit_id']
       end
       
-      if attributes[:'subVariables']
-        if (value = attributes[:'subVariables']).is_a?(Array)
-          self.sub_variables = value
-        end
+      if attributes[:'standard_deviation']
+        self.standard_deviation = attributes[:'standard_deviation']
       end
       
-      if attributes[:'onsetDelay']
-        self.onset_delay = attributes[:'onsetDelay']
+      if attributes[:'variance']
+        self.variance = attributes[:'variance']
       end
       
-      if attributes[:'durationOfAction']
-        self.duration_of_action = attributes[:'durationOfAction']
+      if attributes[:'mean']
+        self.mean = attributes[:'mean']
       end
       
-      if attributes[:'earliestMeasurementTime']
-        self.earliest_measurement_time = attributes[:'earliestMeasurementTime']
+      if attributes[:'median']
+        self.median = attributes[:'median']
       end
       
-      if attributes[:'latestMeasurementTime']
-        self.latest_measurement_time = attributes[:'latestMeasurementTime']
+      if attributes[:'number_of_measurements']
+        self.number_of_measurements = attributes[:'number_of_measurements']
       end
       
-      if attributes[:'updated']
-        self.updated = attributes[:'updated']
+      if attributes[:'number_of_unique_values']
+        self.number_of_unique_values = attributes[:'number_of_unique_values']
       end
       
-      if attributes[:'causeOnly']
-        self.cause_only = attributes[:'causeOnly']
+      if attributes[:'skewness']
+        self.skewness = attributes[:'skewness']
       end
       
-      if attributes[:'numberOfCorrelations']
-        self.number_of_correlations = attributes[:'numberOfCorrelations']
+      if attributes[:'kurtosis']
+        self.kurtosis = attributes[:'kurtosis']
+      end
+      
+      if attributes[:'status']
+        self.status = attributes[:'status']
+      end
+      
+      if attributes[:'error_message']
+        self.error_message = attributes[:'error_message']
+      end
+      
+      if attributes[:'last_successful_update_time']
+        self.last_successful_update_time = attributes[:'last_successful_update_time']
+      end
+      
+      if attributes[:'created_at']
+        self.created_at = attributes[:'created_at']
+      end
+      
+      if attributes[:'updated_at']
+        self.updated_at = attributes[:'updated_at']
+      end
+      
+      if attributes[:'product_url']
+        self.product_url = attributes[:'product_url']
+      end
+      
+      if attributes[:'image_url']
+        self.image_url = attributes[:'image_url']
+      end
+      
+      if attributes[:'price']
+        self.price = attributes[:'price']
+      end
+      
+      if attributes[:'number_of_user_variables']
+        self.number_of_user_variables = attributes[:'number_of_user_variables']
       end
       
       if attributes[:'outcome']
         self.outcome = attributes[:'outcome']
       end
       
-      if attributes[:'measurementsAtLastAnalysis']
-        self.measurements_at_last_analysis = attributes[:'measurementsAtLastAnalysis']
+      if attributes[:'minimum_recorded_value']
+        self.minimum_recorded_value = attributes[:'minimum_recorded_value']
       end
       
-      if attributes[:'numberOfMeasurements']
-        self.number_of_measurements = attributes[:'numberOfMeasurements']
+      if attributes[:'maximum_recorded_value']
+        self.maximum_recorded_value = attributes[:'maximum_recorded_value']
       end
       
-      if attributes[:'lastUnit']
-        self.last_unit = attributes[:'lastUnit']
-      end
-      
-      if attributes[:'lastValue']
-        self.last_value = attributes[:'lastValue']
-      end
-      
-      if attributes[:'mostCommonValue']
-        self.most_common_value = attributes[:'mostCommonValue']
-      end
-      
-      if attributes[:'mostCommonUnit']
-        self.most_common_unit = attributes[:'mostCommonUnit']
-      end
-      
-      if attributes[:'lastSource']
-        self.last_source = attributes[:'lastSource']
-      end
-      
-    end
-
-    def combination_operation=(combination_operation)
-      allowed_values = ["MEAN", "SUM"]
-      if combination_operation && !allowed_values.include?(combination_operation)
-        fail "invalid value for 'combination_operation', must be one of #{allowed_values}"
-      end
-      @combination_operation = combination_operation
     end
 
   end

@@ -1,16 +1,22 @@
 module SwaggerClient
   # 
-  class UnitCategory < BaseObject
-    attr_accessor :id, :name, :created_at, :updated_at
+  class UnitConversion < BaseObject
+    attr_accessor :unit_id, :step_number, :operation, :value, :created_at, :updated_at
     # attribute mapping from ruby-style variable name to JSON key
     def self.attribute_map
       {
         
-        # id
-        :'id' => :'id',
+        # unit_id
+        :'unit_id' => :'unit_id',
         
-        # Unit category name
-        :'name' => :'name',
+        # step in the conversion process
+        :'step_number' => :'step_number',
+        
+        # 0 is add and 1 is multiply
+        :'operation' => :'operation',
+        
+        # number used in the operation
+        :'value' => :'value',
         
         # created_at
         :'created_at' => :'created_at',
@@ -24,8 +30,10 @@ module SwaggerClient
     # attribute type
     def self.swagger_types
       {
-        :'id' => :'Integer',
-        :'name' => :'String',
+        :'unit_id' => :'Integer',
+        :'step_number' => :'BOOLEAN',
+        :'operation' => :'BOOLEAN',
+        :'value' => :'Float',
         :'created_at' => :'DateTime',
         :'updated_at' => :'DateTime'
         
@@ -39,12 +47,20 @@ module SwaggerClient
       attributes = attributes.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
 
       
-      if attributes[:'id']
-        self.id = attributes[:'id']
+      if attributes[:'unit_id']
+        self.unit_id = attributes[:'unit_id']
       end
       
-      if attributes[:'name']
-        self.name = attributes[:'name']
+      if attributes[:'step_number']
+        self.step_number = attributes[:'step_number']
+      end
+      
+      if attributes[:'operation']
+        self.operation = attributes[:'operation']
+      end
+      
+      if attributes[:'value']
+        self.value = attributes[:'value']
       end
       
       if attributes[:'created_at']
