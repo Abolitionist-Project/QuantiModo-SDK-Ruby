@@ -140,7 +140,7 @@ module SwaggerClient
     end
 
     # Get Measurements CSV
-    # Get Measurements CSV
+    # Download a CSV containing all user measurements
     # @param [Hash] opts the optional parameters
     # @return [File]
     def measurements_csv_get(opts = {})
@@ -187,7 +187,7 @@ module SwaggerClient
     end
 
     # Post Request for Measurements CSV
-    # Post Request for Measurements CSV
+    # Use this endpoint to schedule a CSV export containing all user measurements to be emailed to the user within 24 hours.
     # @param [Hash] opts the optional parameters
     # @return [Integer]
     def measurements_request_csv_post(opts = {})
