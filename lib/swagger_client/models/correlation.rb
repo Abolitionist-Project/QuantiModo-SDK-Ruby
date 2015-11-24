@@ -48,10 +48,10 @@ module SwaggerClient
         # A function of the effect size and sample size
         :'statistical_significance' => :'statistical_significance',
         
-        # Unit of Cause
+        # Unit of the predictor variable
         :'cause_unit' => :'cause_unit',
         
-        # Unit ID of Cause
+        # Unit ID of the predictor variable
         :'cause_unit_id' => :'cause_unit_id',
         
         # Cause changes
@@ -66,10 +66,10 @@ module SwaggerClient
         # error
         :'error' => :'error',
         
-        # created_at
+        # When the record was first created. Use ISO 8601 datetime format
         :'created_at' => :'created_at',
         
-        # updated_at
+        # When the record in the database was last updated. Use ISO 8601 datetime format
         :'updated_at' => :'updated_at',
         
         # Correlation when cause and effect are reversed. For any causal relationship, the forward correlation should exceed the reverse correlation

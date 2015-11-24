@@ -15,7 +15,7 @@ module SwaggerClient
         # ID of User
         :'user_id' => :'user_id',
         
-        # ID of cause variable
+        # ID of the predictor variable
         :'cause_id' => :'cause_id',
         
         # ID of effect variable
@@ -24,10 +24,10 @@ module SwaggerClient
         # Value of Vote
         :'value' => :'value',
         
-        # created_at
+        # When the record was first created. Use ISO 8601 datetime format
         :'created_at' => :'created_at',
         
-        # updated_at
+        # When the record in the database was last updated. Use ISO 8601 datetime format
         :'updated_at' => :'updated_at'
         
       }

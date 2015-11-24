@@ -1,7 +1,7 @@
 module SwaggerClient
   # 
   class Connector < BaseObject
-    attr_accessor :id, :name, :display_name, :image, :get_it_url, :short_description, :long_description, :enabled, :oauth
+    attr_accessor :id, :name, :display_name, :image, :get_it_url, :short_description, :long_description, :enabled, :oauth, :created_at, :updated_at
     # attribute mapping from ruby-style variable name to JSON key
     def self.attribute_map
       {
@@ -9,10 +9,10 @@ module SwaggerClient
         # Connector ID number
         :'id' => :'id',
         
-        # Connector lowercase system name
+        # Lowercase system name for the data source
         :'name' => :'name',
         
-        # Connector pretty display name
+        # Pretty display name for the data source
         :'display_name' => :'display_name',
         
         # URL to the image of the connector logo
@@ -21,17 +21,23 @@ module SwaggerClient
         # URL to a site where one can get this device or application
         :'get_it_url' => :'get_it_url',
         
-        # Short description
+        # Short description of the service (such as the categories it tracks)
         :'short_description' => :'short_description',
         
-        # Long description
+        # Longer paragraph description of the data provider
         :'long_description' => :'long_description',
         
-        # enabled
+        # Set to 1 if the connector should be returned when listing connectors
         :'enabled' => :'enabled',
         
-        # oauth
-        :'oauth' => :'oauth'
+        # Set to 1 if the connector uses OAuth authentication as opposed to username/password
+        :'oauth' => :'oauth',
+        
+        # When the record was first created. Use ISO 8601 datetime format
+        :'created_at' => :'created_at',
+        
+        # When the record in the database was last updated. Use ISO 8601 datetime format
+        :'updated_at' => :'updated_at'
         
       }
     end
@@ -47,7 +53,9 @@ module SwaggerClient
         :'short_description' => :'String',
         :'long_description' => :'String',
         :'enabled' => :'BOOLEAN',
-        :'oauth' => :'BOOLEAN'
+        :'oauth' => :'BOOLEAN',
+        :'created_at' => :'DateTime',
+        :'updated_at' => :'DateTime'
         
       }
     end
@@ -93,6 +101,14 @@ module SwaggerClient
       
       if attributes[:'oauth']
         self.oauth = attributes[:'oauth']
+      end
+      
+      if attributes[:'created_at']
+        self.created_at = attributes[:'created_at']
+      end
+      
+      if attributes[:'updated_at']
+        self.updated_at = attributes[:'updated_at']
       end
       
     end

@@ -1,13 +1,16 @@
 module SwaggerClient
   # 
   class UserVariable < BaseObject
-    attr_accessor :parent_id, :client_id, :variable_id, :default_unit_id, :minimum_allowed_value, :maximum_allowed_value, :filling_value, :join_with, :onset_delay, :duration_of_action, :variable_category_id, :updated, :public, :cause_only, :filling_type, :number_of_measurements, :number_of_processed_measurements, :measurements_at_last_analysis, :last_unit_id, :last_original_unit_id, :last_value, :last_original_value, :last_source_id, :number_of_correlations, :status, :error_message, :last_successful_update_time, :standard_deviation, :variance, :minimum_recorded_daily_value, :maximum_recorded_daily_value, :mean, :median, :most_common_unit_id, :most_common_value, :number_of_unique_daily_values, :number_of_changes, :skewness, :kurtosis, :latitude, :longitude, :location, :created_at, :updated_at, :outcome, :sources, :earliest_source_time, :latest_source_time, :earliest_measurement_time, :latest_measurement_time, :earliest_filling_time, :latest_filling_time
+    attr_accessor :parent_id, :user_id, :client_id, :variable_id, :default_unit_id, :minimum_allowed_value, :maximum_allowed_value, :filling_value, :join_with, :onset_delay, :duration_of_action, :variable_category_id, :updated, :public, :cause_only, :filling_type, :number_of_measurements, :number_of_processed_measurements, :measurements_at_last_analysis, :last_unit_id, :last_original_unit_id, :last_value, :last_original_value, :last_source_id, :number_of_correlations, :status, :error_message, :last_successful_update_time, :standard_deviation, :variance, :minimum_recorded_value, :maximum_recorded_daily_value, :mean, :median, :most_common_unit_id, :most_common_value, :number_of_unique_daily_values, :number_of_changes, :skewness, :kurtosis, :latitude, :longitude, :location, :created_at, :updated_at, :outcome, :sources, :earliest_source_time, :latest_source_time, :earliest_measurement_time, :latest_measurement_time, :earliest_filling_time, :latest_filling_time
     # attribute mapping from ruby-style variable name to JSON key
     def self.attribute_map
       {
         
         # ID of the parent variable if this variable has any parent
         :'parent_id' => :'parent_id',
+        
+        # User ID
+        :'user_id' => :'user_id',
         
         # client_id
         :'client_id' => :'client_id',
@@ -93,8 +96,8 @@ module SwaggerClient
         # Variance
         :'variance' => :'variance',
         
-        # Minimum recorded daily value of this variable
-        :'minimum_recorded_daily_value' => :'minimum_recorded_daily_value',
+        # Minimum recorded value of this variable
+        :'minimum_recorded_value' => :'minimum_recorded_value',
         
         # Maximum recorded daily value of this variable
         :'maximum_recorded_daily_value' => :'maximum_recorded_daily_value',
@@ -132,10 +135,10 @@ module SwaggerClient
         # Location
         :'location' => :'location',
         
-        # created_at
+        # When the record was first created. Use ISO 8601 datetime format
         :'created_at' => :'created_at',
         
-        # updated_at
+        # When the record in the database was last updated. Use ISO 8601 datetime format
         :'updated_at' => :'updated_at',
         
         # Outcome variables (those with `outcome` == 1) are variables for which a human would generally want to identify the influencing factors.  These include symptoms of illness, physique, mood, cognitive performance, etc.  Generally correlation calculations are only performed on outcome variables
@@ -169,6 +172,7 @@ module SwaggerClient
     def self.swagger_types
       {
         :'parent_id' => :'Integer',
+        :'user_id' => :'Integer',
         :'client_id' => :'String',
         :'variable_id' => :'Integer',
         :'default_unit_id' => :'Integer',
@@ -197,7 +201,7 @@ module SwaggerClient
         :'last_successful_update_time' => :'DateTime',
         :'standard_deviation' => :'Float',
         :'variance' => :'Float',
-        :'minimum_recorded_daily_value' => :'Float',
+        :'minimum_recorded_value' => :'Float',
         :'maximum_recorded_daily_value' => :'Float',
         :'mean' => :'Float',
         :'median' => :'Float',
@@ -233,6 +237,10 @@ module SwaggerClient
       
       if attributes[:'parent_id']
         self.parent_id = attributes[:'parent_id']
+      end
+      
+      if attributes[:'user_id']
+        self.user_id = attributes[:'user_id']
       end
       
       if attributes[:'client_id']
@@ -347,8 +355,8 @@ module SwaggerClient
         self.variance = attributes[:'variance']
       end
       
-      if attributes[:'minimum_recorded_daily_value']
-        self.minimum_recorded_daily_value = attributes[:'minimum_recorded_daily_value']
+      if attributes[:'minimum_recorded_value']
+        self.minimum_recorded_value = attributes[:'minimum_recorded_value']
       end
       
       if attributes[:'maximum_recorded_daily_value']

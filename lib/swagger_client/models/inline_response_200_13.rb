@@ -18,7 +18,7 @@ module SwaggerClient
     # attribute type
     def self.swagger_types
       {
-        :'data' => :'Array<Source>',
+        :'data' => :'Array<Measurement>',
         :'success' => :'BOOLEAN'
         
       }

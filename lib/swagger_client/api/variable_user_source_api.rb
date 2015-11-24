@@ -11,15 +11,18 @@ module SwaggerClient
     # Get all VariableUserSources
     # Get all VariableUserSources
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :variable_id variable_id
-    # @option opts [Integer] :user_id user_id
-    # @option opts [Integer] :timestamp timestamp
-    # @option opts [String] :created_at created_at
-    # @option opts [String] :updated_at updated_at
-    # @option opts [Integer] :limit limit
-    # @option opts [Integer] :offset offset
-    # @option opts [String] :sort sort
-    # @return [inline_response_200_25]
+    # @option opts [String] :access_token User&#39;s OAuth2 access token
+    # @option opts [Integer] :variable_id ID of variable
+    # @option opts [Integer] :user_id ID of User
+    # @option opts [Integer] :timestamp Time that this measurement occurred Uses epoch minute (epoch time divided by 60)
+    # @option opts [Integer] :earliest_measurement_time Earliest measurement time
+    # @option opts [Integer] :latest_measurement_time Latest measurement time
+    # @option opts [String] :created_at When the record was first created. Use ISO 8601 datetime format
+    # @option opts [String] :updated_at When the record was last updated. Use ISO 8601 datetime format
+    # @option opts [Integer] :limit The LIMIT is used to limit the number of results returned. So if you have 1000 results, but only want to the first 10, you would set this to 10 and offset to 0. The maximum limit is 200 records.
+    # @option opts [Integer] :offset OFFSET says to skip that many rows before beginning to return rows to the client. OFFSET 0 is the same as omitting the OFFSET clause. If both OFFSET and LIMIT appear, then OFFSET rows are skipped before starting to count the LIMIT rows that are returned.
+    # @option opts [String] :sort Sort by given field. If the field is prefixed with &#39;-&#39;, it will sort in descending order.
+    # @return [inline_response_200_29]
     def variable_user_sources_get(opts = {})
       if Configuration.debugging
         Configuration.logger.debug "Calling API: VariableUserSourceApi#variable_user_sources_get ..."
@@ -30,9 +33,12 @@ module SwaggerClient
 
       # query parameters
       query_params = {}
+      query_params[:'access_token'] = opts[:'access_token'] if opts[:'access_token']
       query_params[:'variable_id'] = opts[:'variable_id'] if opts[:'variable_id']
       query_params[:'user_id'] = opts[:'user_id'] if opts[:'user_id']
       query_params[:'timestamp'] = opts[:'timestamp'] if opts[:'timestamp']
+      query_params[:'earliest_measurement_time'] = opts[:'earliest_measurement_time'] if opts[:'earliest_measurement_time']
+      query_params[:'latest_measurement_time'] = opts[:'latest_measurement_time'] if opts[:'latest_measurement_time']
       query_params[:'created_at'] = opts[:'created_at'] if opts[:'created_at']
       query_params[:'updated_at'] = opts[:'updated_at'] if opts[:'updated_at']
       query_params[:'limit'] = opts[:'limit'] if opts[:'limit']
@@ -57,14 +63,14 @@ module SwaggerClient
       post_body = nil
       
 
-      auth_names = []
+      auth_names = ['quantimodo_oauth2']
       result = @api_client.call_api(:GET, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'inline_response_200_25')
+        :return_type => 'inline_response_200_29')
       if Configuration.debugging
         Configuration.logger.debug "API called: VariableUserSourceApi#variable_user_sources_get. Result: #{result.inspect}"
       end
@@ -74,8 +80,9 @@ module SwaggerClient
     # Store VariableUserSource
     # Store VariableUserSource
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :access_token User&#39;s OAuth2 access token
     # @option opts [VariableUserSource] :body VariableUserSource that should be stored
-    # @return [inline_response_200_26]
+    # @return [inline_response_200_30]
     def variable_user_sources_post(opts = {})
       if Configuration.debugging
         Configuration.logger.debug "Calling API: VariableUserSourceApi#variable_user_sources_post ..."
@@ -86,6 +93,7 @@ module SwaggerClient
 
       # query parameters
       query_params = {}
+      query_params[:'access_token'] = opts[:'access_token'] if opts[:'access_token']
 
       # header parameters
       header_params = {}
@@ -105,14 +113,14 @@ module SwaggerClient
       post_body = @api_client.object_to_http_body(opts[:'body'])
       
 
-      auth_names = []
+      auth_names = ['quantimodo_oauth2']
       result = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'inline_response_200_26')
+        :return_type => 'inline_response_200_30')
       if Configuration.debugging
         Configuration.logger.debug "API called: VariableUserSourceApi#variable_user_sources_post. Result: #{result.inspect}"
       end
@@ -124,7 +132,8 @@ module SwaggerClient
     # @param id id of VariableUserSource
     # @param source_id source id of VariableUserSource
     # @param [Hash] opts the optional parameters
-    # @return [inline_response_200_26]
+    # @option opts [String] :access_token User&#39;s OAuth2 access token
+    # @return [inline_response_200_30]
     def variable_user_sources_id_get(id, source_id, opts = {})
       if Configuration.debugging
         Configuration.logger.debug "Calling API: VariableUserSourceApi#variable_user_sources_id_get ..."
@@ -142,6 +151,7 @@ module SwaggerClient
       # query parameters
       query_params = {}
       query_params[:'source_id'] = source_id
+      query_params[:'access_token'] = opts[:'access_token'] if opts[:'access_token']
 
       # header parameters
       header_params = {}
@@ -161,14 +171,14 @@ module SwaggerClient
       post_body = nil
       
 
-      auth_names = []
+      auth_names = ['quantimodo_oauth2']
       result = @api_client.call_api(:GET, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'inline_response_200_26')
+        :return_type => 'inline_response_200_30')
       if Configuration.debugging
         Configuration.logger.debug "API called: VariableUserSourceApi#variable_user_sources_id_get. Result: #{result.inspect}"
       end
@@ -180,6 +190,7 @@ module SwaggerClient
     # @param id variable_id of VariableUserSource
     # @param source_id source id of VariableUserSource
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :access_token User&#39;s OAuth2 access token
     # @option opts [VariableUserSource] :body VariableUserSource that should be updated
     # @return [inline_response_200_2]
     def variable_user_sources_id_put(id, source_id, opts = {})
@@ -199,6 +210,7 @@ module SwaggerClient
       # query parameters
       query_params = {}
       query_params[:'source_id'] = source_id
+      query_params[:'access_token'] = opts[:'access_token'] if opts[:'access_token']
 
       # header parameters
       header_params = {}
@@ -218,7 +230,7 @@ module SwaggerClient
       post_body = @api_client.object_to_http_body(opts[:'body'])
       
 
-      auth_names = []
+      auth_names = ['quantimodo_oauth2']
       result = @api_client.call_api(:PUT, path,
         :header_params => header_params,
         :query_params => query_params,
@@ -237,6 +249,7 @@ module SwaggerClient
     # @param id variable_id of VariableUserSource
     # @param source_id source id of VariableUserSource
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :access_token User&#39;s OAuth2 access token
     # @return [inline_response_200_2]
     def variable_user_sources_id_delete(id, source_id, opts = {})
       if Configuration.debugging
@@ -255,6 +268,7 @@ module SwaggerClient
       # query parameters
       query_params = {}
       query_params[:'source_id'] = source_id
+      query_params[:'access_token'] = opts[:'access_token'] if opts[:'access_token']
 
       # header parameters
       header_params = {}
@@ -274,7 +288,7 @@ module SwaggerClient
       post_body = nil
       
 
-      auth_names = []
+      auth_names = ['quantimodo_oauth2']
       result = @api_client.call_api(:DELETE, path,
         :header_params => header_params,
         :query_params => query_params,

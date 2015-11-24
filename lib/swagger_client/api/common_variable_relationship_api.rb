@@ -1,62 +1,70 @@
 require "uri"
 
 module SwaggerClient
-  class VariableCategoryApi
+  class CommonVariableRelationshipApi
     attr_accessor :api_client
 
     def initialize(api_client = nil)
       @api_client = api_client || Configuration.api_client
     end
 
-    # Get all VariableCategories
-    # The variable categories include Activity, Causes of Illness, Cognitive Performance, Conditions, Environment, Foods, Location, Miscellaneous, Mood, Nutrition, Physical Activity, Physique, Sleep, Social Interactions, Symptoms, Treatments, Vital Signs, and Work.
+    # Get all CommonVariableRelationships
+    # Get all CommonVariableRelationships
     # @param [Hash] opts the optional parameters
     # @option opts [String] :access_token User&#39;s OAuth2 access token
-    # @option opts [String] :name Name of the category
-    # @option opts [Float] :filling_value Value for replacing null measurements
-    # @option opts [Float] :maximum_allowed_value Maximum recorded value of this category
-    # @option opts [Float] :minimum_allowed_value Minimum recorded value of this category
+    # @option opts [Integer] :id id
+    # @option opts [String] :confidence_level Our confidence that a consistent predictive relationship exists based on the amount of evidence, reproducibility, and other factors
+    # @option opts [Float] :confidence_score A quantitative representation of our confidence that a consistent predictive relationship exists based on the amount of evidence, reproducibility, and other factors
+    # @option opts [String] :direction Direction is positive if higher predictor values generally precede higher outcome values. Direction is negative if higher predictor values generally precede lower outcome values.
     # @option opts [Integer] :duration_of_action Estimated number of seconds following the onset delay in which a stimulus produces a perceivable effect
+    # @option opts [String] :error_message error_message
     # @option opts [Integer] :onset_delay Estimated number of seconds that pass before a stimulus produces a perceivable effect
-    # @option opts [String] :combination_operation How to combine values of this variable (for instance, to see a summary of the values over a month) SUM or MEAN
-    # @option opts [Integer] :updated updated
-    # @option opts [BOOLEAN] :cause_only A value of 1 indicates that this category is generally a cause in a causal relationship.  An example of a causeOnly category would be a category such as Work which would generally not be influenced by the behaviour of the user
-    # @option opts [Integer] :public Is category public
-    # @option opts [BOOLEAN] :outcome outcome
-    # @option opts [String] :created_at When the record was first created. Use ISO 8601 datetime format
-    # @option opts [String] :updated_at When the record was last updated. Use ISO 8601 datetime format
-    # @option opts [String] :image_url Image URL
-    # @option opts [Integer] :default_unit_id ID of the default unit for the category
+    # @option opts [Integer] :outcome_variable_id Variable ID for the outcome variable
+    # @option opts [Integer] :predictor_variable_id Variable ID for the predictor variable
+    # @option opts [Integer] :predictor_unit_id ID for default unit of the predictor variable
+    # @option opts [Float] :sinn_rank A value representative of the relevance of this predictor relative to other predictors of this outcome.  Usually used for relevancy sorting.
+    # @option opts [Float] :strength_score A value represented to the size of the effect which the predictor appears to have on the outcome.
+    # @option opts [String] :strength_level Can be weak, medium, or strong based on the size of the effect which the predictor appears to have on the outcome relative to other variable relationship strength scores.
+    # @option opts [Integer] :up_votes Number of users who feel that there is a plausible causal relationship between the predictor and outcome variables.
+    # @option opts [Integer] :down_votes Number of users who do not feel that there is a plausible causal relationship between the predictor and outcome variables.
+    # @option opts [Float] :value_predicting_high_outcome Value for the predictor variable (in it&#39;s default unit) which typically precedes an above average outcome value
+    # @option opts [Float] :value_predicting_low_outcome Value for the predictor variable (in it&#39;s default unit) which typically precedes a below average outcome value
+    # @option opts [Integer] :number_of_users Number of users whose data was aggregated to obtain this relationship
+    # @option opts [String] :data_source data_source
     # @option opts [Integer] :limit The LIMIT is used to limit the number of results returned. So if you have 1000 results, but only want to the first 10, you would set this to 10 and offset to 0. The maximum limit is 200 records.
     # @option opts [Integer] :offset OFFSET says to skip that many rows before beginning to return rows to the client. OFFSET 0 is the same as omitting the OFFSET clause. If both OFFSET and LIMIT appear, then OFFSET rows are skipped before starting to count the LIMIT rows that are returned.
     # @option opts [String] :sort Sort by given field. If the field is prefixed with &#39;-&#39;, it will sort in descending order.
-    # @return [inline_response_200_27]
-    def variable_categories_get(opts = {})
+    # @return [inline_response_200_3]
+    def common_variable_relationships_get(opts = {})
       if Configuration.debugging
-        Configuration.logger.debug "Calling API: VariableCategoryApi#variable_categories_get ..."
+        Configuration.logger.debug "Calling API: CommonVariableRelationshipApi#common_variable_relationships_get ..."
       end
       
       # resource path
-      path = "/variableCategories".sub('{format}','json')
+      path = "/commonVariableRelationships".sub('{format}','json')
 
       # query parameters
       query_params = {}
       query_params[:'access_token'] = opts[:'access_token'] if opts[:'access_token']
-      query_params[:'name'] = opts[:'name'] if opts[:'name']
-      query_params[:'filling_value'] = opts[:'filling_value'] if opts[:'filling_value']
-      query_params[:'maximum_allowed_value'] = opts[:'maximum_allowed_value'] if opts[:'maximum_allowed_value']
-      query_params[:'minimum_allowed_value'] = opts[:'minimum_allowed_value'] if opts[:'minimum_allowed_value']
+      query_params[:'id'] = opts[:'id'] if opts[:'id']
+      query_params[:'confidence_level'] = opts[:'confidence_level'] if opts[:'confidence_level']
+      query_params[:'confidence_score'] = opts[:'confidence_score'] if opts[:'confidence_score']
+      query_params[:'direction'] = opts[:'direction'] if opts[:'direction']
       query_params[:'duration_of_action'] = opts[:'duration_of_action'] if opts[:'duration_of_action']
+      query_params[:'error_message'] = opts[:'error_message'] if opts[:'error_message']
       query_params[:'onset_delay'] = opts[:'onset_delay'] if opts[:'onset_delay']
-      query_params[:'combination_operation'] = opts[:'combination_operation'] if opts[:'combination_operation']
-      query_params[:'updated'] = opts[:'updated'] if opts[:'updated']
-      query_params[:'cause_only'] = opts[:'cause_only'] if opts[:'cause_only']
-      query_params[:'public'] = opts[:'public'] if opts[:'public']
-      query_params[:'outcome'] = opts[:'outcome'] if opts[:'outcome']
-      query_params[:'created_at'] = opts[:'created_at'] if opts[:'created_at']
-      query_params[:'updated_at'] = opts[:'updated_at'] if opts[:'updated_at']
-      query_params[:'image_url'] = opts[:'image_url'] if opts[:'image_url']
-      query_params[:'default_unit_id'] = opts[:'default_unit_id'] if opts[:'default_unit_id']
+      query_params[:'outcome_variable_id'] = opts[:'outcome_variable_id'] if opts[:'outcome_variable_id']
+      query_params[:'predictor_variable_id'] = opts[:'predictor_variable_id'] if opts[:'predictor_variable_id']
+      query_params[:'predictor_unit_id'] = opts[:'predictor_unit_id'] if opts[:'predictor_unit_id']
+      query_params[:'sinn_rank'] = opts[:'sinn_rank'] if opts[:'sinn_rank']
+      query_params[:'strength_score'] = opts[:'strength_score'] if opts[:'strength_score']
+      query_params[:'strength_level'] = opts[:'strength_level'] if opts[:'strength_level']
+      query_params[:'up_votes'] = opts[:'up_votes'] if opts[:'up_votes']
+      query_params[:'down_votes'] = opts[:'down_votes'] if opts[:'down_votes']
+      query_params[:'value_predicting_high_outcome'] = opts[:'value_predicting_high_outcome'] if opts[:'value_predicting_high_outcome']
+      query_params[:'value_predicting_low_outcome'] = opts[:'value_predicting_low_outcome'] if opts[:'value_predicting_low_outcome']
+      query_params[:'number_of_users'] = opts[:'number_of_users'] if opts[:'number_of_users']
+      query_params[:'data_source'] = opts[:'data_source'] if opts[:'data_source']
       query_params[:'limit'] = opts[:'limit'] if opts[:'limit']
       query_params[:'offset'] = opts[:'offset'] if opts[:'offset']
       query_params[:'sort'] = opts[:'sort'] if opts[:'sort']
@@ -86,26 +94,26 @@ module SwaggerClient
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'inline_response_200_27')
+        :return_type => 'inline_response_200_3')
       if Configuration.debugging
-        Configuration.logger.debug "API called: VariableCategoryApi#variable_categories_get. Result: #{result.inspect}"
+        Configuration.logger.debug "API called: CommonVariableRelationshipApi#common_variable_relationships_get. Result: #{result.inspect}"
       end
       return result
     end
 
-    # Store VariableCategory
-    # Store VariableCategory
+    # Store CommonVariableRelationship
+    # Store CommonVariableRelationship
     # @param [Hash] opts the optional parameters
     # @option opts [String] :access_token User&#39;s OAuth2 access token
-    # @option opts [VariableCategory] :body VariableCategory that should be stored
-    # @return [inline_response_200_28]
-    def variable_categories_post(opts = {})
+    # @option opts [CommonVariableRelationship] :body CommonVariableRelationship that should be stored
+    # @return [inline_response_200_4]
+    def common_variable_relationships_post(opts = {})
       if Configuration.debugging
-        Configuration.logger.debug "Calling API: VariableCategoryApi#variable_categories_post ..."
+        Configuration.logger.debug "Calling API: CommonVariableRelationshipApi#common_variable_relationships_post ..."
       end
       
       # resource path
-      path = "/variableCategories".sub('{format}','json')
+      path = "/commonVariableRelationships".sub('{format}','json')
 
       # query parameters
       query_params = {}
@@ -136,29 +144,29 @@ module SwaggerClient
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'inline_response_200_28')
+        :return_type => 'inline_response_200_4')
       if Configuration.debugging
-        Configuration.logger.debug "API called: VariableCategoryApi#variable_categories_post. Result: #{result.inspect}"
+        Configuration.logger.debug "API called: CommonVariableRelationshipApi#common_variable_relationships_post. Result: #{result.inspect}"
       end
       return result
     end
 
-    # Get VariableCategory
-    # Get VariableCategory
-    # @param id id of VariableCategory
+    # Get CommonVariableRelationship
+    # Get CommonVariableRelationship
+    # @param id id of CommonVariableRelationship
     # @param [Hash] opts the optional parameters
     # @option opts [String] :access_token User&#39;s OAuth2 access token
-    # @return [inline_response_200_28]
-    def variable_categories_id_get(id, opts = {})
+    # @return [inline_response_200_4]
+    def common_variable_relationships_id_get(id, opts = {})
       if Configuration.debugging
-        Configuration.logger.debug "Calling API: VariableCategoryApi#variable_categories_id_get ..."
+        Configuration.logger.debug "Calling API: CommonVariableRelationshipApi#common_variable_relationships_id_get ..."
       end
       
       # verify the required parameter 'id' is set
-      fail "Missing the required parameter 'id' when calling variable_categories_id_get" if id.nil?
+      fail "Missing the required parameter 'id' when calling common_variable_relationships_id_get" if id.nil?
       
       # resource path
-      path = "/variableCategories/{id}".sub('{format}','json').sub('{' + 'id' + '}', id.to_s)
+      path = "/commonVariableRelationships/{id}".sub('{format}','json').sub('{' + 'id' + '}', id.to_s)
 
       # query parameters
       query_params = {}
@@ -189,30 +197,30 @@ module SwaggerClient
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'inline_response_200_28')
+        :return_type => 'inline_response_200_4')
       if Configuration.debugging
-        Configuration.logger.debug "API called: VariableCategoryApi#variable_categories_id_get. Result: #{result.inspect}"
+        Configuration.logger.debug "API called: CommonVariableRelationshipApi#common_variable_relationships_id_get. Result: #{result.inspect}"
       end
       return result
     end
 
-    # Update VariableCategory
-    # Update VariableCategory
-    # @param id id of VariableCategory
+    # Update CommonVariableRelationship
+    # Update CommonVariableRelationship
+    # @param id id of CommonVariableRelationship
     # @param [Hash] opts the optional parameters
     # @option opts [String] :access_token User&#39;s OAuth2 access token
-    # @option opts [VariableCategory] :body VariableCategory that should be updated
+    # @option opts [CommonVariableRelationship] :body CommonVariableRelationship that should be updated
     # @return [inline_response_200_2]
-    def variable_categories_id_put(id, opts = {})
+    def common_variable_relationships_id_put(id, opts = {})
       if Configuration.debugging
-        Configuration.logger.debug "Calling API: VariableCategoryApi#variable_categories_id_put ..."
+        Configuration.logger.debug "Calling API: CommonVariableRelationshipApi#common_variable_relationships_id_put ..."
       end
       
       # verify the required parameter 'id' is set
-      fail "Missing the required parameter 'id' when calling variable_categories_id_put" if id.nil?
+      fail "Missing the required parameter 'id' when calling common_variable_relationships_id_put" if id.nil?
       
       # resource path
-      path = "/variableCategories/{id}".sub('{format}','json').sub('{' + 'id' + '}', id.to_s)
+      path = "/commonVariableRelationships/{id}".sub('{format}','json').sub('{' + 'id' + '}', id.to_s)
 
       # query parameters
       query_params = {}
@@ -245,27 +253,27 @@ module SwaggerClient
         :auth_names => auth_names,
         :return_type => 'inline_response_200_2')
       if Configuration.debugging
-        Configuration.logger.debug "API called: VariableCategoryApi#variable_categories_id_put. Result: #{result.inspect}"
+        Configuration.logger.debug "API called: CommonVariableRelationshipApi#common_variable_relationships_id_put. Result: #{result.inspect}"
       end
       return result
     end
 
-    # Delete VariableCategory
-    # Delete VariableCategory
-    # @param id id of VariableCategory
+    # Delete CommonVariableRelationship
+    # Delete CommonVariableRelationship
+    # @param id id of CommonVariableRelationship
     # @param [Hash] opts the optional parameters
     # @option opts [String] :access_token User&#39;s OAuth2 access token
     # @return [inline_response_200_2]
-    def variable_categories_id_delete(id, opts = {})
+    def common_variable_relationships_id_delete(id, opts = {})
       if Configuration.debugging
-        Configuration.logger.debug "Calling API: VariableCategoryApi#variable_categories_id_delete ..."
+        Configuration.logger.debug "Calling API: CommonVariableRelationshipApi#common_variable_relationships_id_delete ..."
       end
       
       # verify the required parameter 'id' is set
-      fail "Missing the required parameter 'id' when calling variable_categories_id_delete" if id.nil?
+      fail "Missing the required parameter 'id' when calling common_variable_relationships_id_delete" if id.nil?
       
       # resource path
-      path = "/variableCategories/{id}".sub('{format}','json').sub('{' + 'id' + '}', id.to_s)
+      path = "/commonVariableRelationships/{id}".sub('{format}','json').sub('{' + 'id' + '}', id.to_s)
 
       # query parameters
       query_params = {}
@@ -298,7 +306,7 @@ module SwaggerClient
         :auth_names => auth_names,
         :return_type => 'inline_response_200_2')
       if Configuration.debugging
-        Configuration.logger.debug "API called: VariableCategoryApi#variable_categories_id_delete. Result: #{result.inspect}"
+        Configuration.logger.debug "API called: CommonVariableRelationshipApi#common_variable_relationships_id_delete. Result: #{result.inspect}"
       end
       return result
     end

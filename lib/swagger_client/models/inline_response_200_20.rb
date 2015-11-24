@@ -18,7 +18,7 @@ module SwaggerClient
     # attribute type
     def self.swagger_types
       {
-        :'data' => :'Update',
+        :'data' => :'Unit',
         :'success' => :'BOOLEAN'
         
       }

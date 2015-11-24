@@ -11,34 +11,34 @@ module SwaggerClient
     # Get all AggregatedCorrelations
     # Get all AggregatedCorrelations
     # @param [Hash] opts the optional parameters
-    # @option opts [Float] :correlation correlation
-    # @option opts [Integer] :cause_id cause_id
-    # @option opts [Integer] :effect_id effect_id
-    # @option opts [Integer] :onset_delay onset_delay
-    # @option opts [Integer] :duration_of_action duration_of_action
-    # @option opts [Integer] :number_of_pairs number_of_pairs
-    # @option opts [Float] :value_predicting_high_outcome value_predicting_high_outcome
-    # @option opts [Float] :value_predicting_low_outcome value_predicting_low_outcome
-    # @option opts [Float] :optimal_pearson_product optimal_pearson_product
-    # @option opts [Float] :vote vote
-    # @option opts [Integer] :number_of_users number_of_users
-    # @option opts [Integer] :number_of_correlations number_of_correlations
-    # @option opts [Float] :statistical_significance statistical_significance
-    # @option opts [String] :cause_unit cause_unit
-    # @option opts [Integer] :cause_unit_id cause_unit_id
-    # @option opts [Integer] :cause_changes cause_changes
-    # @option opts [Integer] :effect_changes effect_changes
-    # @option opts [Float] :aggregate_qm_score aggregate_qm_score
-    # @option opts [String] :created_at created_at
-    # @option opts [String] :updated_at updated_at
-    # @option opts [String] :status status
-    # @option opts [String] :error_message error_message
-    # @option opts [String] :last_successful_update_time last_successful_update_time
-    # @option opts [Float] :reverse_pearson_correlation_coefficient reverse_pearson_correlation_coefficient
-    # @option opts [Float] :predictive_pearson_correlation_coefficient predictive_pearson_correlation_coefficient
-    # @option opts [Integer] :limit limit
-    # @option opts [Integer] :offset offset
-    # @option opts [String] :sort sort
+    # @option opts [String] :access_token User&#39;s OAuth2 access token
+    # @option opts [Float] :correlation Pearson correlation coefficient between cause and effect measurements
+    # @option opts [Integer] :cause_id Variable ID of the predictor variable for which the user desires correlations
+    # @option opts [Integer] :effect_id Variable ID of the outcome variable for which the user desires correlations
+    # @option opts [Integer] :onset_delay User estimated (or default number of seconds) after cause measurement before a perceivable effect is observed
+    # @option opts [Integer] :duration_of_action Number of seconds over which the predictor variable event is expected to produce a perceivable effect following the onset delay
+    # @option opts [Integer] :number_of_pairs Number of predictor/outcome data points used in the analysis
+    # @option opts [Float] :value_predicting_high_outcome Predictor daily aggregated measurement value that predicts an above average effect measurement value (in default unit for predictor variable)
+    # @option opts [Float] :value_predicting_low_outcome Predictor daily aggregated measurement value that predicts a below average effect measurement value (in default unit for outcome variable)
+    # @option opts [Float] :optimal_pearson_product Optimal Pearson Product
+    # @option opts [Integer] :number_of_users Number of users whose data was used in this aggregation
+    # @option opts [Integer] :number_of_correlations Number of correlational analyses used in this aggregation
+    # @option opts [Float] :statistical_significance A function of the effect size and sample size
+    # @option opts [String] :cause_unit Abbreviated unit name for the predictor variable
+    # @option opts [Integer] :cause_unit_id Unit ID for the predictor variable
+    # @option opts [Integer] :cause_changes Number of times that the predictor time series changes
+    # @option opts [Integer] :effect_changes Number of times that the predictor time series changes
+    # @option opts [Float] :aggregate_qm_score Aggregated QM Score which is directly proportional with the relevance of each predictor or outcome
+    # @option opts [String] :created_at Date at which the analysis was first performed
+    # @option opts [String] :updated_at Date at which the analysis was last updated
+    # @option opts [String] :status Indicates whether an analysis is up to date (UPDATED), needs to be updated (WAITING), or had an error (ERROR)
+    # @option opts [String] :error_message Message describing any problems encountered during the analysis
+    # @option opts [String] :last_successful_update_time Last Successful update time
+    # @option opts [Float] :reverse_pearson_correlation_coefficient Correlation when cause and effect are reversed. For any causal relationship, the forward correlation should exceed the reverse correlation
+    # @option opts [Float] :predictive_pearson_correlation_coefficient Predictive Pearson Correlation Coefficient
+    # @option opts [Integer] :limit Limit the number of results returned
+    # @option opts [Integer] :offset Records from give Offset
+    # @option opts [String] :sort Sort records by given field
     # @return [inline_response_200]
     def aggregated_correlations_get(opts = {})
       if Configuration.debugging
@@ -50,6 +50,7 @@ module SwaggerClient
 
       # query parameters
       query_params = {}
+      query_params[:'access_token'] = opts[:'access_token'] if opts[:'access_token']
       query_params[:'correlation'] = opts[:'correlation'] if opts[:'correlation']
       query_params[:'cause_id'] = opts[:'cause_id'] if opts[:'cause_id']
       query_params[:'effect_id'] = opts[:'effect_id'] if opts[:'effect_id']
@@ -59,7 +60,6 @@ module SwaggerClient
       query_params[:'value_predicting_high_outcome'] = opts[:'value_predicting_high_outcome'] if opts[:'value_predicting_high_outcome']
       query_params[:'value_predicting_low_outcome'] = opts[:'value_predicting_low_outcome'] if opts[:'value_predicting_low_outcome']
       query_params[:'optimal_pearson_product'] = opts[:'optimal_pearson_product'] if opts[:'optimal_pearson_product']
-      query_params[:'vote'] = opts[:'vote'] if opts[:'vote']
       query_params[:'number_of_users'] = opts[:'number_of_users'] if opts[:'number_of_users']
       query_params[:'number_of_correlations'] = opts[:'number_of_correlations'] if opts[:'number_of_correlations']
       query_params[:'statistical_significance'] = opts[:'statistical_significance'] if opts[:'statistical_significance']
@@ -97,7 +97,7 @@ module SwaggerClient
       post_body = nil
       
 
-      auth_names = []
+      auth_names = ['quantimodo_oauth2']
       result = @api_client.call_api(:GET, path,
         :header_params => header_params,
         :query_params => query_params,
@@ -114,6 +114,7 @@ module SwaggerClient
     # Store AggregatedCorrelation
     # Store AggregatedCorrelation
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :access_token User&#39;s OAuth2 access token
     # @option opts [AggregatedCorrelation] :body AggregatedCorrelation that should be stored
     # @return [inline_response_200_1]
     def aggregated_correlations_post(opts = {})
@@ -126,6 +127,7 @@ module SwaggerClient
 
       # query parameters
       query_params = {}
+      query_params[:'access_token'] = opts[:'access_token'] if opts[:'access_token']
 
       # header parameters
       header_params = {}
@@ -145,7 +147,7 @@ module SwaggerClient
       post_body = @api_client.object_to_http_body(opts[:'body'])
       
 
-      auth_names = []
+      auth_names = ['quantimodo_oauth2']
       result = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,
@@ -163,6 +165,7 @@ module SwaggerClient
     # Get AggregatedCorrelation
     # @param id id of AggregatedCorrelation
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :access_token User&#39;s OAuth2 access token
     # @return [inline_response_200_1]
     def aggregated_correlations_id_get(id, opts = {})
       if Configuration.debugging
@@ -177,6 +180,7 @@ module SwaggerClient
 
       # query parameters
       query_params = {}
+      query_params[:'access_token'] = opts[:'access_token'] if opts[:'access_token']
 
       # header parameters
       header_params = {}
@@ -196,7 +200,7 @@ module SwaggerClient
       post_body = nil
       
 
-      auth_names = []
+      auth_names = ['quantimodo_oauth2']
       result = @api_client.call_api(:GET, path,
         :header_params => header_params,
         :query_params => query_params,
@@ -214,6 +218,7 @@ module SwaggerClient
     # Update AggregatedCorrelation
     # @param id id of AggregatedCorrelation
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :access_token User&#39;s OAuth2 access token
     # @option opts [AggregatedCorrelation] :body AggregatedCorrelation that should be updated
     # @return [inline_response_200_2]
     def aggregated_correlations_id_put(id, opts = {})
@@ -229,6 +234,7 @@ module SwaggerClient
 
       # query parameters
       query_params = {}
+      query_params[:'access_token'] = opts[:'access_token'] if opts[:'access_token']
 
       # header parameters
       header_params = {}
@@ -248,7 +254,7 @@ module SwaggerClient
       post_body = @api_client.object_to_http_body(opts[:'body'])
       
 
-      auth_names = []
+      auth_names = ['quantimodo_oauth2']
       result = @api_client.call_api(:PUT, path,
         :header_params => header_params,
         :query_params => query_params,
@@ -266,6 +272,7 @@ module SwaggerClient
     # Delete AggregatedCorrelation
     # @param id id of AggregatedCorrelation
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :access_token User&#39;s OAuth2 access token
     # @return [inline_response_200_2]
     def aggregated_correlations_id_delete(id, opts = {})
       if Configuration.debugging
@@ -280,6 +287,7 @@ module SwaggerClient
 
       # query parameters
       query_params = {}
+      query_params[:'access_token'] = opts[:'access_token'] if opts[:'access_token']
 
       # header parameters
       header_params = {}
@@ -299,7 +307,7 @@ module SwaggerClient
       post_body = nil
       
 
-      auth_names = []
+      auth_names = ['quantimodo_oauth2']
       result = @api_client.call_api(:DELETE, path,
         :header_params => header_params,
         :query_params => query_params,

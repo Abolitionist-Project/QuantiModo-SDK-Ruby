@@ -8,24 +8,26 @@ module SwaggerClient
       @api_client = api_client || Configuration.api_client
     end
 
-    # Get all Units
-    # Get all Units
+    # Get all available units
+    # Get all available units
     # @param [Hash] opts the optional parameters
-    # @option opts [String] :client_id client_id
-    # @option opts [String] :name name
-    # @option opts [String] :abbreviated_name abbreviated_name
-    # @option opts [BOOLEAN] :category_id category_id
-    # @option opts [Float] :minimum_value minimum_value
-    # @option opts [Float] :maximum_value maximum_value
+    # @option opts [String] :access_token User&#39;s OAuth2 access token
+    # @option opts [String] :client_id The ID of the client application which last created or updated this unit
+    # @option opts [String] :name Unit name
+    # @option opts [String] :abbreviated_name Unit abbreviation
+    # @option opts [Integer] :unit_category_id Unit category ID
+    # @option opts [Float] :minimum_value Minimum value permitted for this unit
+    # @option opts [Float] :maximum_value Maximum value permitted for this unit
     # @option opts [Integer] :updated updated
-    # @option opts [Float] :multiply multiply
-    # @option opts [Float] :add add
-    # @option opts [String] :created_at created_at
-    # @option opts [String] :updated_at updated_at
-    # @option opts [Integer] :limit limit
-    # @option opts [Integer] :offset offset
-    # @option opts [String] :sort sort
-    # @return [inline_response_200_17]
+    # @option opts [Integer] :default_unit_id ID of default unit for this units category
+    # @option opts [Float] :multiply Value multiplied to convert to default unit in this unit category
+    # @option opts [Float] :add Value which should be added to convert to default unit
+    # @option opts [String] :created_at When the record was first created. Use ISO 8601 datetime format
+    # @option opts [String] :updated_at When the record was last updated. Use ISO 8601 datetime format
+    # @option opts [Integer] :limit The LIMIT is used to limit the number of results returned. So if you have 1000 results, but only want to the first 10, you would set this to 10 and offset to 0. The maximum limit is 200 records.
+    # @option opts [Integer] :offset OFFSET says to skip that many rows before beginning to return rows to the client. OFFSET 0 is the same as omitting the OFFSET clause. If both OFFSET and LIMIT appear, then OFFSET rows are skipped before starting to count the LIMIT rows that are returned.
+    # @option opts [String] :sort Sort by given field. If the field is prefixed with &#39;-&#39;, it will sort in descending order.
+    # @return [inline_response_200_19]
     def units_get(opts = {})
       if Configuration.debugging
         Configuration.logger.debug "Calling API: UnitApi#units_get ..."
@@ -36,13 +38,15 @@ module SwaggerClient
 
       # query parameters
       query_params = {}
+      query_params[:'access_token'] = opts[:'access_token'] if opts[:'access_token']
       query_params[:'client_id'] = opts[:'client_id'] if opts[:'client_id']
       query_params[:'name'] = opts[:'name'] if opts[:'name']
       query_params[:'abbreviated_name'] = opts[:'abbreviated_name'] if opts[:'abbreviated_name']
-      query_params[:'category_id'] = opts[:'category_id'] if opts[:'category_id']
+      query_params[:'unit_category_id'] = opts[:'unit_category_id'] if opts[:'unit_category_id']
       query_params[:'minimum_value'] = opts[:'minimum_value'] if opts[:'minimum_value']
       query_params[:'maximum_value'] = opts[:'maximum_value'] if opts[:'maximum_value']
       query_params[:'updated'] = opts[:'updated'] if opts[:'updated']
+      query_params[:'default_unit_id'] = opts[:'default_unit_id'] if opts[:'default_unit_id']
       query_params[:'multiply'] = opts[:'multiply'] if opts[:'multiply']
       query_params[:'add'] = opts[:'add'] if opts[:'add']
       query_params[:'created_at'] = opts[:'created_at'] if opts[:'created_at']
@@ -69,14 +73,14 @@ module SwaggerClient
       post_body = nil
       
 
-      auth_names = []
+      auth_names = ['quantimodo_oauth2']
       result = @api_client.call_api(:GET, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'inline_response_200_17')
+        :return_type => 'inline_response_200_19')
       if Configuration.debugging
         Configuration.logger.debug "API called: UnitApi#units_get. Result: #{result.inspect}"
       end
@@ -86,8 +90,9 @@ module SwaggerClient
     # Store Unit
     # Store Unit
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :access_token User&#39;s OAuth2 access token
     # @option opts [Unit] :body Unit that should be stored
-    # @return [inline_response_200_18]
+    # @return [inline_response_200_20]
     def units_post(opts = {})
       if Configuration.debugging
         Configuration.logger.debug "Calling API: UnitApi#units_post ..."
@@ -98,6 +103,7 @@ module SwaggerClient
 
       # query parameters
       query_params = {}
+      query_params[:'access_token'] = opts[:'access_token'] if opts[:'access_token']
 
       # header parameters
       header_params = {}
@@ -117,14 +123,14 @@ module SwaggerClient
       post_body = @api_client.object_to_http_body(opts[:'body'])
       
 
-      auth_names = []
+      auth_names = ['quantimodo_oauth2']
       result = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'inline_response_200_18')
+        :return_type => 'inline_response_200_20')
       if Configuration.debugging
         Configuration.logger.debug "API called: UnitApi#units_post. Result: #{result.inspect}"
       end
@@ -135,7 +141,8 @@ module SwaggerClient
     # Get Unit
     # @param id id of Unit
     # @param [Hash] opts the optional parameters
-    # @return [inline_response_200_18]
+    # @option opts [String] :access_token User&#39;s OAuth2 access token
+    # @return [inline_response_200_20]
     def units_id_get(id, opts = {})
       if Configuration.debugging
         Configuration.logger.debug "Calling API: UnitApi#units_id_get ..."
@@ -149,6 +156,7 @@ module SwaggerClient
 
       # query parameters
       query_params = {}
+      query_params[:'access_token'] = opts[:'access_token'] if opts[:'access_token']
 
       # header parameters
       header_params = {}
@@ -168,14 +176,14 @@ module SwaggerClient
       post_body = nil
       
 
-      auth_names = []
+      auth_names = ['quantimodo_oauth2']
       result = @api_client.call_api(:GET, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'inline_response_200_18')
+        :return_type => 'inline_response_200_20')
       if Configuration.debugging
         Configuration.logger.debug "API called: UnitApi#units_id_get. Result: #{result.inspect}"
       end
@@ -186,6 +194,7 @@ module SwaggerClient
     # Update Unit
     # @param id id of Unit
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :access_token User&#39;s OAuth2 access token
     # @option opts [Unit] :body Unit that should be updated
     # @return [inline_response_200_2]
     def units_id_put(id, opts = {})
@@ -201,6 +210,7 @@ module SwaggerClient
 
       # query parameters
       query_params = {}
+      query_params[:'access_token'] = opts[:'access_token'] if opts[:'access_token']
 
       # header parameters
       header_params = {}
@@ -220,7 +230,7 @@ module SwaggerClient
       post_body = @api_client.object_to_http_body(opts[:'body'])
       
 
-      auth_names = []
+      auth_names = ['quantimodo_oauth2']
       result = @api_client.call_api(:PUT, path,
         :header_params => header_params,
         :query_params => query_params,
@@ -238,6 +248,7 @@ module SwaggerClient
     # Delete Unit
     # @param id id of Unit
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :access_token User&#39;s OAuth2 access token
     # @return [inline_response_200_2]
     def units_id_delete(id, opts = {})
       if Configuration.debugging
@@ -252,6 +263,7 @@ module SwaggerClient
 
       # query parameters
       query_params = {}
+      query_params[:'access_token'] = opts[:'access_token'] if opts[:'access_token']
 
       # header parameters
       header_params = {}
@@ -271,7 +283,7 @@ module SwaggerClient
       post_body = nil
       
 
-      auth_names = []
+      auth_names = ['quantimodo_oauth2']
       result = @api_client.call_api(:DELETE, path,
         :header_params => header_params,
         :query_params => query_params,

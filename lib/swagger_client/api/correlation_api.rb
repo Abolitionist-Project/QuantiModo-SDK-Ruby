@@ -11,33 +11,34 @@ module SwaggerClient
     # Get all Correlations
     # Get all Correlations
     # @param [Hash] opts the optional parameters
-    # @option opts [Integer] :timestamp timestamp
-    # @option opts [Integer] :user_id user_id
-    # @option opts [Float] :correlation correlation
-    # @option opts [Integer] :cause_id cause_id
-    # @option opts [Integer] :effect_id effect_id
-    # @option opts [Integer] :onset_delay onset_delay
-    # @option opts [Integer] :duration_of_action duration_of_action
-    # @option opts [Integer] :number_of_pairs number_of_pairs
-    # @option opts [Float] :value_predicting_high_outcome value_predicting_high_outcome
-    # @option opts [Float] :value_predicting_low_outcome value_predicting_low_outcome
-    # @option opts [Float] :optimal_pearson_product optimal_pearson_product
-    # @option opts [Float] :vote vote
-    # @option opts [Float] :statistical_significance statistical_significance
-    # @option opts [String] :cause_unit cause_unit
-    # @option opts [Integer] :cause_unit_id cause_unit_id
-    # @option opts [Integer] :cause_changes cause_changes
-    # @option opts [Integer] :effect_changes effect_changes
-    # @option opts [Float] :qm_score qm_score
+    # @option opts [String] :access_token User&#39;s OAuth2 access token
+    # @option opts [Integer] :timestamp Time at which correlation was calculated
+    # @option opts [Integer] :user_id ID of user that owns this correlation
+    # @option opts [Float] :correlation Pearson correlation coefficient between cause and effect measurements
+    # @option opts [Integer] :cause_id variable ID of the predictor variable for which the user desires correlations
+    # @option opts [Integer] :effect_id variable ID of the outcome variable for which the user desires correlations
+    # @option opts [Integer] :onset_delay User estimated or default time after cause measurement before a perceivable effect is observed
+    # @option opts [Integer] :duration_of_action Time over which the cause is expected to produce a perceivable effect following the onset delay
+    # @option opts [Integer] :number_of_pairs Number of points that went into the correlation calculation
+    # @option opts [Float] :value_predicting_high_outcome cause value that predicts an above average effect value (in default unit for predictor variable)
+    # @option opts [Float] :value_predicting_low_outcome cause value that predicts a below average effect value (in default unit for predictor variable)
+    # @option opts [Float] :optimal_pearson_product Optimal Pearson Product
+    # @option opts [Float] :vote Vote
+    # @option opts [Float] :statistical_significance A function of the effect size and sample size
+    # @option opts [String] :cause_unit Unit of the predictor variable
+    # @option opts [Integer] :cause_unit_id Unit ID of the predictor variable
+    # @option opts [Integer] :cause_changes Cause changes
+    # @option opts [Integer] :effect_changes Effect changes
+    # @option opts [Float] :qm_score QM Score
     # @option opts [String] :error error
-    # @option opts [String] :created_at created_at
-    # @option opts [String] :updated_at updated_at
-    # @option opts [Float] :reverse_pearson_correlation_coefficient reverse_pearson_correlation_coefficient
-    # @option opts [Float] :predictive_pearson_correlation_coefficient predictive_pearson_correlation_coefficient
-    # @option opts [Integer] :limit limit
-    # @option opts [Integer] :offset offset
-    # @option opts [String] :sort sort
-    # @return [inline_response_200_7]
+    # @option opts [String] :created_at When the record was first created. Use ISO 8601 datetime format
+    # @option opts [String] :updated_at When the record in the database was last updated. Use ISO 8601 datetime format
+    # @option opts [Float] :reverse_pearson_correlation_coefficient Correlation when cause and effect are reversed. For any causal relationship, the forward correlation should exceed the reverse correlation
+    # @option opts [Float] :predictive_pearson_correlation_coefficient Predictive Pearson Correlation Coefficient
+    # @option opts [Integer] :limit Limit the number of results returned
+    # @option opts [Integer] :offset Records from give Offset
+    # @option opts [String] :sort Sort records by given field
+    # @return [inline_response_200_9]
     def correlations_get(opts = {})
       if Configuration.debugging
         Configuration.logger.debug "Calling API: CorrelationApi#correlations_get ..."
@@ -48,6 +49,7 @@ module SwaggerClient
 
       # query parameters
       query_params = {}
+      query_params[:'access_token'] = opts[:'access_token'] if opts[:'access_token']
       query_params[:'timestamp'] = opts[:'timestamp'] if opts[:'timestamp']
       query_params[:'user_id'] = opts[:'user_id'] if opts[:'user_id']
       query_params[:'correlation'] = opts[:'correlation'] if opts[:'correlation']
@@ -93,14 +95,14 @@ module SwaggerClient
       post_body = nil
       
 
-      auth_names = []
+      auth_names = ['quantimodo_oauth2']
       result = @api_client.call_api(:GET, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'inline_response_200_7')
+        :return_type => 'inline_response_200_9')
       if Configuration.debugging
         Configuration.logger.debug "API called: CorrelationApi#correlations_get. Result: #{result.inspect}"
       end
@@ -110,8 +112,9 @@ module SwaggerClient
     # Store Correlation
     # Store Correlation
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :access_token User&#39;s OAuth2 access token
     # @option opts [Correlation] :body Correlation that should be stored
-    # @return [inline_response_200_8]
+    # @return [inline_response_200_10]
     def correlations_post(opts = {})
       if Configuration.debugging
         Configuration.logger.debug "Calling API: CorrelationApi#correlations_post ..."
@@ -122,6 +125,7 @@ module SwaggerClient
 
       # query parameters
       query_params = {}
+      query_params[:'access_token'] = opts[:'access_token'] if opts[:'access_token']
 
       # header parameters
       header_params = {}
@@ -141,25 +145,26 @@ module SwaggerClient
       post_body = @api_client.object_to_http_body(opts[:'body'])
       
 
-      auth_names = []
+      auth_names = ['quantimodo_oauth2']
       result = @api_client.call_api(:POST, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'inline_response_200_8')
+        :return_type => 'inline_response_200_10')
       if Configuration.debugging
         Configuration.logger.debug "API called: CorrelationApi#correlations_post. Result: #{result.inspect}"
       end
       return result
     end
 
-    # Get Correlation
+    # Get Correlation Details
     # Get Correlation
     # @param id id of Correlation
     # @param [Hash] opts the optional parameters
-    # @return [inline_response_200_8]
+    # @option opts [String] :access_token User&#39;s OAuth2 access token
+    # @return [inline_response_200_10]
     def correlations_id_get(id, opts = {})
       if Configuration.debugging
         Configuration.logger.debug "Calling API: CorrelationApi#correlations_id_get ..."
@@ -173,6 +178,7 @@ module SwaggerClient
 
       # query parameters
       query_params = {}
+      query_params[:'access_token'] = opts[:'access_token'] if opts[:'access_token']
 
       # header parameters
       header_params = {}
@@ -192,14 +198,14 @@ module SwaggerClient
       post_body = nil
       
 
-      auth_names = []
+      auth_names = ['quantimodo_oauth2']
       result = @api_client.call_api(:GET, path,
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
         :body => post_body,
         :auth_names => auth_names,
-        :return_type => 'inline_response_200_8')
+        :return_type => 'inline_response_200_10')
       if Configuration.debugging
         Configuration.logger.debug "API called: CorrelationApi#correlations_id_get. Result: #{result.inspect}"
       end
@@ -210,6 +216,7 @@ module SwaggerClient
     # Update Correlation
     # @param id id of Correlation
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :access_token User&#39;s OAuth2 access token
     # @option opts [Correlation] :body Correlation that should be updated
     # @return [inline_response_200_2]
     def correlations_id_put(id, opts = {})
@@ -225,6 +232,7 @@ module SwaggerClient
 
       # query parameters
       query_params = {}
+      query_params[:'access_token'] = opts[:'access_token'] if opts[:'access_token']
 
       # header parameters
       header_params = {}
@@ -244,7 +252,7 @@ module SwaggerClient
       post_body = @api_client.object_to_http_body(opts[:'body'])
       
 
-      auth_names = []
+      auth_names = ['quantimodo_oauth2']
       result = @api_client.call_api(:PUT, path,
         :header_params => header_params,
         :query_params => query_params,
@@ -262,6 +270,7 @@ module SwaggerClient
     # Delete Correlation
     # @param id id of Correlation
     # @param [Hash] opts the optional parameters
+    # @option opts [String] :access_token User&#39;s OAuth2 access token
     # @return [inline_response_200_2]
     def correlations_id_delete(id, opts = {})
       if Configuration.debugging
@@ -276,6 +285,7 @@ module SwaggerClient
 
       # query parameters
       query_params = {}
+      query_params[:'access_token'] = opts[:'access_token'] if opts[:'access_token']
 
       # header parameters
       header_params = {}
@@ -295,7 +305,7 @@ module SwaggerClient
       post_body = nil
       
 
-      auth_names = []
+      auth_names = ['quantimodo_oauth2']
       result = @api_client.call_api(:DELETE, path,
         :header_params => header_params,
         :query_params => query_params,

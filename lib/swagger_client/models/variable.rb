@@ -12,70 +12,70 @@ module SwaggerClient
         # client_id
         :'client_id' => :'client_id',
         
-        # parent_id
+        # ID of the parent variable if this variable has any parent
         :'parent_id' => :'parent_id',
         
-        # Name of the variable
+        # User-defined variable display name
         :'name' => :'name',
         
-        # Category of the variable
+        # Variable category ID
         :'variable_category_id' => :'variable_category_id',
         
         # ID of the default unit of measurement to use for this variable
         :'default_unit_id' => :'default_unit_id',
         
-        # How to combine values of this variable (for instance, to see a summary of the values over a month) 0 for sum OR 1 for mean
+        # How to combine values of this variable (for instance, to see a summary of the values over a month) SUM or MEAN
         :'combination_operation' => :'combination_operation',
         
-        # filling_value
+        # Value for replacing null measurements
         :'filling_value' => :'filling_value',
         
-        # maximum_allowed_value
+        # Maximum reasonable value for this variable (uses default unit)
         :'maximum_allowed_value' => :'maximum_allowed_value',
         
-        # minimum_allowed_value
+        # Minimum reasonable value for this variable (uses default unit)
         :'minimum_allowed_value' => :'minimum_allowed_value',
         
-        # onset_delay
+        # How long it takes for a measurement in this variable to take effect
         :'onset_delay' => :'onset_delay',
         
-        # duration_of_action
+        # How long the effect of a measurement in this variable lasts
         :'duration_of_action' => :'duration_of_action',
         
-        # public
+        # Is variable public
         :'public' => :'public',
         
-        # cause_only
+        # A value of 1 indicates that this variable is generally a cause in a causal relationship.  An example of a causeOnly variable would be a variable such as Cloud Cover which would generally not be influenced by the behaviour of the user
         :'cause_only' => :'cause_only',
         
-        # most_common_value
+        # Most common value
         :'most_common_value' => :'most_common_value',
         
-        # most_common_unit_id
+        # Most common Unit
         :'most_common_unit_id' => :'most_common_unit_id',
         
-        # standard_deviation
+        # Standard Deviation
         :'standard_deviation' => :'standard_deviation',
         
-        # variance
+        # Variance
         :'variance' => :'variance',
         
-        # mean
+        # Mean
         :'mean' => :'mean',
         
-        # median
+        # Median
         :'median' => :'median',
         
-        # number_of_measurements
+        # Number of measurements
         :'number_of_measurements' => :'number_of_measurements',
         
-        # number_of_unique_values
+        # Number of unique values
         :'number_of_unique_values' => :'number_of_unique_values',
         
-        # skewness
+        # Skewness
         :'skewness' => :'skewness',
         
-        # kurtosis
+        # Kurtosis
         :'kurtosis' => :'kurtosis',
         
         # status
@@ -84,34 +84,34 @@ module SwaggerClient
         # error_message
         :'error_message' => :'error_message',
         
-        # last_successful_update_time
+        # When this variable or its settings were last updated
         :'last_successful_update_time' => :'last_successful_update_time',
         
-        # created_at
+        # When the record was first created. Use ISO 8601 datetime format
         :'created_at' => :'created_at',
         
-        # updated_at
+        # When the record in the database was last updated. Use ISO 8601 datetime format
         :'updated_at' => :'updated_at',
         
-        # product_url
+        # Product URL
         :'product_url' => :'product_url',
         
-        # image_url
+        # Image URL
         :'image_url' => :'image_url',
         
-        # price
+        # Price
         :'price' => :'price',
         
-        # number_of_user_variables
+        # Number of variables
         :'number_of_user_variables' => :'number_of_user_variables',
         
-        # outcome
+        # Outcome variables (those with `outcome` == 1) are variables for which a human would generally want to identify the influencing factors.  These include symptoms of illness, physique, mood, cognitive performance, etc.  Generally correlation calculations are only performed on outcome variables.
         :'outcome' => :'outcome',
         
-        # minimum_recorded_value
+        # Minimum recorded value of this variable
         :'minimum_recorded_value' => :'minimum_recorded_value',
         
-        # maximum_recorded_value
+        # Maximum recorded value of this variable
         :'maximum_recorded_value' => :'maximum_recorded_value'
         
       }

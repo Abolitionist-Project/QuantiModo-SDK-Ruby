@@ -6,13 +6,13 @@ module SwaggerClient
     def self.attribute_map
       {
         
-        # variable_id
+        # ID of the variable for the measurement as obtained from the GET variables endpoint
         :'variable_id' => :'variable_id',
         
-        # source_id
+        # Source ID of the app or device as obtained from the GET sources endpoint
         :'source_id' => :'source_id',
         
-        # unit_id
+        # Unit id for the measurement value as obtained from the GET units endpoint
         :'unit_id' => :'unit_id',
         
         # measurements

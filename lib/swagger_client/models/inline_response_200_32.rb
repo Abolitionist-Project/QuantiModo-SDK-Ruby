@@ -1,6 +1,6 @@
 module SwaggerClient
   # 
-  class InlineResponse2006 < BaseObject
+  class InlineResponse20032 < BaseObject
     attr_accessor :data, :success
     # attribute mapping from ruby-style variable name to JSON key
     def self.attribute_map
@@ -18,7 +18,7 @@ module SwaggerClient
     # attribute type
     def self.swagger_types
       {
-        :'data' => :'Connection',
+        :'data' => :'Variable',
         :'success' => :'BOOLEAN'
         
       }

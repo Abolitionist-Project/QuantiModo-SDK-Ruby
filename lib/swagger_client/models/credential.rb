@@ -1,24 +1,27 @@
 module SwaggerClient
   # 
   class Credential < BaseObject
-    attr_accessor :connector_id, :attr_key, :attr_value, :created_at, :updated_at
+    attr_accessor :user_id, :connector_id, :attr_key, :attr_value, :created_at, :updated_at
     # attribute mapping from ruby-style variable name to JSON key
     def self.attribute_map
       {
         
-        # connector_id
+        # ID of user that owns this credential
+        :'user_id' => :'user_id',
+        
+        # The id for the connector data source from which the credential was obtained
         :'connector_id' => :'connector_id',
         
-        # attr_key
+        # Attribute name such as token, userid, username, or password
         :'attr_key' => :'attr_key',
         
-        # attr_value
+        # Encrypted value for the attribute specified
         :'attr_value' => :'attr_value',
         
-        # created_at
+        # When the record was first created. Use ISO 8601 datetime format
         :'created_at' => :'created_at',
         
-        # updated_at
+        # When the record in the database was last updated. Use ISO 8601 datetime format
         :'updated_at' => :'updated_at'
         
       }
@@ -27,6 +30,7 @@ module SwaggerClient
     # attribute type
     def self.swagger_types
       {
+        :'user_id' => :'Integer',
         :'connector_id' => :'Integer',
         :'attr_key' => :'String',
         :'attr_value' => :'String',
@@ -42,6 +46,10 @@ module SwaggerClient
       # convert string to symbol for hash key
       attributes = attributes.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
 
+      
+      if attributes[:'user_id']
+        self.user_id = attributes[:'user_id']
+      end
       
       if attributes[:'connector_id']
         self.connector_id = attributes[:'connector_id']

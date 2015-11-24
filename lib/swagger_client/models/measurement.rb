@@ -15,7 +15,7 @@ module SwaggerClient
         # client_id
         :'client_id' => :'client_id',
         
-        # Connector ID
+        # The id for the connector data source from which the measurement was obtained
         :'connector_id' => :'connector_id',
         
         # ID of the variable for which we are creating the measurement records
@@ -24,40 +24,40 @@ module SwaggerClient
         # Application or device used to record the measurement values
         :'source_id' => :'source_id',
         
-        # Start Time for the measurement event in ISO 8601
+        # Start Time for the measurement event. Use ISO 8601
         :'start_time' => :'start_time',
         
-        # Converted measurement value in requested unit
+        # The value of the measurement after conversion to the default unit for that variable
         :'value' => :'value',
         
-        # Unit ID of measurement as requested in GET request
+        # The default unit for the variable
         :'unit_id' => :'unit_id',
         
-        # Original value
+        # Value of measurement as originally posted (before conversion to default unit)
         :'original_value' => :'original_value',
         
         # Unit ID of measurement as originally submitted
         :'original_unit_id' => :'original_unit_id',
         
-        # duration of measurement in seconds
+        # Duration of the event being measurement in seconds
         :'duration' => :'duration',
         
-        # Note of measurement
+        # An optional note the user may include with their measurement
         :'note' => :'note',
         
-        # latitude
+        # Latitude at which the measurement was taken
         :'latitude' => :'latitude',
         
-        # longitude
+        # Longitude at which the measurement was taken
         :'longitude' => :'longitude',
         
         # location
         :'location' => :'location',
         
-        # created_at
+        # When the record was first created. Use ISO 8601 datetime format
         :'created_at' => :'created_at',
         
-        # updated_at
+        # When the record in the database was last updated. Use ISO 8601 datetime format
         :'updated_at' => :'updated_at',
         
         # error
@@ -75,7 +75,7 @@ module SwaggerClient
         :'connector_id' => :'Integer',
         :'variable_id' => :'Integer',
         :'source_id' => :'Integer',
-        :'start_time' => :'Integer',
+        :'start_time' => :'String',
         :'value' => :'Float',
         :'unit_id' => :'Integer',
         :'original_value' => :'Float',

@@ -6,10 +6,10 @@ module SwaggerClient
     def self.attribute_map
       {
         
-        # start_time
+        # When the measurement event occurred . Use ISO 8601 datetime format
         :'start_time' => :'start_time',
         
-        # value
+        # Value for the measurement
         :'value' => :'value'
         
       }
@@ -18,7 +18,7 @@ module SwaggerClient
     # attribute type
     def self.swagger_types
       {
-        :'start_time' => :'Integer',
+        :'start_time' => :'String',
         :'value' => :'Float'
         
       }

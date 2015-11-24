@@ -1,7 +1,7 @@
 module SwaggerClient
   # 
   class Unit < BaseObject
-    attr_accessor :id, :client_id, :name, :abbreviated_name, :category_id, :minimum_value, :maximum_value, :updated, :default_unit_id, :multiply, :add, :created_at, :updated_at
+    attr_accessor :id, :client_id, :name, :abbreviated_name, :unit_category_id, :minimum_value, :maximum_value, :updated, :default_unit_id, :multiply, :add, :created_at, :updated_at
     # attribute mapping from ruby-style variable name to JSON key
     def self.attribute_map
       {
@@ -19,30 +19,30 @@ module SwaggerClient
         :'abbreviated_name' => :'abbreviated_name',
         
         # Unit category ID
-        :'category_id' => :'category_id',
+        :'unit_category_id' => :'unit_category_id',
         
-        # Unit minimum value
+        # Minimum value permitted for this unit
         :'minimum_value' => :'minimum_value',
         
-        # Unit maximum value
+        # Maximum value permitted for this unit
         :'maximum_value' => :'maximum_value',
         
         # updated
         :'updated' => :'updated',
         
-        # ID of default unit
+        # ID of default unit for this units category
         :'default_unit_id' => :'default_unit_id',
         
-        # Value multiplied to
+        # Value multiplied to convert to default unit in this unit category
         :'multiply' => :'multiply',
         
         # Value which should be added to convert to default unit
         :'add' => :'add',
         
-        # created_at
+        # When the record was first created. Use ISO 8601 datetime format
         :'created_at' => :'created_at',
         
-        # updated_at
+        # When the record in the database was last updated. Use ISO 8601 datetime format
         :'updated_at' => :'updated_at'
         
       }
@@ -55,7 +55,7 @@ module SwaggerClient
         :'client_id' => :'String',
         :'name' => :'String',
         :'abbreviated_name' => :'String',
-        :'category_id' => :'Integer',
+        :'unit_category_id' => :'Integer',
         :'minimum_value' => :'Float',
         :'maximum_value' => :'Float',
         :'updated' => :'Integer',
@@ -91,8 +91,8 @@ module SwaggerClient
         self.abbreviated_name = attributes[:'abbreviated_name']
       end
       
-      if attributes[:'category_id']
-        self.category_id = attributes[:'category_id']
+      if attributes[:'unit_category_id']
+        self.unit_category_id = attributes[:'unit_category_id']
       end
       
       if attributes[:'minimum_value']

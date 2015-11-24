@@ -1,7 +1,7 @@
 module SwaggerClient
   # 
   class AggregatedCorrelation < BaseObject
-    attr_accessor :id, :correlation, :cause_id, :effect_id, :onset_delay, :duration_of_action, :number_of_pairs, :value_predicting_high_outcome, :value_predicting_low_outcome, :optimal_pearson_product, :vote, :number_of_users, :number_of_correlations, :statistical_significance, :cause_unit, :cause_unit_id, :cause_changes, :effect_changes, :aggregate_qm_score, :created_at, :updated_at, :status, :error_message, :last_successful_update_time, :reverse_pearson_correlation_coefficient, :predictive_pearson_correlation_coefficient
+    attr_accessor :id, :correlation, :cause_id, :effect_id, :onset_delay, :duration_of_action, :number_of_pairs, :value_predicting_high_outcome, :value_predicting_low_outcome, :optimal_pearson_product, :vote, :number_of_users, :number_of_correlations, :statistical_significance, :cause_unit, :cause_unit_id, :cause_changes, :effect_changes, :aggregate_qm_score, :created_at, :updated_at, :status, :error_message, :last_successful_update_time, :reverse_pearson_correlation_coefficient, :predictive_pearson_correlation_coefficient, :data_source
     # attribute mapping from ruby-style variable name to JSON key
     def self.attribute_map
       {
@@ -9,80 +9,83 @@ module SwaggerClient
         # id
         :'id' => :'id',
         
-        # correlation
+        # Pearson correlation coefficient between cause and effect measurements
         :'correlation' => :'correlation',
         
-        # cause_id
+        # variable ID of the cause variable for which the user desires correlations
         :'cause_id' => :'cause_id',
         
-        # effect_id
+        # variable ID of the effect variable for which the user desires correlations
         :'effect_id' => :'effect_id',
         
-        # onset_delay
+        # User estimated or default time after cause measurement before a perceivable effect is observed
         :'onset_delay' => :'onset_delay',
         
-        # duration_of_action
+        # Time over which the cause is expected to produce a perceivable effect following the onset delay
         :'duration_of_action' => :'duration_of_action',
         
-        # number_of_pairs
+        # Number of points that went into the correlation calculation
         :'number_of_pairs' => :'number_of_pairs',
         
-        # value_predicting_high_outcome
+        # cause value that predicts an above average effect value (in default unit for cause variable)
         :'value_predicting_high_outcome' => :'value_predicting_high_outcome',
         
-        # value_predicting_low_outcome
+        # cause value that predicts a below average effect value (in default unit for cause variable)
         :'value_predicting_low_outcome' => :'value_predicting_low_outcome',
         
-        # optimal_pearson_product
+        # Optimal Pearson Product
         :'optimal_pearson_product' => :'optimal_pearson_product',
         
-        # vote
+        # Vote
         :'vote' => :'vote',
         
-        # number_of_users
+        # Number of Users by which correlation is aggregated
         :'number_of_users' => :'number_of_users',
         
-        # number_of_correlations
+        # Number of Correlations by which correlation is aggregated
         :'number_of_correlations' => :'number_of_correlations',
         
-        # statistical_significance
+        # A function of the effect size and sample size
         :'statistical_significance' => :'statistical_significance',
         
-        # cause_unit
+        # Unit of the predictor variable
         :'cause_unit' => :'cause_unit',
         
-        # cause_unit_id
+        # Unit ID of the predictor variable
         :'cause_unit_id' => :'cause_unit_id',
         
-        # cause_changes
+        # Cause changes
         :'cause_changes' => :'cause_changes',
         
-        # effect_changes
+        # Effect changes
         :'effect_changes' => :'effect_changes',
         
-        # aggregate_qm_score
+        # Aggregated QM Score
         :'aggregate_qm_score' => :'aggregate_qm_score',
         
-        # created_at
+        # When the record was first created. Use ISO 8601 datetime format
         :'created_at' => :'created_at',
         
-        # updated_at
+        # When the record in the database was last updated. Use ISO 8601 datetime format
         :'updated_at' => :'updated_at',
         
-        # status
+        # Status
         :'status' => :'status',
         
-        # error_message
+        # Error Message
         :'error_message' => :'error_message',
         
-        # last_successful_update_time
+        # Last Successful update time
         :'last_successful_update_time' => :'last_successful_update_time',
         
-        # reverse_pearson_correlation_coefficient
+        # Correlation when cause and effect are reversed. For any causal relationship, the forward correlation should exceed the reverse correlation
         :'reverse_pearson_correlation_coefficient' => :'reverse_pearson_correlation_coefficient',
         
-        # predictive_pearson_correlation_coefficient
-        :'predictive_pearson_correlation_coefficient' => :'predictive_pearson_correlation_coefficient'
+        # Predictive Pearson Correlation Coefficient
+        :'predictive_pearson_correlation_coefficient' => :'predictive_pearson_correlation_coefficient',
+        
+        # Source of data for this correlation
+        :'data_source' => :'data_source'
         
       }
     end
@@ -115,7 +118,8 @@ module SwaggerClient
         :'error_message' => :'String',
         :'last_successful_update_time' => :'DateTime',
         :'reverse_pearson_correlation_coefficient' => :'Float',
-        :'predictive_pearson_correlation_coefficient' => :'Float'
+        :'predictive_pearson_correlation_coefficient' => :'Float',
+        :'data_source' => :'String'
         
       }
     end
@@ -229,6 +233,10 @@ module SwaggerClient
       
       if attributes[:'predictive_pearson_correlation_coefficient']
         self.predictive_pearson_correlation_coefficient = attributes[:'predictive_pearson_correlation_coefficient']
+      end
+      
+      if attributes[:'data_source']
+        self.data_source = attributes[:'data_source']
       end
       
     end

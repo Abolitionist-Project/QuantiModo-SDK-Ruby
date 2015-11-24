@@ -18,7 +18,7 @@ module SwaggerClient
     # attribute type
     def self.swagger_types
       {
-        :'data' => :'Array<VariableUserSource>',
+        :'data' => :'Array<UserVariable>',
         :'success' => :'BOOLEAN'
         
       }
