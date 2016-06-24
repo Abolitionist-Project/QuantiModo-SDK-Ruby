@@ -1,109 +1,292 @@
+=begin
+QuantiModo
+
+Welcome to QuantiModo API! QuantiModo makes it easy to retrieve normalized user data from a wide array of devices and applications. [Learn about QuantiModo](https://quantimo.do) or contact us at <api@quantimo.do>.         Before you get started, you will need to: * Sign in/Sign up, and add some data at [https://app.quantimo.do/api/v2/account/connectors](https://app.quantimo.do/api/v2/account/connectors) to try out the API for yourself * Create an app to get your client id and secret at [https://app.quantimo.do/api/v2/apps](https://app.quantimo.do/api/v2/apps) * As long as you're signed in, it will use your browser's cookie for authentication.  However, client applications must use OAuth2 tokens to access the API.     ## Application Endpoints These endpoints give you access to all authorized users' data for that application. ### Getting Application Token Make a `POST` request to `/api/v2/oauth/access_token`         * `grant_type` Must be `client_credentials`.         * `clientId` Your application's clientId.         * `client_secret` Your application's client_secret.         * `redirect_uri` Your application's redirect url.                ## Example Queries ### Query Options The standard query options for QuantiModo API are as described in the table below. These are the available query options in QuantiModo API: <table>            <thead>                <tr>                    <th>Parameter</th>                    <th>Description</th>                </tr>            </thead>            <tbody>                <tr>                    <td>limit</td>                    <td>The LIMIT is used to limit the number of results returned.  So if you have 1000 results, but only want to the first 10, you would set this to 10 and offset to 0. The maximum limit is 200 records.</td>                </tr>                <tr>                    <td>offset</td>                    <td>Suppose you wanted to show results 11-20. You'd set the    offset to 10 and the limit to 10.</td>                </tr>                <tr>                    <td>sort</td>                    <td>Sort by given field. If the field is prefixed with '-', it    will sort in descending order.</td>                </tr>            </tbody>        </table>         ### Pagination Conventions Since the maximum limit is 200 records, to get more than that you'll have to make multiple API calls and page through the results. To retrieve all the data, you can iterate through data by using the `limit` and `offset` query parameters.For example, if you want to retrieve data from 61-80 then you can use a query with the following parameters,         `/v2/variables?limit=20&offset=60`         Generally, you'll be retrieving new or updated user data. To avoid unnecessary API calls, you'll want to store your last refresh time locally.  Initially, it should be set to 0. Then whenever you make a request to get new data, you should limit the returned results to those updated since your last refresh by appending append         `?lastUpdated=(ge)&quot2013-01-D01T01:01:01&quot`         to your request.         Also for better pagination, you can get link to the records of first, last, next and previous page from response headers: * `Total-Count` - Total number of results for given query * `Link-First` - Link to get first page records * `Link-Last` - Link to get last page records * `Link-Prev` - Link to get previous records set * `Link-Next` - Link to get next records set         Remember, response header will be only sent when the record set is available. e.g. You will not get a ```Link-Last``` & ```Link-Next``` when you query for the last page.         ### Filter operators support API supports the following operators with filter parameters: <br> **Comparison operators**         Comparison operators allow you to limit results to those greater than, less than, or equal to a specified value for a specified attribute. These operators can be used with strings, numbers, and dates. The following comparison operators are available: * `gt` for `greater than` comparison * `ge` for `greater than or equal` comparison * `lt` for `less than` comparison * `le` for `less than or equal` comparison         They are included in queries using the following format:         `(<operator>)<value>`         For example, in order to filter value which is greater than 21, the following query parameter should be used:         `?value=(gt)21` <br><br> **Equals/In Operators**         It also allows filtering by the exact value of an attribute or by a set of values, depending on the type of value passed as a query parameter. If the value contains commas, the parameter is split on commas and used as array input for `IN` filtering, otherwise the exact match is applied. In order to only show records which have the value 42, the following query should be used:         `?value=42`         In order to filter records which have value 42 or 43, the following query should be used:         `?value=42,43` <br><br> **Like operators**         Like operators allow filtering using `LIKE` query. This operator is triggered if exact match operator is used, but value contains `%` sign as the first or last character. In order to filter records which category that start with `Food`, the following query should be used:         `?category=Food%` <br><br> **Negation operator**         It is possible to get negated results of a query by prefixed the operator with `!`. Some examples:         `//filter records except those with value are not 42 or 43`<br> `?value=!42,43`         `//filter records with value not greater than 21`<br> `?value=!(ge)21` <br><br> **Multiple constraints for single attribute**         It is possible to apply multiple constraints by providing an array of query filters:         Filter all records which value is greater than 20.2 and less than 20.3<br> `?value[]=(gt)20.2&value[]=(lt)20.3`         Filter all records which value is greater than 20.2 and less than 20.3 but not 20.2778<br> `?value[]=(gt)20.2&value[]=(lt)20.3&value[]=!20.2778`<br><br> 
+
+OpenAPI spec version: 2.0.6
+
+Generated by: https://github.com/swagger-api/swagger-codegen.git
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+=end
+
+require 'date'
+
 module SwaggerClient
-  # 
-  class UserVariables < BaseObject
-    attr_accessor :user, :variable, :duration_of_action, :filling_value, :join_with, :maximum_allowed_value, :minimum_allowed_value, :name, :onset_delay, :unit
-    # attribute mapping from ruby-style variable name to JSON key
+
+  class UserVariables
+    # User ID
+    attr_accessor :user
+
+    # Common variable id
+    attr_accessor :variable_id
+
+    # Estimated duration of time following the onset delay in which a stimulus produces a perceivable effect
+    attr_accessor :duration_of_action
+
+    # fillingValue
+    attr_accessor :filling_value
+
+    # joinWith
+    attr_accessor :join_with
+
+    # maximumAllowedValue
+    attr_accessor :maximum_allowed_value
+
+    # minimumAllowedValue
+    attr_accessor :minimum_allowed_value
+
+    # onsetDelay
+    attr_accessor :onset_delay
+
+    # Earliest measurement startTime that should be used in analysis in ISO format
+    attr_accessor :experiment_start_time
+
+    # Latest measurement startTime that should be used in analysis in ISO format
+    attr_accessor :experiment_end_time
+
+
+    # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        
-        # User ID
         :'user' => :'user',
-        
-        # Variable DISPLAY name
-        :'variable' => :'variable',
-        
-        # Estimated duration of time following the onset delay in which a stimulus produces a perceivable effect
+        :'variable_id' => :'variableId',
         :'duration_of_action' => :'durationOfAction',
-        
-        # fillingValue
         :'filling_value' => :'fillingValue',
-        
-        # joinWith
         :'join_with' => :'joinWith',
-        
-        # maximumAllowedValue
         :'maximum_allowed_value' => :'maximumAllowedValue',
-        
-        # minimumAllowedValue
         :'minimum_allowed_value' => :'minimumAllowedValue',
-        
-        # name
-        :'name' => :'name',
-        
-        # onsetDelay
         :'onset_delay' => :'onsetDelay',
-        
-        # unit
-        :'unit' => :'unit'
-        
+        :'experiment_start_time' => :'experimentStartTime',
+        :'experiment_end_time' => :'experimentEndTime'
       }
     end
 
-    # attribute type
+    # Attribute type mapping.
     def self.swagger_types
       {
         :'user' => :'Integer',
-        :'variable' => :'String',
+        :'variable_id' => :'Integer',
         :'duration_of_action' => :'Integer',
         :'filling_value' => :'Integer',
         :'join_with' => :'String',
         :'maximum_allowed_value' => :'Float',
         :'minimum_allowed_value' => :'Float',
-        :'name' => :'String',
         :'onset_delay' => :'Integer',
-        :'unit' => :'String'
-        
+        :'experiment_start_time' => :'String',
+        :'experiment_end_time' => :'String'
       }
     end
 
+    # Initializes the object
+    # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
-      return if !attributes.is_a?(Hash) || attributes.empty?
+      return unless attributes.is_a?(Hash)
 
       # convert string to symbol for hash key
-      attributes = attributes.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
+      attributes = attributes.each_with_object({}){|(k,v), h| h[k.to_sym] = v}
 
-      
-      if attributes[:'user']
+      if attributes.has_key?(:'user')
         self.user = attributes[:'user']
       end
-      
-      if attributes[:'variable']
-        self.variable = attributes[:'variable']
+
+      if attributes.has_key?(:'variableId')
+        self.variable_id = attributes[:'variableId']
       end
-      
-      if attributes[:'durationOfAction']
+
+      if attributes.has_key?(:'durationOfAction')
         self.duration_of_action = attributes[:'durationOfAction']
       end
-      
-      if attributes[:'fillingValue']
+
+      if attributes.has_key?(:'fillingValue')
         self.filling_value = attributes[:'fillingValue']
       end
-      
-      if attributes[:'joinWith']
+
+      if attributes.has_key?(:'joinWith')
         self.join_with = attributes[:'joinWith']
       end
-      
-      if attributes[:'maximumAllowedValue']
+
+      if attributes.has_key?(:'maximumAllowedValue')
         self.maximum_allowed_value = attributes[:'maximumAllowedValue']
       end
-      
-      if attributes[:'minimumAllowedValue']
+
+      if attributes.has_key?(:'minimumAllowedValue')
         self.minimum_allowed_value = attributes[:'minimumAllowedValue']
       end
-      
-      if attributes[:'name']
-        self.name = attributes[:'name']
-      end
-      
-      if attributes[:'onsetDelay']
+
+      if attributes.has_key?(:'onsetDelay')
         self.onset_delay = attributes[:'onsetDelay']
       end
-      
-      if attributes[:'unit']
-        self.unit = attributes[:'unit']
+
+      if attributes.has_key?(:'experimentStartTime')
+        self.experiment_start_time = attributes[:'experimentStartTime']
       end
-      
+
+      if attributes.has_key?(:'experimentEndTime')
+        self.experiment_end_time = attributes[:'experimentEndTime']
+      end
+
+    end
+
+    # Show invalid properties with the reasons. Usually used together with valid?
+    # @return Array for valid properies with the reasons
+    def list_invalid_properties
+      invalid_properties = Array.new
+      return invalid_properties
+    end
+
+    # Check to see if the all the properties in the model are valid
+    # @return true if the model is valid
+    def valid?
+      return false if @user.nil?
+      return false if @variable_id.nil?
+      return true
+    end
+
+    # Checks equality by comparing each attribute.
+    # @param [Object] Object to be compared
+    def ==(o)
+      return true if self.equal?(o)
+      self.class == o.class &&
+          user == o.user &&
+          variable_id == o.variable_id &&
+          duration_of_action == o.duration_of_action &&
+          filling_value == o.filling_value &&
+          join_with == o.join_with &&
+          maximum_allowed_value == o.maximum_allowed_value &&
+          minimum_allowed_value == o.minimum_allowed_value &&
+          onset_delay == o.onset_delay &&
+          experiment_start_time == o.experiment_start_time &&
+          experiment_end_time == o.experiment_end_time
+    end
+
+    # @see the `==` method
+    # @param [Object] Object to be compared
+    def eql?(o)
+      self == o
+    end
+
+    # Calculates hash code according to all attributes.
+    # @return [Fixnum] Hash code
+    def hash
+      [user, variable_id, duration_of_action, filling_value, join_with, maximum_allowed_value, minimum_allowed_value, onset_delay, experiment_start_time, experiment_end_time].hash
+    end
+
+    # Builds the object from hash
+    # @param [Hash] attributes Model attributes in the form of hash
+    # @return [Object] Returns the model itself
+    def build_from_hash(attributes)
+      return nil unless attributes.is_a?(Hash)
+      self.class.swagger_types.each_pair do |key, type|
+        if type =~ /^Array<(.*)>/i
+          # check to ensure the input is an array given that the the attribute
+          # is documented as an array but the input is not
+          if attributes[self.class.attribute_map[key]].is_a?(Array)
+            self.send("#{key}=", attributes[self.class.attribute_map[key]].map{ |v| _deserialize($1, v) } )
+          end
+        elsif !attributes[self.class.attribute_map[key]].nil?
+          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
+        end # or else data not found in attributes(hash), not an issue as the data can be optional
+      end
+
+      self
+    end
+
+    # Deserializes the data based on type
+    # @param string type Data type
+    # @param string value Value to be deserialized
+    # @return [Object] Deserialized data
+    def _deserialize(type, value)
+      case type.to_sym
+      when :DateTime
+        DateTime.parse(value)
+      when :Date
+        Date.parse(value)
+      when :String
+        value.to_s
+      when :Integer
+        value.to_i
+      when :Float
+        value.to_f
+      when :BOOLEAN
+        if value.to_s =~ /^(true|t|yes|y|1)$/i
+          true
+        else
+          false
+        end
+      when :Object
+        # generic object (usually a Hash), return directly
+        value
+      when /\AArray<(?<inner_type>.+)>\z/
+        inner_type = Regexp.last_match[:inner_type]
+        value.map { |v| _deserialize(inner_type, v) }
+      when /\AHash<(?<k_type>.+), (?<v_type>.+)>\z/
+        k_type = Regexp.last_match[:k_type]
+        v_type = Regexp.last_match[:v_type]
+        {}.tap do |hash|
+          value.each do |k, v|
+            hash[_deserialize(k_type, k)] = _deserialize(v_type, v)
+          end
+        end
+      else # model
+        temp_model = SwaggerClient.const_get(type).new
+        temp_model.build_from_hash(value)
+      end
+    end
+
+    # Returns the string representation of the object
+    # @return [String] String presentation of the object
+    def to_s
+      to_hash.to_s
+    end
+
+    # to_body is an alias to to_hash (backward compatibility)
+    # @return [Hash] Returns the object in the form of hash
+    def to_body
+      to_hash
+    end
+
+    # Returns the object in the form of hash
+    # @return [Hash] Returns the object in the form of hash
+    def to_hash
+      hash = {}
+      self.class.attribute_map.each_pair do |attr, param|
+        value = self.send(attr)
+        next if value.nil?
+        hash[param] = _to_hash(value)
+      end
+      hash
+    end
+
+    # Outputs non-array value in the form of hash
+    # For object, use to_hash. Otherwise, just return the value
+    # @param [Object] value Any valid value
+    # @return [Hash] Returns the value in the form of hash
+    def _to_hash(value)
+      if value.is_a?(Array)
+        value.compact.map{ |v| _to_hash(v) }
+      elsif value.is_a?(Hash)
+        {}.tap do |hash|
+          value.each { |k, v| hash[k] = _to_hash(v) }
+        end
+      elsif value.respond_to? :to_hash
+        value.to_hash
+      else
+        value
+      end
     end
 
   end
+
 end
